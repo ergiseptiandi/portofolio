@@ -47,13 +47,16 @@ export default function Home() {
     },
   ];
 
-  const sectionVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: { 
-      opacity: 1, 
+  const sectionVariants: Variants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
       y: 0,
-      transition: { duration: 0.8, ease: "easeOut" }
-    }
+      transition: {
+        duration: 0.6,
+        ease: [0.4, 0, 0.2, 1], 
+      },
+    },
   };
 
   return (
