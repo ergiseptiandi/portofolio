@@ -7,7 +7,7 @@ import Hero from "@/components/Hero";
 import ProjectCard from "@/components/ProjectCard";
 import ScrollFlow from "@/components/ScrollFlow";
 import SkillBadge from "@/components/SkillBadge";
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import { Code, Database, Globe, Layers, Layout, Server, Smartphone, Terminal } from "lucide-react";
 
 export default function Home() {
