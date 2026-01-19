@@ -133,12 +133,12 @@ export default function Home() {
                
                <div className="flex flex-wrap gap-4 justify-center md:justify-start pt-2">
                  <a 
-                   href="/path-to-cv" 
-                   download
+                   href="/cv.html" 
+                   target="_blank"
                    className="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg bg-primary text-primary-foreground font-semibold hover:bg-primary/90 transition-all shadow-lg hover:shadow-primary/25"
                  >
                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
-                   Download CV
+                   Download CV (ATS)
                  </a>
                  <a 
                    href="#contact"
