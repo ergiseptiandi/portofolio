@@ -16,8 +16,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Portfolio | Creative Developer",
-  description: "A showcase of my work and skills",
+  title: "Erghi Septiandi Putra | Fullstack Developer",
+  description: "Portfolio of Erghi Septiandi Putra, a Fullstack Developer specializing in Laravel, Next.js, NestJS, and Flutter.",
 };
 
 export default function RootLayout({

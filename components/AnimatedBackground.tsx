@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
+import SplashCursor from "./SplashCursor";
 
 const AnimatedBackground = () => {
   const { theme } = useTheme();
@@ -18,6 +19,7 @@ const AnimatedBackground = () => {
 
   return (
     <div className="fixed inset-0 -z-50 overflow-hidden pointer-events-none">
+      <SplashCursor />
       {/* Primary Blob */}
       <motion.div
         animate={{

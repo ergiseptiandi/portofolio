@@ -5,22 +5,34 @@ import { Briefcase, Calendar } from "lucide-react";
 
 const experiences = [
   {
-    role: "Senior Frontend Developer",
-    company: "Tech Solutions Inc.",
-    period: "2023 - Present",
-    description: "Leading the frontend team in building scalable web applications using Next.js and React. Implemented comprehensive design systems and improved performance by 40%.",
-  },
-  {
     role: "Full Stack Developer",
-    company: "Creative Digital Agency",
-    period: "2021 - 2023",
-    description: "Developed and maintained multiple client websites. Worked with Node.js backend and React frontend. Integrated various CMS platforms and payment gateways.",
+    company: "Persero Batam (HRIS Project)",
+    period: "2024 - Present",
+    description: "Developed a comprehensive HRIS application integrating salary systems with tax calculations, automated payslips, and overtime requests. Implemented real-time integration between fingerprint attendance devices and the web dashboard.",
   },
   {
-    role: "Junior Web Developer",
-    company: "StartUp Hub",
-    period: "2020 - 2021",
-    description: "Collaborated with senior developers to create responsive user interfaces. Assisted in bug fixing and code optimization.",
+    role: "Full Stack Developer (Laravel & Flutter)",
+    company: "Candu Roti Bakar",
+    period: "Sep 2024 - Oct 2024",
+    description: "Built a full-stack solution for product management, stock allocation, and financial reporting (Sales, Profit, COGS). Developed an Android POS system with automated QRIS (Midtrans) payments and real-time sales analytics.",
+  },
+  {
+    role: "Backend Developer (NestJS)",
+    company: "Freelance Projects",
+    period: "2023 - 2024",
+    description: "Developed backend systems for multiple clients: 'HappyBeauty' (E-commerce automation), 'Tritunas' & 'Grand Batam Mall' (Branch/Invoice management, IG integration), and 'Liszthoven Music School' (50+ features including billing and radius-based attendance).",
+  },
+  {
+    role: "Mobile Developer",
+    company: "Hang Nadim Airport Project",
+    period: "2024",
+    description: "Created a mobile acceptance application to automatically scan and integrate package QR codes into the airport's central system.",
+  },
+  {
+    role: "Full Stack Developer (Internship)",
+    company: "Tax Center - PBL Project",
+    period: "Aug 2022 - Dec 2022",
+    description: "Optimized tax calculation formulas and enhanced session security. Implemented an automatic subscription feature with Virtual Account payments and improved overall application performance.",
   },
 ];
 

@@ -1,9 +1,6 @@
-"use client";
-
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { ExternalLink, Github } from "lucide-react";
+import { motion } from "framer-motion";
+import { ExternalLink, Github, Lock } from "lucide-react";
 import Image from "next/image";
 
 interface ProjectCardProps {
@@ -13,73 +10,103 @@ interface ProjectCardProps {
   imageUrl?: string;
   githubUrl?: string;
   demoUrl?: string;
+  isPrivate?: boolean;
   delay?: number;
 }
 
-const ProjectCard = ({ title, description, tags, imageUrl, githubUrl, demoUrl, delay = 0 }: ProjectCardProps) => {
+const ProjectCard = ({ title, description, tags, imageUrl, githubUrl, demoUrl, isPrivate = false, delay = 0 }: ProjectCardProps) => {
   return (
-    <Card className="glass-card overflow-hidden h-full flex flex-col group animate-in fade-in-up duration-700 mx-auto w-full max-w-sm sm:max-w-md lg:max-w-none" style={{ animationDelay: `${delay}ms` }}>
-      {imageUrl ? (
-        <div className="relative h-48 w-full overflow-hidden">
-          <Image 
-            src={imageUrl} 
-            alt={title} 
-            fill 
-            className="object-cover transition-transform duration-500 group-hover:scale-110" 
-          />
-          <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-4">
-             {githubUrl && (
-                <Button size="icon" variant="ghost" className="rounded-full bg-background/80 hover:bg-background h-10 w-10" asChild>
-                  <a href={githubUrl} target="_blank" rel="noopener noreferrer">
-                    <Github className="h-5 w-5" />
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5, delay: delay * 0.001 }}
+      className="h-full"
+    >
+      <div className={`group relative h-full rounded-xl border border-zinc-200 dark:border-white/10 bg-white dark:bg-zinc-900/50 overflow-hidden transition-all duration-300 hover:border-zinc-300 dark:hover:border-white/20 shadow-sm hover:shadow-lg ${!isPrivate ? 'dark:hover:shadow-[0_0_30px_-5px_rgba(255,255,255,0.1)]' : 'cursor-not-allowed opacity-80'}`}>
+        
+        {/* Lighting Effect */}
+        {!isPrivate && (
+          <div className="absolute inset-0 -z-10 bg-gradient-to-br from-primary/20 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+        )}
+
+        <div className="relative h-48 w-full overflow-hidden bg-zinc-100 dark:bg-zinc-800/50">
+          {imageUrl ? (
+            <Image 
+              src={imageUrl} 
+              alt={title} 
+              fill 
+              className={`object-cover transition-transform duration-700 ${!isPrivate ? 'group-hover:scale-110' : ''}`}
+            />
+          ) : (
+            <div className={`h-full w-full flex items-center justify-center bg-gradient-to-br from-zinc-100 to-zinc-200 dark:from-zinc-800 dark:to-zinc-900 ${!isPrivate && 'group-hover:scale-105 transition-transform duration-500'}`}>
+               <span className="text-4xl">{isPrivate ? '🔒' : '💡'}</span>
+            </div>
+          )}
+          
+          {isPrivate && (
+            <div className="absolute inset-0 bg-black/60 flex items-center justify-center backdrop-blur-[2px]">
+              <Badge variant="secondary" className="gap-1.5 px-3 py-1 text-sm font-medium">
+                <Lock className="h-3.5 w-3.5" />
+                Private Project
+              </Badge>
+            </div>
+          )}
+        </div>
+
+        <div className="flex flex-col p-6 h-[calc(100%-12rem)]">
+          <div className="mb-4">
+            <h3 className="text-xl font-bold tracking-tight mb-2 group-hover:text-primary transition-colors duration-300">
+              {title}
+            </h3>
+            <p className="text-muted-foreground line-clamp-3 text-sm leading-relaxed">
+              {description}
+            </p>
+          </div>
+
+          <div className="mt-auto space-y-4">
+            <div className="flex flex-wrap gap-2">
+              {tags.map((tag) => (
+                <Badge 
+                  key={tag} 
+                  variant="outline" 
+                  className="bg-zinc-100 dark:bg-white/5 border-zinc-200 dark:border-white/10 hover:bg-zinc-200 dark:hover:bg-white/10 transition-colors text-xs py-0.5 text-zinc-700 dark:text-zinc-300"
+                >
+                  {tag}
+                </Badge>
+              ))}
+            </div>
+
+            {!isPrivate && (
+              <div className="flex items-center gap-4 pt-4 border-t border-zinc-200 dark:border-white/5">
+                {githubUrl && (
+                  <a 
+                    href={githubUrl} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="flex items-center gap-2 text-xs font-medium text-muted-foreground hover:text-foreground dark:hover:text-white transition-colors"
+                  >
+                    <Github className="h-4 w-4" />
+                    Source Code
                   </a>
-                </Button>
-              )}
-              {demoUrl && (
-                <Button size="icon" variant="ghost" className="rounded-full bg-background/80 hover:bg-background h-10 w-10" asChild>
-                   <a href={demoUrl} target="_blank" rel="noopener noreferrer">
-                    <ExternalLink className="h-5 w-5" />
+                )}
+                {demoUrl && (
+                  <a 
+                    href={demoUrl} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="flex items-center gap-2 text-xs font-medium text-muted-foreground hover:text-foreground dark:hover:text-white transition-colors ml-auto"
+                  >
+                    <ExternalLink className="h-4 w-4" />
+                    Live Demo
                   </a>
-                </Button>
-              )}
+                )}
+              </div>
+            )}
           </div>
         </div>
-      ) : (
-         <div className="h-48 w-full bg-gradient-to-br from-primary/10 to-secondary/10 flex items-center justify-center group-hover:from-primary/20 group-hover:to-secondary/20 transition-colors">
-            <span className="text-4xl">🚀</span>
-         </div>
-      )}
-      
-      <CardHeader>
-        <CardTitle>{title}</CardTitle>
-      </CardHeader>
-      
-      <CardContent className="flex-grow">
-        <CardDescription className="text-base mb-4">
-          {description}
-        </CardDescription>
-        <div className="flex flex-wrap gap-2">
-          {tags.map((tag) => (
-            <Badge key={tag} variant="outline" className="bg-background/30 border-primary/20">
-              {tag}
-            </Badge>
-          ))}
-        </div>
-      </CardContent>
-      
-      <CardFooter className="flex justify-between border-t border-border/50 pt-4 mt-auto">
-        {githubUrl && (
-            <a href={githubUrl} target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-primary flex items-center gap-1">
-              <Github className="h-4 w-4" /> Code
-            </a>
-        )}
-        {demoUrl && (
-             <a href={demoUrl} target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-primary flex items-center gap-1">
-              <ExternalLink className="h-4 w-4" /> Live Demo
-            </a>
-        )}
-      </CardFooter>
-    </Card>
+      </div>
+    </motion.div>
   );
 };
 

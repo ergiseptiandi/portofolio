@@ -4,7 +4,7 @@ import { ThemeToggle } from "@/components/ThemeToggle";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
-import { Mail, Menu, X } from "lucide-react";
+import { Github, Mail, Menu, X } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -52,7 +52,7 @@ const Navbar = () => {
         <div className="glass mt-4 flex h-16 items-center justify-between rounded-full px-6 transition-all">
           <div className="flex items-center">
             <Link href="/" className="text-xl font-bold tracking-tight text-foreground/90 hover:text-primary transition-colors">
-              Portfolio<span className="text-primary">.</span>
+              Portfolio
             </Link>
           </div>
           
@@ -87,9 +87,16 @@ const Navbar = () => {
           <div className="hidden md:block">
             <div className="flex items-center gap-4">
               <ThemeToggle />
-              <Button variant="outline" size="sm" className="rounded-full gap-2 border-primary/20 hover:bg-primary/10">
-                <Mail className="h-4 w-4" />
-                <span>Hire Me</span>
+              <Button asChild variant="ghost" size="icon" className="rounded-full hover:bg-primary/10">
+                <a href="https://github.com/ergiseptiandi" target="_blank" rel="noopener noreferrer">
+                   <Github className="h-5 w-5" />
+                </a>
+              </Button>
+              <Button asChild variant="outline" size="sm" className="rounded-full gap-2 border-primary/20 hover:bg-primary/10">
+                <a href="mailto:ergiputra321@gmail.com">
+                  <Mail className="h-4 w-4" />
+                  <span>Hire Me</span>
+                </a>
               </Button>
             </div>
           </div>
@@ -129,8 +136,10 @@ const Navbar = () => {
                 <span className="text-sm font-medium">Switch Theme</span>
                 <ThemeToggle />
              </div>
-             <Button className="w-full rounded-full bg-primary/20 text-foreground hover:bg-primary/30 border border-primary/20">
-              Hire Me
+             <Button asChild className="w-full rounded-full bg-primary/20 text-foreground hover:bg-primary/30 border border-primary/20">
+              <a href="mailto:ergiputra321@gmail.com">
+                Hire Me
+              </a>
             </Button>
           </div>
         </div>

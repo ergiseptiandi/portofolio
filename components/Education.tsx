@@ -5,16 +5,10 @@ import { Award, GraduationCap } from "lucide-react";
 
 const education = [
   {
-    degree: "Bachelor of Computer Science",
-    school: "University of Technology",
-    year: "2016 - 2020",
-    description: "Major in Software Engineering. Graduated with Honors.",
-  },
-  {
-    degree: "Full Stack Web Development",
-    school: "Coding Bootcamp Academy",
-    year: "2019",
-    description: "Intensive 12-week program focused on modern web technologies.",
+    degree: "Student",
+    school: "Batam State Polytechnic",
+    year: "2022 - 2025",
+    description: "Informatics Engineering",
   },
 ];
 

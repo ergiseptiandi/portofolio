@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import { ArrowRight, Code, Database, Layout } from "lucide-react";
+import { ArrowRight, Database, Layout, Smartphone } from "lucide-react";
 import Typewriter from "typewriter-effect";
 
 const Hero = () => {
@@ -30,7 +30,7 @@ const Hero = () => {
               <h1 className="text-4xl font-extrabold tracking-tight sm:text-6xl md:text-7xl lg:text-7xl bg-clip-text text-transparent bg-gradient-to-r from-foreground to-foreground/70 min-h-[120px] sm:min-h-[160px] lg:min-h-[200px]">
                 <Typewriter
                   options={{
-                    strings: ['Creating Digital Experiences', 'Building Modern Web Apps', 'Crafting User Interfaces'],
+                    strings: ['Fullstack Developer', 'Laravel & Next.js Expert', 'Mobile Apps with Flutter', 'Backend with NestJS'],
                     autoStart: true,
                     loop: true,
                     deleteSpeed: 50,
@@ -45,7 +45,7 @@ const Hero = () => {
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.7 }}
               >
-                I build accessible, pixel-perfect, secure, and performant web applications with a focus on exceptional user experience.
+                I build robust and scalable full-stack applications for Web and Mobile used Laravel, Next.js, NestJS, and Flutter.
               </motion.p>
             </div>
             
@@ -55,12 +55,16 @@ const Hero = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.9 }}
             >
-              <Button size="lg" className="rounded-full text-base h-12 px-8 shadow-lg shadow-primary/20 transition-transform hover:scale-105">
-                View Projects
-                <ArrowRight className="ml-2 h-4 w-4" />
+              <Button asChild size="lg" className="rounded-full text-base h-12 px-8 shadow-lg shadow-primary/20 transition-transform hover:scale-105">
+                <a href="#projects">
+                  View Projects
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </a>
               </Button>
-              <Button size="lg" variant="outline" className="rounded-full text-base h-12 px-8 glass border-primary/20 hover:bg-primary/5 transition-transform hover:scale-105">
-                Contact Me
+              <Button asChild size="lg" variant="outline" className="rounded-full text-base h-12 px-8 glass border-primary/20 hover:bg-primary/5 transition-transform hover:scale-105">
+                <a href="#contact">
+                  Contact Me
+                </a>
               </Button>
             </motion.div>
           </motion.div>
@@ -100,26 +104,26 @@ const Hero = () => {
                 </div>
                 <div>
                   <h3 className="text-lg font-bold">Backend</h3>
-                  <p className="text-sm text-muted-foreground">Node.js, Postgres, Prisma</p>
+                  <p className="text-sm text-muted-foreground">Laravel, NestJS, PostgreSQL</p>
                 </div>
               </motion.div>
 
-               {/* Card 3: Fullstack */}
+               {/* Card 3: Mobile & Web */}
                <motion.div 
                  animate={{ y: [0, -15, 0] }}
                  transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
                  className="absolute top-48 right-8 lg:top-16 lg:right-16 w-[240px] sm:w-[280px] glass-card transform rotate-3 lg:rotate-12 z-20 p-6 flex flex-col justify-between shadow-2xl border-primary/30 mt-0 ml-0 lg:-mr-12 lg:mt-24 left-1/2 -translate-x-1/2 lg:translate-x-0 lg:left-auto"
               >
                  <div className="h-12 w-12 rounded-lg bg-accent/20 flex items-center justify-center">
-                   <Code className="h-6 w-6 text-accent-foreground" />
+                   <Smartphone className="h-6 w-6 text-accent-foreground" />
                  </div>
                  <div className="space-y-2">
                     <div className="h-2 w-1/2 rounded bg-foreground/10" />
                     <div className="h-2 w-3/4 rounded bg-foreground/10" />
                  </div>
                  <div>
-                   <h3 className="text-lg font-bold">Fullstack</h3>
-                   <p className="text-sm text-muted-foreground">Building complete solutions</p>
+                   <h3 className="text-lg font-bold">Web & Mobile</h3>
+                   <p className="text-sm text-muted-foreground">Flutter, Next.js, Laravel</p>
                  </div>
               </motion.div>
             </div>
