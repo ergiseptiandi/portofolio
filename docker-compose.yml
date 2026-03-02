@@ -1,6 +1,7 @@
 version: '3'
 services:
   portfolio:
+    container_name: portofolio-portfolio-1
     build: .
     networks:
       - nginx-proxy-manager_default
