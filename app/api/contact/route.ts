@@ -6,18 +6,17 @@ export async function POST(req: Request) {
   try {
     const { name, email, message } = await req.json();
 
-    // NOTE: User needs to configure these environment variables in .env.local
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
-        user: process.env.EMAIL_USER, // ergiputra321@gmaill.com (User provided, but should be env var)
-        pass: process.env.EMAIL_PASS, // App Password
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
       },
     });
 
     const mailOptions = {
       from: process.env.EMAIL_USER,
-      to: 'ergiputra321@gmail.com', // Sending to the user's email
+      to: 'ergiputra321@gmail.com',
       subject: `New Contact Form Submission from ${name}`,
       text: `
         Name: ${name}
