@@ -2,8 +2,8 @@ version: '3'
 services:
   portfolio:
     build: .
-    ports:
-      - "3000:3000"
+    networks:
+      - nginx-proxy-manager_default
     env_file:
       - /home/runner/portfolio.env
     restart: always
@@ -12,3 +12,7 @@ services:
         limits:
           cpus: "0.3"
           memory: 100M
+
+networks:
+  nginx-proxy-manager_default:
+    external: true
