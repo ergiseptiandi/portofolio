@@ -6,7 +6,6 @@ export async function POST(req: Request) {
   try {
     const { name, email, message } = await req.json();
 
-    // CRM / Email Configuration
     // NOTE: User needs to configure these environment variables in .env.local
     const transporter = nodemailer.createTransport({
       service: 'gmail',
