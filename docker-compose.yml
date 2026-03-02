@@ -3,7 +3,7 @@ services:
   portfolio:
     build: .
     ports:
-      # - "3000:3000"
+      - "3000:3000"
     env_file:
       - /home/runner/portfolio.env
     restart: always
