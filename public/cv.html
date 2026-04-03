@@ -79,6 +79,37 @@
             gap: 10px;
         }
 
+        .skill-group {
+            margin-bottom: 12px;
+        }
+
+        .skill-group-title {
+            font-weight: bold;
+            font-size: 14px;
+            color: #222;
+        }
+
+        .skill-group-desc {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 4px;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .skill-tag {
+            background: #f3f4f6;
+            border: 1px solid #d1d5db;
+            padding: 2px 10px;
+            border-radius: 4px;
+            font-size: 13px;
+            color: #374151;
+        }
+
         @media print {
             body {
                 padding: 0;
@@ -115,9 +146,8 @@
             Batam, Indonesia | ergiputra321@gmail.com | github.com/ergiseptiandi
         </div>
         <p style="font-size: 14px; max-width: 600px; margin: 0 auto; text-align: center;">
-            Experienced Fullstack Developer specializing in building robust web and mobile applications.
-            Proficient in the Laravel and Next.js ecosystems, with strong expertise in backend development using NestJS
-            and mobile app development with Flutter.
+            A full-stack developer with hands-on experience delivering internal systems, customer-facing interfaces,
+            backend services, mobile workflows, and deployment automation.
         </p>
     </div>
 
@@ -125,14 +155,100 @@
 
     <div class="job">
         <div class="job-title">
+            Full Stack Developer <span class="date">Project-based</span>
+        </div>
+        <div class="company">PT Jalaarmadarinjani (Aplikasi Absensi)</div>
+        <p style="font-size: 14px;">
+            Built a comprehensive attendance application with two user roles: admin and employee. The system handles
+            coordinate-based attendance with cross-day clock-in support, leave and sick request submissions, and
+            complete attendance history tracking.
+        </p>
+        <ul>
+            <li><strong>Employee:</strong> Coordinate-based GPS attendance, cross-day clock-in/out, leave/sick/permission
+                requests, personal attendance history.</li>
+            <li><strong>Admin Dashboard:</strong> Overview dashboard (total employees, coordinates, today's attendance,
+                pending requests), user management, coordinate location management, shift settings with reusable
+                templates per division or individual, employee leave/permission management, informative attendance
+                reports (overall and per-employee).</li>
+        </ul>
+    </div>
+
+    <div class="job">
+        <div class="job-title">
+            Full Stack Developer (Freelance) <span class="date">Jan 2026 - Present</span>
+        </div>
+        <div class="company">Captura</div>
+        <ul>
+            <li>Optimized the user interface to deliver a more engaging experience with strong responsiveness across
+                mobile and desktop.</li>
+            <li>Built new features, fixed application issues, and developed a real-time queue dashboard that
+                consolidated data from multiple branches and companies.</li>
+        </ul>
+    </div>
+
+    <div class="job">
+        <div class="job-title">
+            DevOps Engineer <span class="date">Project-based</span>
+        </div>
+        <div class="company">PT Persero Batam</div>
+        <ul>
+            <li>Automated deployment workflows with GitLab CI/CD using GitLab jobs.</li>
+            <li>Configured Docker services to restart automatically after server outages.</li>
+            <li>Successfully migrated an Odoo application from a cloud server to an on-premise server without data
+                loss.</li>
+        </ul>
+    </div>
+
+    <div class="job">
+        <div class="job-title">
             Full Stack Developer <span class="date">2024 - Present</span>
         </div>
-        <div class="company">Persero Batam (HRIS Project)</div>
+        <div class="company">PT Persero Batam (HRIS Project)</div>
         <ul>
-            <li>Developed a comprehensive HRIS application integrating salary systems with tax calculations.</li>
-            <li>Implemented automated payslips generation and overtime request management.</li>
-            <li>Built real-time integration between fingerprint attendance devices and the web dashboard for accurate
-                tracking.</li>
+            <li>Built mobile and web HRIS applications covering attendance, payroll, BPJS, income tax, overtime, and
+                automated payslip delivery.</li>
+            <li>Developed the mobile HRIS app with Expo, including coordinate-based attendance, fake GPS detection,
+                payslip and overtime slip access, KPI dashboards, and in-app auto updates.</li>
+        </ul>
+    </div>
+
+    <div class="job">
+        <div class="job-title">
+            Full Stack Developer <span class="date">Oct 2025</span>
+        </div>
+        <div class="company">PT Persero Batam (Meeting Room Application)</div>
+        <ul>
+            <li>Built a Laravel-based meeting room application with a real-time dashboard to monitor room status by date
+                and time.</li>
+            <li>Developed scheduling and meeting management features including participant count, meal requirements, and
+                automated WhatsApp API notifications.</li>
+        </ul>
+    </div>
+
+    <div class="job">
+        <div class="job-title">
+            Full Stack Developer <span class="date">Feb 2025</span>
+        </div>
+        <div class="company">Batam Toteles Application</div>
+        <ul>
+            <li>Built a Laravel-based operational management application with interconnected ERP-style modules:
+                purchase requests, purchase orders, delivery orders, production flows, and UMKM consignment management.
+            </li>
+            <li>Implemented user management with configurable roles and access control, WhatsApp Gateway notifications,
+                and informative operational reporting.</li>
+        </ul>
+    </div>
+
+    <div class="job">
+        <div class="job-title">
+            Full Stack Developer <span class="date">2025</span>
+        </div>
+        <div class="company">Mudik Gratis BUMN Application</div>
+        <ul>
+            <li>Built a Laravel-based registration system to replace Google Form process with 24/7 status checking, live
+                chat support, and automatic email delivery.</li>
+            <li>Developed admin dashboard with participant totals, real-time notifications, statistical charts,
+                automated QRIS payment handling, NIK blacklist validation, and fully system-driven workflows.</li>
         </ul>
     </div>
 
@@ -144,8 +260,8 @@
         <ul>
             <li>Built a full-stack solution for product management, stock allocation, and financial reporting (Sales,
                 Profit, COGS).</li>
-            <li>Developed an Android POS system with automated QRIS (Midtrans) payment gateway integration.</li>
-            <li>Implemented real-time sales analytics to improve business decision making.</li>
+            <li>Developed an Android POS system with automated QRIS (Midtrans) payments and real-time sales analytics.
+            </li>
         </ul>
     </div>
 
@@ -156,7 +272,7 @@
         <div class="company">Freelance Projects</div>
         <ul>
             <li>Developed backend for 'HappyBeauty' (E-commerce automation).</li>
-            <li>Built 'Tritunas' & 'Grand Batam Mall' systems for branch and invoice management.</li>
+            <li>Built 'Tritunas' & 'Grand Batam Mall' systems for branch, invoice management, and IG integration.</li>
             <li>Created 'Liszthoven Music School' system with 50+ features including billing and radius-based
                 attendance.</li>
         </ul>
@@ -166,10 +282,10 @@
         <div class="job-title">
             Mobile Developer <span class="date">2024</span>
         </div>
-        <div class="company">Hang Nadim Airport Project</div>
+        <div class="company">PT Persero Batam Hang Nadim Airport Project</div>
         <ul>
-            <li>Created a mobile acceptance application to automatically scan and integrate package QR codes.</li>
-            <li>Ensured seamless data synchronization with the central airport logistics system.</li>
+            <li>Created a mobile acceptance application to automatically scan and integrate package QR codes into the
+                airport's central system.</li>
         </ul>
     </div>
 
@@ -180,17 +296,69 @@
         <div class="company">Tax Center - PBL Project</div>
         <ul>
             <li>Optimized tax calculation formulas and enhanced session security.</li>
-            <li>Implemented automatic subscription features with Virtual Account payments.</li>
+            <li>Implemented automatic subscription features with Virtual Account payments and improved overall
+                application performance.</li>
         </ul>
     </div>
 
     <h2>Technical Skills</h2>
     <div style="font-size: 14px;">
-        <strong>Languages & Frameworks:</strong> Laravel, Next.js, NestJS, Flutter, React, Node.js, TypeScript, PHP,
-        Dart.<br>
-        <strong>Database:</strong> PostgreSQL, MySQL.<br>
-        <strong>Tools & Tech:</strong> Git, Docker, Cloudflare, Nginx, DevOps, Midtrans Payment Gateway, Websockets,
-        REST APIs.
+        <div class="skill-group">
+            <div class="skill-group-title">Core Web Stack</div>
+            <div class="skill-group-desc">Primary tools for product interfaces, admin systems, and full-stack dashboards.
+            </div>
+            <div class="skill-tags">
+                <span class="skill-tag">Laravel</span>
+                <span class="skill-tag">Next.js</span>
+                <span class="skill-tag">React</span>
+                <span class="skill-tag">Tailwind CSS</span>
+            </div>
+        </div>
+        <div class="skill-group">
+            <div class="skill-group-title">Backend & Data</div>
+            <div class="skill-group-desc">Service architecture, integrations, and persistence for production workflows.
+            </div>
+            <div class="skill-tags">
+                <span class="skill-tag">NestJS</span>
+                <span class="skill-tag">Node.js</span>
+                <span class="skill-tag">PostgreSQL</span>
+                <span class="skill-tag">MySQL</span>
+                <span class="skill-tag">Cloudflare</span>
+            </div>
+        </div>
+        <div class="skill-group">
+            <div class="skill-group-title">Mobile Delivery</div>
+            <div class="skill-group-desc">Cross-platform execution for internal tools and customer-facing mobile
+                products.</div>
+            <div class="skill-tags">
+                <span class="skill-tag">Flutter</span>
+                <span class="skill-tag">Expo</span>
+                <span class="skill-tag">Dart</span>
+            </div>
+        </div>
+        <div class="skill-group">
+            <div class="skill-group-title">Infrastructure</div>
+            <div class="skill-group-desc">Deployment, runtime reliability, and operational support around shipped systems.
+            </div>
+            <div class="skill-tags">
+                <span class="skill-tag">Docker</span>
+                <span class="skill-tag">Nginx</span>
+                <span class="skill-tag">GitLab CI/CD</span>
+                <span class="skill-tag">DevOps</span>
+            </div>
+        </div>
+        <div class="skill-group">
+            <div class="skill-group-title">Tools & Integrations</div>
+            <div class="skill-tags">
+                <span class="skill-tag">Git</span>
+                <span class="skill-tag">TypeScript</span>
+                <span class="skill-tag">PHP</span>
+                <span class="skill-tag">REST APIs</span>
+                <span class="skill-tag">WebSockets</span>
+                <span class="skill-tag">Midtrans Payment</span>
+                <span class="skill-tag">WhatsApp API</span>
+            </div>
+        </div>
     </div>
 
     <h2>Education</h2>
@@ -204,8 +372,16 @@
     <h2>Projects</h2>
     <div style="font-size: 14px;">
         <ul>
-            <li><strong>HRIS Integrated System:</strong> Corporate HR management with payroll and attendance. (Laravel,
-                MySQL)</li>
+            <li><strong>Aplikasi Absensi (PT Jalaarmadarinjani):</strong> Attendance system with GPS coordinates,
+                cross-day support, shift templates, leave management, and admin dashboard.</li>
+            <li><strong>HRIS Integrated System:</strong> Corporate HR management with payroll, tax, BPJS, attendance,
+                and mobile app with Expo. (Laravel, MySQL, Expo)</li>
+            <li><strong>Captura Queue Dashboard:</strong> Real-time queue dashboard for multiple branches and companies.
+                (Next.js, React)</li>
+            <li><strong>Batam Toteles:</strong> ERP-style operational management with interconnected modules.
+                (Laravel, MySQL)</li>
+            <li><strong>Mudik Gratis BUMN:</strong> Registration system with QRIS payments, NIK validation, and admin
+                dashboard. (Laravel)</li>
             <li><strong>Smart POS System:</strong> Retail POS with stock and financial reports. (Laravel, Flutter)</li>
             <li><strong>Airport Cargo Mobile:</strong> Logistics scanning app. (Flutter)</li>
             <li><strong>Backend Services:</strong> Scalable microservices for e-commerce and management systems.
