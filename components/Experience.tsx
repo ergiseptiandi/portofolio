@@ -14,31 +14,10 @@ type ExperienceItem = {
 const experiences: ExperienceItem[] = [
   {
     role: "Full Stack Developer",
-    company: "PT Jalaarmadarinjani (Aplikasi Absensi)",
+    company: "PT Jala Armada Rinjani (Aplikasi Absensi)",
     period: "Project-based",
     description:
       "Built a comprehensive attendance application with two user roles: admin and employee. The system handles coordinate-based attendance with cross-day clock-in support, leave and sick request submissions, and complete attendance history tracking.",
-    featureSections: [
-      {
-        title: "Employee Features",
-        items: [
-          "Coordinate-based attendance with GPS location tracking",
-          "Cross-day clock-in and clock-out support",
-          "Leave, sick, and permission request submissions",
-          "Personal attendance history and records",
-        ],
-      },
-      {
-        title: "Admin Dashboard",
-        items: [
-          "Overview dashboard: total employees, coordinates, today's attendance, latest check-ins, and pending leave/sick requests",
-          "User management and coordinate location management",
-          "Shift settings with reusable templates, applicable per division or individual employees",
-          "Employee leave and permission management",
-          "Informative attendance reports with overall and per-employee views",
-        ],
-      },
-    ],
   },
   {
     role: "Full Stack Developer (Freelance)",
