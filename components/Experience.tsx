@@ -3,12 +3,45 @@
 import { motion } from "framer-motion";
 import { Briefcase, Calendar } from "lucide-react";
 
-const experiences = [
+type ExperienceItem = {
+  role: string;
+  company: string;
+  period: string;
+  description: string;
+  featureSections?: {
+    title: string;
+    items: string[];
+  }[];
+};
+
+const experiences: ExperienceItem[] = [
+  {
+    role: "Full Stack Developer (Freelance)",
+    company: "Captura",
+    period: "Jan 2026 - Present",
+    description:
+      "Optimized the user interface to deliver a more engaging experience with strong responsiveness across mobile and desktop. Built new features, fixed application issues, and developed a real-time queue dashboard that consolidated data from multiple branches and companies.",
+  },
+  {
+    role: "DevOps Engineer",
+    company: "PT Persero Batam",
+    period: "Project-based",
+    description:
+      "Automated deployment workflows with GitLab CI/CD using GitLab jobs, configured Docker services to restart automatically after server outages, and successfully migrated an Odoo application from a cloud server to an on-premise server without data loss.",
+  },
   {
     role: "Full Stack Developer",
-    company: "Persero Batam (HRIS Project)",
+    company: "PT Persero Batam (HRIS Project)",
     period: "2024 - Present",
-    description: "Developed a comprehensive HRIS application integrating salary systems with tax calculations, automated payslips, and overtime requests. Implemented real-time integration between fingerprint attendance devices and the web dashboard.",
+    description:
+      "Built mobile and web HRIS applications that transformed manual workflows into a more efficient and automated system, covering attendance, payroll, BPJS, income tax, overtime, and automated payslip delivery. Developed the mobile HRIS app with Expo, including coordinate-based attendance managed from the web admin panel, fake GPS detection and user monitoring, payslip and overtime slip access, attendance history, KPI dashboards for attendance, lateness, leave, and more, plus in-app auto updates without requiring Play Store releases.",
+  },
+  {
+    role: "Full Stack Developer",
+    company: "PT Persero Batam (Meeting Room Application)",
+    period: "Oct 2025",
+    description:
+      "Built a Laravel-based meeting room application with a real-time dashboard to monitor room status by date and time. Developed scheduling and meeting management features, including participant count, meal requirements, and automated notifications through the WhatsApp API.",
   },
   {
     role: "Full Stack Developer (Laravel & Flutter)",
@@ -24,7 +57,7 @@ const experiences = [
   },
   {
     role: "Mobile Developer",
-    company: "Hang Nadim Airport Project",
+    company: "PT Persero Batam Hang Nadim Airport Project",
     period: "2024",
     description: "Created a mobile acceptance application to automatically scan and integrate package QR codes into the airport's central system.",
   },
@@ -40,8 +73,8 @@ const Experience = () => {
   return (
     <div className="relative border-l border-primary/30 ml-4 md:ml-6 space-y-12">
       {experiences.map((exp, index) => (
-        <motion.div 
-          key={index} 
+        <motion.div
+          key={index}
           className="relative pl-8 md:pl-12"
           initial={{ opacity: 0, x: -20 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -50,7 +83,7 @@ const Experience = () => {
         >
           {/* Timeline Dot */}
           <div className="absolute -left-[5px] top-2 h-3 w-3 rounded-full bg-primary ring-4 ring-background" />
-          
+
           <div className="glass-card p-6 md:p-8 hover:bg-primary/5 transition-colors">
             <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4 gap-2">
               <h3 className="text-xl font-bold text-primary flex items-center gap-2">
@@ -66,6 +99,22 @@ const Experience = () => {
             <p className="text-muted-foreground leading-relaxed">
               {exp.description}
             </p>
+            {exp.featureSections && (
+              <div className="mt-5 space-y-4">
+                {exp.featureSections.map((section) => (
+                  <div key={section.title}>
+                    <h5 className="text-sm font-semibold uppercase tracking-[0.2em] text-primary/80">
+                      {section.title}
+                    </h5>
+                    <ul className="mt-2 list-disc space-y-2 pl-5 text-sm leading-relaxed text-muted-foreground">
+                      {section.items.map((item) => (
+                        <li key={item}>{item}</li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         </motion.div>
       ))}

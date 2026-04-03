@@ -40,6 +40,7 @@ const Contact = () => {
       } else {
         setStatus("error");
       }
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
       setStatus("error");
     }
@@ -52,7 +53,7 @@ const Contact = () => {
         <CardHeader className="text-center">
           <CardTitle className="text-2xl">Get in Touch</CardTitle>
           <CardDescription>
-            Have a project in mind? Let's talk about it.
+            Have a project in mind? Let&apos;s talk about it.
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -61,54 +62,54 @@ const Contact = () => {
               <Label htmlFor="name">Name</Label>
               <div className="relative">
                 <User className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                <Input 
-                  id="name" 
+                <Input
+                  id="name"
                   value={formData.name}
                   onChange={handleChange}
                   onFocus={() => setIsPandaCovering(false)}
                   required
-                  placeholder="John Doe" 
-                  className="pl-9 bg-background/50 border-primary/20 focus:border-primary/50 transition-colors" 
+                  placeholder="Nama"
+                  className="pl-9 bg-background/50 border-primary/20 focus:border-primary/50 transition-colors"
                 />
               </div>
             </div>
-            
+
             <div className="space-y-2">
-               <Label htmlFor="email">Email</Label>
-               <div className="relative">
+              <Label htmlFor="email">Email</Label>
+              <div className="relative">
                 <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                <Input 
-                  id="email" 
-                  type="email" 
+                <Input
+                  id="email"
+                  type="email"
                   value={formData.email}
                   onChange={handleChange}
                   onFocus={() => setIsPandaCovering(false)}
                   required
-                  placeholder="john@example.com" 
-                  className="pl-9 bg-background/50 border-primary/20 focus:border-primary/50 transition-colors" 
+                  placeholder="Email"
+                  className="pl-9 bg-background/50 border-primary/20 focus:border-primary/50 transition-colors"
                 />
               </div>
             </div>
-            
+
             <div className="space-y-2">
-               <Label htmlFor="message">Message</Label>
-               <div className="relative">
+              <Label htmlFor="message">Message</Label>
+              <div className="relative">
                 <MessageSquare className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                <Textarea 
-                  id="message" 
+                <Textarea
+                  id="message"
                   value={formData.message}
                   onChange={handleChange}
                   onFocus={() => setIsPandaCovering(true)}
                   onBlur={() => setIsPandaCovering(false)}
                   required
-                  placeholder="Tell me about your project..." 
-                  className="pl-9 min-h-[120px] bg-background/50 border-primary/20 focus:border-primary/50 transition-colors" 
+                  placeholder="Tell me about your project..."
+                  className="pl-9 min-h-[120px] bg-background/50 border-primary/20 focus:border-primary/50 transition-colors"
                 />
               </div>
             </div>
-            
-            <Button 
-              type="submit" 
+
+            <Button
+              type="submit"
               disabled={status === "loading" || status === "success"}
               className="w-full rounded-full shadow-lg hover:shadow-primary/20 transition-all duration-300"
             >
@@ -119,7 +120,7 @@ const Contact = () => {
           </form>
         </CardContent>
       </Card>
-      
+
       <div className="mt-8 flex justify-center gap-6 text-muted-foreground">
         <a href="https://linkedin.com/in/ergi-septiandi-p-05b896275" target="_blank" className="hover:text-primary transition-colors">
           LinkedIn

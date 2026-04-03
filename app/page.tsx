@@ -9,7 +9,7 @@ import ProjectCard from "@/components/ProjectCard";
 import ScrollFlow from "@/components/ScrollFlow";
 import SkillBadge from "@/components/SkillBadge";
 import { motion, Variants } from "framer-motion";
-import { SiCloudflare, SiDocker, SiFlutter, SiLaravel, SiNestjs, SiNextdotjs, SiNginx, SiNodedotjs, SiPostgresql, SiReact, SiTailwindcss } from "react-icons/si";
+import { SiCloudflare, SiDocker, SiExpo, SiFlutter, SiLaravel, SiNestjs, SiNextdotjs, SiNginx, SiNodedotjs, SiPostgresql, SiReact, SiTailwindcss } from "react-icons/si";
 
 export default function Home() {
   const skills = [
@@ -17,6 +17,7 @@ export default function Home() {
     { name: "Next.js", icon: <SiNextdotjs className="h-4 w-4" />, color: "#000000" }, // Black shadow might be invisible in dark mode, but the badge handles opacity.
     { name: "NestJS", icon: <SiNestjs className="h-4 w-4" />, color: "#E0234E" },
     { name: "Flutter", icon: <SiFlutter className="h-4 w-4" />, color: "#02569B" },
+    { name: "Expo", icon: <SiExpo className="h-4 w-4" />, color: "#000020" },
     { name: "React", icon: <SiReact className="h-4 w-4" />, color: "#61DAFB" },
     { name: "PostgreSQL", icon: <SiPostgresql className="h-4 w-4" />, color: "#336791" },
     { name: "Node.js", icon: <SiNodedotjs className="h-4 w-4" />, color: "#339933" },
@@ -31,6 +32,13 @@ export default function Home() {
       title: "HRIS Integrated System",
       description: "Comprehensive HR management for Persero Batam. Features automated payroll with tax calculation, realtime fingerprint attendance integration, and overtime management.",
       tags: ["Laravel", "MySQL", "Realtime Integration", "Bootstrap"],
+      imageUrl: "",
+      isPrivate: true,
+    },
+    {
+      title: "Captura Queue Dashboard",
+      description: "Built and improved a realtime queue dashboard for multiple branches and companies, while optimizing the user interface for a more engaging and fully responsive experience across mobile and desktop.",
+      tags: ["Next.js", "Realtime Dashboard", "Responsive UI", "Full Stack"],
       imageUrl: "",
       isPrivate: true,
     },
@@ -59,6 +67,13 @@ export default function Home() {
       title: "Backend Services Portfolio",
       description: "Various backend systems for clients including HappyBeauty (E-commerce), Tritunas, and Grand Batam Mall (IG Automation).",
       tags: ["NestJS", "PostgreSQL", "Automation"],
+      imageUrl: "",
+      isPrivate: true,
+    },
+    {
+      title: "DevOps Automation & Odoo Migration",
+      description: "Implemented GitLab CI/CD auto-deployment workflows, configured Docker services for automatic recovery after server outages, and migrated an Odoo application from a cloud server to an internal server without data loss.",
+      tags: ["GitLab CI/CD", "Docker", "Odoo", "DevOps"],
       imageUrl: "",
       isPrivate: true,
     },
@@ -129,7 +144,7 @@ export default function Home() {
               <p className="text-lg text-primary font-medium">Fullstack Developer</p>
 
               <p className="text-base leading-relaxed text-muted-foreground">
-                Hello! I'm a versatile Fullstack Developer capable of building complete solutions for Web and Mobile.
+                Hello! I&apos;m a versatile Fullstack Developer capable of building complete solutions for Web and Mobile.
                 I have extensive experience with <strong>Laravel</strong>, <strong>Next.js</strong>, <strong>NestJS</strong>,
                 and <strong>Flutter</strong>. I enjoy creating efficient systems, from robust backends to intuitive and beautiful user interfaces.
               </p>
@@ -173,7 +188,7 @@ export default function Home() {
           />
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+        <div className="max-w-4xl mx-auto space-y-16">
           <div>
             <h3 className="text-2xl font-bold mb-8 text-center lg:text-left flex items-center justify-center lg:justify-start gap-2">
               <span className="text-primary">01.</span> Experience
