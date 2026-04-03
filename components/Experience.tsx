@@ -1,6 +1,3 @@
-"use client";
-
-import { motion } from "framer-motion";
 import { Briefcase, Calendar } from "lucide-react";
 
 type ExperienceItem = {
@@ -15,6 +12,34 @@ type ExperienceItem = {
 };
 
 const experiences: ExperienceItem[] = [
+  {
+    role: "Full Stack Developer",
+    company: "PT Jalaarmadarinjani (Aplikasi Absensi)",
+    period: "Project-based",
+    description:
+      "Built a comprehensive attendance application with two user roles: admin and employee. The system handles coordinate-based attendance with cross-day clock-in support, leave and sick request submissions, and complete attendance history tracking.",
+    featureSections: [
+      {
+        title: "Employee Features",
+        items: [
+          "Coordinate-based attendance with GPS location tracking",
+          "Cross-day clock-in and clock-out support",
+          "Leave, sick, and permission request submissions",
+          "Personal attendance history and records",
+        ],
+      },
+      {
+        title: "Admin Dashboard",
+        items: [
+          "Overview dashboard: total employees, coordinates, today's attendance, latest check-ins, and pending leave/sick requests",
+          "User management and coordinate location management",
+          "Shift settings with reusable templates, applicable per division or individual employees",
+          "Employee leave and permission management",
+          "Informative attendance reports with overall and per-employee views",
+        ],
+      },
+    ],
+  },
   {
     role: "Full Stack Developer (Freelance)",
     company: "Captura",
@@ -44,69 +69,83 @@ const experiences: ExperienceItem[] = [
       "Built a Laravel-based meeting room application with a real-time dashboard to monitor room status by date and time. Developed scheduling and meeting management features, including participant count, meal requirements, and automated notifications through the WhatsApp API.",
   },
   {
+    role: "Full Stack Developer",
+    company: "Batam Toteles Application",
+    period: "Feb 2025",
+    description:
+      "Built a Laravel-based operational management application for Toteles in Batam with interconnected modules similar to an ERP workflow. The system handled purchase requests, purchase orders, delivery orders, production flows, and UMKM consignment management, all linked within one application ecosystem. Also implemented user management with configurable roles and access control directly from the app, integrated WhatsApp Gateway notifications, and delivered more informative reporting for operational monitoring.",
+  },
+  {
+    role: "Full Stack Developer",
+    company: "Mudik Gratis BUMN Application",
+    period: "2025",
+    description:
+      "Built a Laravel-based registration system for Mudik Gratis BUMN to replace the previous Google Form process and make participant handling more scalable. The platform included 24/7 status checking, live chat support for user issues, and automatic email delivery for registrants. On the admin side, developed a dashboard with totals for participants, pending verification, approved and rejected applicants, real-time notifications, statistical charts, participant filtering by payment status, automated QRIS payment handling, NIK blacklist validation, and fully system-driven workflows without hardcoded operational steps.",
+  },
+  {
     role: "Full Stack Developer (Laravel & Flutter)",
     company: "Candu Roti Bakar",
     period: "Sep 2024 - Oct 2024",
-    description: "Built a full-stack solution for product management, stock allocation, and financial reporting (Sales, Profit, COGS). Developed an Android POS system with automated QRIS (Midtrans) payments and real-time sales analytics.",
+    description:
+      "Built a full-stack solution for product management, stock allocation, and financial reporting (Sales, Profit, COGS). Developed an Android POS system with automated QRIS (Midtrans) payments and real-time sales analytics.",
   },
   {
     role: "Backend Developer (NestJS)",
     company: "Freelance Projects",
     period: "2023 - 2024",
-    description: "Developed backend systems for multiple clients: 'HappyBeauty' (E-commerce automation), 'Tritunas' & 'Grand Batam Mall' (Branch/Invoice management, IG integration), and 'Liszthoven Music School' (50+ features including billing and radius-based attendance).",
+    description:
+      "Developed backend systems for multiple clients: HappyBeauty (E-commerce automation), Tritunas and Grand Batam Mall (Branch, invoice management, and IG integration), plus Liszthoven Music School (50+ features including billing and radius-based attendance).",
   },
   {
     role: "Mobile Developer",
     company: "PT Persero Batam Hang Nadim Airport Project",
     period: "2024",
-    description: "Created a mobile acceptance application to automatically scan and integrate package QR codes into the airport's central system.",
+    description:
+      "Created a mobile acceptance application to automatically scan and integrate package QR codes into the airport's central system.",
   },
   {
     role: "Full Stack Developer (Internship)",
     company: "Tax Center - PBL Project",
     period: "Aug 2022 - Dec 2022",
-    description: "Optimized tax calculation formulas and enhanced session security. Implemented an automatic subscription feature with Virtual Account payments and improved overall application performance.",
+    description:
+      "Optimized tax calculation formulas and enhanced session security. Implemented an automatic subscription feature with Virtual Account payments and improved overall application performance.",
   },
 ];
 
 const Experience = () => {
   return (
-    <div className="relative border-l border-primary/30 ml-4 md:ml-6 space-y-12">
+    <div className="relative space-y-6 pl-6 before:absolute before:bottom-2 before:left-[0.45rem] before:top-2 before:w-px before:bg-border/80">
       {experiences.map((exp, index) => (
-        <motion.div
-          key={index}
-          className="relative pl-8 md:pl-12"
-          initial={{ opacity: 0, x: -20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: index * 0.2 }}
-        >
-          {/* Timeline Dot */}
-          <div className="absolute -left-[5px] top-2 h-3 w-3 rounded-full bg-primary ring-4 ring-background" />
+        <article key={`${exp.company}-${index}`} className="relative pl-6">
+          <div className="absolute left-0 top-6 h-3 w-3 rounded-full border-4 border-background bg-primary shadow-sm" />
+          <div className="surface-panel px-5 py-5 sm:px-6 sm:py-6">
+            <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
+              <div className="space-y-2">
+                <div className="inline-flex items-center gap-2 text-primary">
+                  <Briefcase className="h-4 w-4" />
+                  <h4 className="text-lg font-semibold text-foreground">{exp.role}</h4>
+                </div>
+                <p className="text-sm font-medium text-foreground/80">{exp.company}</p>
+              </div>
 
-          <div className="glass-card p-6 md:p-8 hover:bg-primary/5 transition-colors">
-            <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4 gap-2">
-              <h3 className="text-xl font-bold text-primary flex items-center gap-2">
-                <Briefcase className="h-5 w-5" />
-                {exp.role}
-              </h3>
-              <div className="flex items-center text-sm text-muted-foreground bg-primary/10 px-3 py-1 rounded-full w-fit">
-                <Calendar className="h-3 w-3 mr-2" />
+              <div className="inline-flex items-center gap-2 rounded-full border border-border/70 bg-background/70 px-3 py-1 text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground">
+                <Calendar className="h-3.5 w-3.5" />
                 {exp.period}
               </div>
             </div>
-            <h4 className="text-lg font-semibold mb-2">{exp.company}</h4>
-            <p className="text-muted-foreground leading-relaxed">
+
+            <p className="mt-4 text-sm leading-7 text-muted-foreground sm:text-[0.95rem]">
               {exp.description}
             </p>
-            {exp.featureSections && (
+
+            {exp.featureSections ? (
               <div className="mt-5 space-y-4">
                 {exp.featureSections.map((section) => (
                   <div key={section.title}>
-                    <h5 className="text-sm font-semibold uppercase tracking-[0.2em] text-primary/80">
+                    <h5 className="font-mono text-xs uppercase tracking-[0.24em] text-primary/75">
                       {section.title}
                     </h5>
-                    <ul className="mt-2 list-disc space-y-2 pl-5 text-sm leading-relaxed text-muted-foreground">
+                    <ul className="mt-2 list-disc space-y-2 pl-5 text-sm leading-6 text-muted-foreground">
                       {section.items.map((item) => (
                         <li key={item}>{item}</li>
                       ))}
@@ -114,9 +153,9 @@ const Experience = () => {
                   </div>
                 ))}
               </div>
-            )}
+            ) : null}
           </div>
-        </motion.div>
+        </article>
       ))}
     </div>
   );

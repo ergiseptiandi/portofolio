@@ -8,139 +8,173 @@ import { Github, Mail, Menu, X } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
+const NAV_LINKS = [
+  { name: "Home", href: "#home", id: "home" },
+  { name: "Profile", href: "#about", id: "about" },
+  { name: "Experience", href: "#experience", id: "experience" },
+  { name: "Skills", href: "#skills", id: "skills" },
+  { name: "Projects", href: "#projects", id: "projects" },
+  { name: "Contact", href: "#contact", id: "contact" },
+] as const;
+
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState("home");
-
-  const navLinks = [
-    { name: "About", href: "#about" },
-    { name: "Experience", href: "#experience" },
-    { name: "Skills", href: "#skills" },
-    { name: "Projects", href: "#projects" },
-    { name: "Contact", href: "#contact" },
-  ];
+  const [activeSection, setActiveSection] = useState<(typeof NAV_LINKS)[number]["id"]>("home");
 
   useEffect(() => {
-    const handleScroll = () => {
-      const sections = navLinks.map(link => link.href.substring(1));
-      
-      // Default to home if near top
-      if (window.scrollY < 100) {
-        setActiveSection("home");
-        return;
-      }
+    const sections = NAV_LINKS.map((link) => document.getElementById(link.id)).filter(
+      (element): element is HTMLElement => Boolean(element)
+    );
 
-      for (const section of sections) {
-        const element = document.getElementById(section);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          if (rect.top <= 150 && rect.bottom >= 150) {
-            setActiveSection(section);
-            break;
-          }
+    if (!sections.length) {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visibleEntries = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+
+        if (visibleEntries[0]) {
+          setActiveSection(visibleEntries[0].target.id as (typeof NAV_LINKS)[number]["id"]);
         }
+      },
+      {
+        rootMargin: "-45% 0px -45% 0px",
+        threshold: [0.15, 0.35, 0.55],
       }
-    };
+    );
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    sections.forEach((section) => observer.observe(section));
+
+    return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    if (!isOpen) {
+      return;
+    }
+
+    const closeMenu = () => setIsOpen(false);
+
+    window.addEventListener("hashchange", closeMenu);
+    return () => window.removeEventListener("hashchange", closeMenu);
+  }, [isOpen]);
+
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="glass mt-4 flex h-16 items-center justify-between rounded-full px-6 transition-all">
-          <div className="flex items-center">
-            <Link href="/" className="text-xl font-bold tracking-tight text-foreground/90 hover:text-primary transition-colors">
-              Portfolio
-            </Link>
-          </div>
-          
-          <div className="hidden md:block">
-            <div className="flex items-baseline space-x-1 relative">
-              {navLinks.map((link) => {
-                const isActive = activeSection === link.href.substring(1);
-                return (
-                  <Link
-                    key={link.name}
-                    href={link.href}
-                    className={cn(
-                      "relative px-4 py-2 text-sm font-medium transition-colors z-10",
-                      isActive ? "text-primary-foreground" : "text-muted-foreground hover:text-primary"
-                    )}
-                  >
-                    {isActive && (
-                      <motion.span
-                        layoutId="activeNav"
-                        className="absolute inset-0 bg-primary rounded-full -z-10"
-                        transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                      />
-                    )}
-                    {link.name}
-                  </Link>
-                );
-              })}
-            </div>
-          </div>
+    <nav className="fixed inset-x-0 top-0 z-50">
+      <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
+        <div className="surface-panel flex h-14 items-center justify-between rounded-full px-3 sm:px-4">
+          <Link
+            href="#home"
+            className="rounded-full px-3 py-2 font-semibold tracking-tight text-foreground transition-colors hover:text-primary"
+          >
+            Erghi
+          </Link>
 
+          <div className="hidden items-center gap-1 lg:flex">
+            {NAV_LINKS.map((link) => {
+              const isActive = activeSection === link.id;
 
-          <div className="hidden md:block">
-            <div className="flex items-center gap-4">
-              <ThemeToggle />
-              <Button asChild variant="ghost" size="icon" className="rounded-full hover:bg-primary/10">
-                <a href="https://github.com/ergiseptiandi" target="_blank" rel="noopener noreferrer">
-                   <Github className="h-5 w-5" />
-                </a>
-              </Button>
-              <Button asChild variant="outline" size="sm" className="rounded-full gap-2 border-primary/20 hover:bg-primary/10">
-                <a href="mailto:ergiputra321@gmail.com">
-                  <Mail className="h-4 w-4" />
-                  <span>Hire Me</span>
-                </a>
-              </Button>
-            </div>
+              return (
+                <Link
+                  key={link.id}
+                  href={link.href}
+                  className={cn(
+                    "relative rounded-full px-4 py-2 text-sm font-medium transition-colors",
+                    isActive ? "text-foreground" : "text-muted-foreground hover:text-foreground"
+                  )}
+                >
+                  {isActive ? (
+                    <motion.span
+                      layoutId="active-nav-pill"
+                      className="absolute inset-0 -z-10 rounded-full bg-foreground/8"
+                      transition={{ type: "spring", stiffness: 360, damping: 32 }}
+                    />
+                  ) : null}
+                  {link.name}
+                </Link>
+              );
+            })}
           </div>
 
-          <div className="-mr-2 flex md:hidden">
+          <div className="hidden items-center gap-2 lg:flex">
+            <ThemeToggle />
+            <Button
+              asChild
+              variant="ghost"
+              size="icon"
+              className="rounded-full text-muted-foreground hover:bg-background hover:text-foreground"
+            >
+              <a href="https://github.com/ergiseptiandi" target="_blank" rel="noopener noreferrer">
+                <Github className="h-4 w-4" />
+              </a>
+            </Button>
+            <Button
+              asChild
+              className="h-10 rounded-full px-5 text-sm font-semibold shadow-[0_16px_38px_-24px_rgba(39,83,214,0.56)]"
+            >
+              <a href="mailto:ergiputra321@gmail.com">
+                <Mail className="h-4 w-4" />
+                Hire me
+              </a>
+            </Button>
+          </div>
+
+          <div className="flex items-center gap-2 lg:hidden">
+            <ThemeToggle />
             <Button
               variant="ghost"
               size="icon"
-              onClick={() => setIsOpen(!isOpen)}
-              className="inline-flex items-center justify-center rounded-full p-2 text-muted-foreground hover:bg-primary/10 hover:text-primary focus:outline-none"
+              onClick={() => setIsOpen((open) => !open)}
+              className="rounded-full text-muted-foreground hover:bg-background hover:text-foreground"
+              aria-expanded={isOpen}
+              aria-label="Toggle navigation"
             >
-              <span className="sr-only">Open main menu</span>
-              {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </Button>
           </div>
         </div>
-      </div>
 
-      {/* Mobile menu */}
-      <div className={cn(
-        "absolute left-0 right-0 top-24 mx-4 p-4 transition-all duration-300 ease-in-out md:hidden",
-        isOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4 pointer-events-none"
-      )}>
-        <div className="glass rounded-2xl p-4 space-y-2">
-          {navLinks.map((link) => (
-            <Link
-              key={link.name}
-              href={link.href}
-              onClick={() => setIsOpen(false)}
-              className="block rounded-lg px-4 py-3 text-base font-medium text-foreground hover:bg-primary/10 hover:text-primary transition-colors"
-            >
-              {link.name}
-            </Link>
-          ))}
-          <div className="pt-4 flex flex-col gap-4">
-             <div className="flex justify-between items-center px-4">
-                <span className="text-sm font-medium">Switch Theme</span>
-                <ThemeToggle />
-             </div>
-             <Button asChild className="w-full rounded-full bg-primary/20 text-foreground hover:bg-primary/30 border border-primary/20">
-              <a href="mailto:ergiputra321@gmail.com">
-                Hire Me
-              </a>
-            </Button>
+        <div
+          className={cn(
+            "px-1 pt-3 transition-all duration-200 lg:hidden",
+            isOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
+          )}
+        >
+          <div
+            className={cn(
+              "surface-card overflow-hidden p-2 transition-all duration-200",
+              isOpen ? "translate-y-0" : "-translate-y-2"
+            )}
+          >
+            <div className="space-y-1">
+              {NAV_LINKS.map((link) => (
+                <Link
+                  key={link.id}
+                  href={link.href}
+                  onClick={() => setIsOpen(false)}
+                  className={cn(
+                    "block rounded-2xl px-4 py-3 text-sm font-medium transition-colors",
+                    activeSection === link.id
+                      ? "bg-foreground/8 text-foreground"
+                      : "text-muted-foreground hover:bg-background hover:text-foreground"
+                  )}
+                >
+                  {link.name}
+                </Link>
+              ))}
+            </div>
+
+            <div className="mt-2 border-t border-border/60 px-2 pt-4">
+              <Button asChild className="h-11 w-full rounded-full text-sm font-semibold">
+                <a href="mailto:ergiputra321@gmail.com">
+                  <Mail className="h-4 w-4" />
+                  Start a conversation
+                </a>
+              </Button>
+            </div>
           </div>
         </div>
       </div>

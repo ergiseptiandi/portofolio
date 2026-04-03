@@ -1,6 +1,3 @@
-"use client";
-
-import { motion } from "framer-motion";
 import { Award, GraduationCap } from "lucide-react";
 
 const education = [
@@ -14,40 +11,23 @@ const education = [
 
 const Education = () => {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-      {education.map((edu, index) => (
-        <motion.div 
-          key={index}
-          className="glass-card p-6 relative overflow-hidden group"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: index * 0.2 }}
-        >
-          <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity transform group-hover:scale-110 duration-500">
-            <GraduationCap className="h-24 w-24 text-primary" />
+    <div className="space-y-4">
+      {education.map((edu) => (
+        <article key={edu.school} className="surface-panel relative overflow-hidden px-5 py-5 sm:px-6 sm:py-6">
+          <div className="absolute right-5 top-5 rounded-full bg-primary/8 p-4 text-primary/60">
+            <GraduationCap className="h-7 w-7" />
           </div>
-          
-          <div className="relative z-10">
-            <div className="flex items-center gap-3 mb-4">
-               <div className="p-2 bg-primary/10 rounded-lg">
-                 <GraduationCap className="h-6 w-6 text-primary" />
-               </div>
-               <span className="text-sm font-medium text-muted-foreground border border-border px-2 py-1 rounded-md">
-                 {edu.year}
-               </span>
+
+          <div className="max-w-[calc(100%-4rem)]">
+            <div className="inline-flex items-center gap-2 rounded-full border border-border/70 bg-background/70 px-3 py-1 text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground">
+              <Award className="h-3.5 w-3.5" />
+              {edu.year}
             </div>
-            
-            <h3 className="text-xl font-bold mb-1">{edu.degree}</h3>
-            <h4 className="text-lg text-primary/80 mb-4 flex items-center gap-2">
-              <Award className="h-4 w-4" />
-              {edu.school}
-            </h4>
-            <p className="text-muted-foreground">
-              {edu.description}
-            </p>
+            <h4 className="mt-4 text-xl font-semibold">{edu.degree}</h4>
+            <p className="mt-2 text-sm font-medium text-foreground/80">{edu.school}</p>
+            <p className="mt-3 text-sm leading-7 text-muted-foreground">{edu.description}</p>
           </div>
-        </motion.div>
+        </article>
       ))}
     </div>
   );

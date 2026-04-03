@@ -1,133 +1,169 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { ArrowRight, BriefcaseBusiness, Download, Layers3, Server, Smartphone } from "lucide-react";
 import { motion } from "framer-motion";
-import { ArrowRight, Database, Layout, Smartphone } from "lucide-react";
-import Typewriter from "typewriter-effect";
+
+const capabilityCards = [
+  {
+    title: "Frontend systems",
+    description: "Responsive product interfaces with clear hierarchy and reliable states.",
+    icon: Layers3,
+  },
+  {
+    title: "Backend delivery",
+    description: "Laravel and NestJS services built for scale, integrations, and operations.",
+    icon: Server,
+  },
+  {
+    title: "Mobile execution",
+    description: "Flutter and Expo apps with pragmatic product workflows and release speed.",
+    icon: Smartphone,
+  },
+];
 
 const Hero = () => {
   return (
-    <section className="relative flex min-h-[calc(100vh-4rem)] items-center justify-center overflow-hidden py-20 lg:py-32">
-      {/* Decorative blobs are now handled by AnimatedBackground globally */}
+    <section
+      id="home"
+      className="relative min-h-[calc(100vh-4.5rem)] scroll-mt-28 pt-6 md:pt-10"
+    >
+      <div className="section-shell flex min-h-[calc(100vh-4.5rem)] items-center py-8 md:py-10">
+        <div className="surface-card relative w-full overflow-hidden px-6 py-8 sm:px-8 sm:py-10 lg:px-12 lg:py-14">
+          <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/45 to-transparent" />
+          <div className="absolute right-6 top-6 hidden h-28 w-28 rounded-full border border-primary/12 bg-primary/8 blur-2xl lg:block" />
 
-      <div className="container mx-auto px-4 md:px-6">
-        <div className="grid gap-12 lg:grid-cols-2 lg:gap-8 items-center">
-          <motion.div 
-            className="flex flex-col justify-center space-y-8 text-center lg:text-left"
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-          >
-            <div className="space-y-4">
-              <motion.div 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 }}
-                className="inline-block rounded-full bg-primary/10 px-3 py-1 text-sm font-semibold text-primary backdrop-blur-md border border-primary/20"
-              >
-                Available for freelance work
-              </motion.div>
-              <h1 className="text-4xl font-extrabold tracking-tight sm:text-6xl md:text-7xl lg:text-7xl bg-clip-text text-transparent bg-gradient-to-r from-foreground to-foreground/70 min-h-[120px] sm:min-h-[160px] lg:min-h-[200px]">
-                <Typewriter
-                  options={{
-                    strings: ['Fullstack Developer', 'Laravel & Next.js Expert', 'Mobile Apps with Flutter', 'Backend with NestJS'],
-                    autoStart: true,
-                    loop: true,
-                    deleteSpeed: 50,
-                    delay: 50,
-                    cursor: "<span class='text-primary'>|</span>",
-                  }}
-                />
-              </h1>
-              <motion.p 
-                className="mx-auto max-w-[700px] text-lg text-muted-foreground md:text-xl lg:mx-0"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.7 }}
-              >
-                I build robust and scalable full-stack applications for Web and Mobile used Laravel, Next.js, NestJS, and Flutter.
-              </motion.p>
-            </div>
-            
-            <motion.div 
-              className="flex flex-col gap-4 sm:flex-row justify-center lg:justify-start"
+          <div className="grid items-start gap-10 lg:grid-cols-[minmax(0,1.2fr)_minmax(320px,0.8fr)]">
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.9 }}
+              transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+              className="space-y-8"
             >
-              <Button asChild size="lg" className="rounded-full text-base h-12 px-8 shadow-lg shadow-primary/20 transition-transform hover:scale-105">
-                <a href="#projects">
-                  View Projects
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </a>
-              </Button>
-              <Button asChild size="lg" variant="outline" className="rounded-full text-base h-12 px-8 glass border-primary/20 hover:bg-primary/5 transition-transform hover:scale-105">
-                <a href="#contact">
-                  Contact Me
-                </a>
-              </Button>
+              <div className="space-y-5">
+                <div className="surface-panel inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-foreground/80">
+                  <BriefcaseBusiness className="h-4 w-4 text-primary" />
+                  Available for freelance and product work
+                </div>
+
+                <div className="space-y-4">
+                  <p className="section-label">Full-stack developer based in Batam</p>
+                  <h1 className="max-w-4xl text-4xl font-semibold leading-[0.95] sm:text-5xl lg:text-[4.6rem]">
+                    Building web, mobile, and backend systems that feel{" "}
+                    <span className="text-primary">calm</span> under real traffic.
+                  </h1>
+                  <p className="max-w-2xl text-base leading-7 text-muted-foreground sm:text-lg">
+                    I design and ship complete product systems across Laravel, Next.js,
+                    NestJS, Flutter, Expo mobile, and deployment workflows, with a strong
+                    focus on responsive UX and dependable delivery.
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex flex-col gap-3 sm:flex-row">
+                <Button
+                  asChild
+                  size="lg"
+                  className="h-12 rounded-full px-7 text-sm font-semibold shadow-[0_18px_45px_-24px_rgba(39,83,214,0.6)]"
+                >
+                  <a href="#projects">
+                    View selected work
+                    <ArrowRight className="h-4 w-4" />
+                  </a>
+                </Button>
+                <Button
+                  asChild
+                  size="lg"
+                  variant="outline"
+                  className="h-12 rounded-full border-border/70 bg-background/70 px-7 text-sm font-semibold hover:bg-background"
+                >
+                  <a href="/cv.html" target="_blank" rel="noreferrer">
+                    Download CV
+                    <Download className="h-4 w-4" />
+                  </a>
+                </Button>
+              </div>
+
+              <div className="grid gap-3 sm:grid-cols-3">
+                <div className="surface-panel px-4 py-4">
+                  <p className="font-mono text-xs uppercase tracking-[0.24em] text-muted-foreground">
+                    Focus
+                  </p>
+                  <p className="mt-2 text-lg font-semibold">Web products</p>
+                </div>
+                <div className="surface-panel px-4 py-4">
+                  <p className="font-mono text-xs uppercase tracking-[0.24em] text-muted-foreground">
+                    Mobile
+                  </p>
+                  <p className="mt-2 text-lg font-semibold">Mobile apps</p>
+                </div>
+                <div className="surface-panel px-4 py-4">
+                  <p className="font-mono text-xs uppercase tracking-[0.24em] text-muted-foreground">
+                    Ops
+                  </p>
+                  <p className="mt-2 text-lg font-semibold">CI/CD + infra</p>
+                </div>
+              </div>
             </motion.div>
-          </motion.div>
 
-          <motion.div 
-            className="flex justify-center lg:justify-end relative mt-10 lg:mt-0"
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
-            {/* Mobile-optimized container: Stacks on very small screens, preserves 3D layout on larger mobile/desktop */}
-            <div className="relative h-[400px] w-full max-w-[350px] sm:w-[400px] perspective-1000">
-              
-              {/* Card 1: Frontend */}
-              <motion.div 
-                animate={{ y: [0, -10, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute top-0 right-0 lg:right-0 w-[240px] sm:w-[280px] glass-card transform rotate-6 z-10 p-6 flex flex-col justify-between left-1/2 -translate-x-1/2 lg:translate-x-0 lg:left-auto"
-              >
-                <div className="h-12 w-12 rounded-lg bg-primary/20 flex items-center justify-center">
-                  <Layout className="h-6 w-6 text-primary" />
+            <motion.div
+              initial={{ opacity: 0, x: 28 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+              className="surface-panel relative overflow-hidden p-5 sm:p-6"
+            >
+              <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/60 to-transparent" />
+              <div className="space-y-6">
+                <div className="space-y-2">
+                  <p className="section-label text-[0.68rem]">Capability stack</p>
+                  <h2 className="text-2xl font-semibold sm:text-[2rem]">
+                    End-to-end delivery without handoff friction.
+                  </h2>
                 </div>
-                <div>
-                  <h3 className="text-lg font-bold">Frontend</h3>
-                  <p className="text-sm text-muted-foreground">React, Next.js, Tailwind</p>
-                </div>
-              </motion.div>
-              
-              {/* Card 2: Backend */}
-              <motion.div 
-                animate={{ y: [0, 10, 0] }}
-                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                className="absolute top-24 right-4 lg:top-8 lg:right-8 w-[240px] sm:w-[280px] glass-card transform -rotate-6 z-0 bg-secondary/30 p-6 flex flex-col justify-between opacity-80 scale-95 origin-bottom-right left-1/2 -translate-x-1/2 lg:translate-x-0 lg:left-auto"
-              >
-                <div className="h-12 w-12 rounded-lg bg-secondary/20 flex items-center justify-center">
-                   <Database className="h-6 w-6 text-foreground" />
-                </div>
-                <div>
-                  <h3 className="text-lg font-bold">Backend</h3>
-                  <p className="text-sm text-muted-foreground">Laravel, NestJS, PostgreSQL</p>
-                </div>
-              </motion.div>
 
-               {/* Card 3: Mobile & Web */}
-               <motion.div 
-                 animate={{ y: [0, -15, 0] }}
-                 transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-                 className="absolute top-48 right-8 lg:top-16 lg:right-16 w-[240px] sm:w-[280px] glass-card transform rotate-3 lg:rotate-12 z-20 p-6 flex flex-col justify-between shadow-2xl border-primary/30 mt-0 ml-0 lg:-mr-12 lg:mt-24 left-1/2 -translate-x-1/2 lg:translate-x-0 lg:left-auto"
-              >
-                 <div className="h-12 w-12 rounded-lg bg-accent/20 flex items-center justify-center">
-                   <Smartphone className="h-6 w-6 text-accent-foreground" />
-                 </div>
-                 <div className="space-y-2">
-                    <div className="h-2 w-1/2 rounded bg-foreground/10" />
-                    <div className="h-2 w-3/4 rounded bg-foreground/10" />
-                 </div>
-                 <div>
-                   <h3 className="text-lg font-bold">Web & Mobile</h3>
-                   <p className="text-sm text-muted-foreground">Flutter, Next.js, Laravel</p>
-                 </div>
-              </motion.div>
-            </div>
-          </motion.div>
+                <div className="space-y-3">
+                  {capabilityCards.map(({ title, description, icon: Icon }, index) => (
+                    <motion.div
+                      key={title}
+                      initial={{ opacity: 0, y: 16 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.4, delay: 0.22 + index * 0.08 }}
+                      className="surface-panel flex items-start gap-4 px-4 py-4"
+                    >
+                      <div className="rounded-2xl bg-primary/10 p-3 text-primary">
+                        <Icon className="h-5 w-5" />
+                      </div>
+                      <div className="space-y-1">
+                        <p className="text-base font-semibold">{title}</p>
+                        <p className="text-sm leading-6 text-muted-foreground">
+                          {description}
+                        </p>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+
+                <div className="surface-panel grid gap-4 px-4 py-4 sm:grid-cols-2">
+                  <div>
+                    <p className="font-mono text-xs uppercase tracking-[0.24em] text-muted-foreground">
+                      Core stack
+                    </p>
+                    <p className="mt-2 text-sm leading-6 text-foreground/85">
+                      Laravel, Next.js, NestJS, Flutter, PostgreSQL, Docker
+                    </p>
+                  </div>
+                  <div>
+                    <p className="font-mono text-xs uppercase tracking-[0.24em] text-muted-foreground">
+                      Working style
+                    </p>
+                    <p className="mt-2 text-sm leading-6 text-foreground/85">
+                      Product-minded delivery, quick iteration, and implementation detail.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </div>
     </section>

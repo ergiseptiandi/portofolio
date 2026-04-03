@@ -1,59 +1,12 @@
-"use client";
-
-import { motion } from "framer-motion";
-
 const AnimatedBackground = () => {
   return (
-    <div className="fixed inset-0 -z-50 overflow-hidden pointer-events-none">
-      {/* Primary Blob */}
-      <motion.div
-        animate={{
-          x: [0, 100, 0],
-          y: [0, 50, 0],
-          scale: [1, 1.2, 1],
-        }}
-        transition={{
-          duration: 20,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-        className="absolute top-0 left-0 w-[500px] h-[500px] bg-primary/20 rounded-full blur-[100px] opacity-50 dark:opacity-20"
-      />
-
-      {/* Secondary Blob */}
-      <motion.div
-        animate={{
-          x: [0, -100, 0],
-          y: [0, 100, 0],
-          scale: [1, 1.3, 1],
-        }}
-        transition={{
-          duration: 25,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 2,
-        }}
-        className="absolute top-0 right-0 w-[400px] h-[400px] bg-secondary/30 rounded-full blur-[100px] opacity-50 dark:opacity-20"
-      />
-
-      {/* Accent Blob */}
-      <motion.div
-        animate={{
-          x: [0, 50, 0],
-          y: [0, -50, 0],
-          scale: [1, 1.5, 1],
-        }}
-        transition={{
-          duration: 30,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 5,
-        }}
-        className="absolute bottom-0 left-1/4 w-[600px] h-[600px] bg-accent/20 rounded-full blur-[120px] opacity-40 dark:opacity-10"
-      />
-      
-      {/* Connecting Line (simulated with standard div for now, will be part of scroll animation) */}
-      <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-[0.02] dark:opacity-[0.05]" />
+    <div className="pointer-events-none fixed inset-0 -z-50 overflow-hidden">
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,color-mix(in_srgb,var(--border)_45%,transparent)_1px,transparent_1px),linear-gradient(to_bottom,color-mix(in_srgb,var(--border)_45%,transparent)_1px,transparent_1px)] bg-[size:120px_120px] opacity-[0.35] dark:opacity-[0.18]" />
+      <div className="absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-background via-background/85 to-transparent" />
+      <div className="absolute -left-24 top-12 h-72 w-72 rounded-full bg-primary/12 blur-3xl dark:bg-primary/18" />
+      <div className="absolute right-[-6rem] top-28 h-80 w-80 rounded-full bg-accent/14 blur-3xl dark:bg-accent/12" />
+      <div className="absolute bottom-[-10rem] left-1/3 h-96 w-96 rounded-full bg-primary/10 blur-3xl dark:bg-primary/14" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_transparent_0,_transparent_45%,_rgba(15,23,42,0.06)_100%)] dark:bg-[radial-gradient(circle_at_top,_transparent_0,_transparent_28%,_rgba(0,0,0,0.44)_100%)]" />
     </div>
   );
 };

@@ -7,8 +7,28 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Mail, MessageSquare, Send, User } from "lucide-react";
-import Panda from "./Panda";
+import { Github, Linkedin, Mail, MessageSquare, Send, User } from "lucide-react";
+
+const contactLinks = [
+  {
+    label: "Email",
+    value: "ergiputra321@gmail.com",
+    href: "mailto:ergiputra321@gmail.com",
+    icon: Mail,
+  },
+  {
+    label: "LinkedIn",
+    value: "ergi-septiandi-p-05b896275",
+    href: "https://linkedin.com/in/ergi-septiandi-p-05b896275",
+    icon: Linkedin,
+  },
+  {
+    label: "GitHub",
+    value: "github.com/ergiseptiandi",
+    href: "https://github.com/ergiseptiandi",
+    icon: Github,
+  },
+];
 
 const Contact = () => {
   const [formData, setFormData] = React.useState({
@@ -17,7 +37,6 @@ const Contact = () => {
     message: "",
   });
   const [status, setStatus] = React.useState<"idle" | "loading" | "success" | "error">("idle");
-  const [isPandaCovering, setIsPandaCovering] = React.useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData((prev) => ({ ...prev, [e.target.id]: e.target.value }));
@@ -40,54 +59,85 @@ const Contact = () => {
       } else {
         setStatus("error");
       }
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    } catch (error) {
+    } catch {
       setStatus("error");
     }
   };
 
   return (
-    <div className="w-full max-w-xl mx-auto pt-12">
-      <Panda isCoveringEyes={isPandaCovering} />
-      <Card className="glass-card mt-4">
-        <CardHeader className="text-center">
-          <CardTitle className="text-2xl">Get in Touch</CardTitle>
-          <CardDescription>
-            Have a project in mind? Let&apos;s talk about it.
+    <div className="grid gap-6 lg:grid-cols-[minmax(280px,0.8fr)_minmax(0,1.2fr)]">
+      <aside className="surface-card flex flex-col justify-between p-6 sm:p-8">
+        <div>
+          <p className="section-label text-[0.68rem]">Direct contact</p>
+          <h3 className="mt-4 text-2xl font-semibold">Let&apos;s talk about the build.</h3>
+          <p className="mt-4 text-sm leading-7 text-muted-foreground sm:text-[0.95rem]">
+            Share a short brief, a product problem, or the current bottleneck in your system.
+            I usually work across interfaces, backend implementation, integrations, and delivery.
+          </p>
+        </div>
+
+        <div className="mt-8 space-y-3">
+          {contactLinks.map(({ label, value, href, icon: Icon }) => (
+            <a
+              key={label}
+              href={href}
+              target={href.startsWith("http") ? "_blank" : undefined}
+              rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
+              className="surface-panel flex items-center gap-4 px-4 py-4 transition-transform duration-200 hover:-translate-y-0.5"
+            >
+              <div className="rounded-full bg-primary/10 p-3 text-primary">
+                <Icon className="h-4 w-4" />
+              </div>
+              <div>
+                <p className="font-mono text-[0.68rem] uppercase tracking-[0.24em] text-muted-foreground">
+                  {label}
+                </p>
+                <p className="mt-1 text-sm font-medium text-foreground/88">{value}</p>
+              </div>
+            </a>
+          ))}
+        </div>
+      </aside>
+
+      <Card className="surface-card gap-0 border-none py-0 shadow-none">
+        <CardHeader className="border-b border-border/60 px-6 py-6 sm:px-8">
+          <CardTitle className="text-2xl font-semibold">Project inquiry</CardTitle>
+          <CardDescription className="mt-2 max-w-xl text-sm leading-7">
+            Tell me what you are building, what needs to improve, and the stack involved.
           </CardDescription>
         </CardHeader>
-        <CardContent>
-          <form className="space-y-4" onSubmit={handleSubmit}>
-            <div className="space-y-2">
-              <Label htmlFor="name">Name</Label>
-              <div className="relative">
-                <User className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                <Input
-                  id="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  onFocus={() => setIsPandaCovering(false)}
-                  required
-                  placeholder="Nama"
-                  className="pl-9 bg-background/50 border-primary/20 focus:border-primary/50 transition-colors"
-                />
+        <CardContent className="px-6 py-6 sm:px-8 sm:py-8">
+          <form className="space-y-5" onSubmit={handleSubmit}>
+            <div className="grid gap-5 sm:grid-cols-2">
+              <div className="space-y-2">
+                <Label htmlFor="name">Name</Label>
+                <div className="relative">
+                  <User className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                  <Input
+                    id="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    required
+                    placeholder="Your name"
+                    className="h-12 rounded-2xl border-border/70 bg-background/72 pl-10"
+                  />
+                </div>
               </div>
-            </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
-              <div className="relative">
-                <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                <Input
-                  id="email"
-                  type="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  onFocus={() => setIsPandaCovering(false)}
-                  required
-                  placeholder="Email"
-                  className="pl-9 bg-background/50 border-primary/20 focus:border-primary/50 transition-colors"
-                />
+              <div className="space-y-2">
+                <Label htmlFor="email">Email</Label>
+                <div className="relative">
+                  <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                  <Input
+                    id="email"
+                    type="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                    placeholder="Your email"
+                    className="h-12 rounded-2xl border-border/70 bg-background/72 pl-10"
+                  />
+                </div>
               </div>
             </div>
 
@@ -99,36 +149,33 @@ const Contact = () => {
                   id="message"
                   value={formData.message}
                   onChange={handleChange}
-                  onFocus={() => setIsPandaCovering(true)}
-                  onBlur={() => setIsPandaCovering(false)}
                   required
-                  placeholder="Tell me about your project..."
-                  className="pl-9 min-h-[120px] bg-background/50 border-primary/20 focus:border-primary/50 transition-colors"
+                  placeholder="Tell me about your project, timeline, or current bottleneck."
+                  className="min-h-[160px] rounded-[1.35rem] border-border/70 bg-background/72 pl-10"
                 />
               </div>
             </div>
 
-            <Button
-              type="submit"
-              disabled={status === "loading" || status === "success"}
-              className="w-full rounded-full shadow-lg hover:shadow-primary/20 transition-all duration-300"
-            >
-              {status === "loading" ? "Sending..." : status === "success" ? "Message Sent!" : "Send Message"}
-              <Send className="ml-2 h-4 w-4" />
-            </Button>
-            {status === "error" && <p className="text-center text-red-500 text-sm mt-2">Something went wrong. Please try again.</p>}
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+              <p className="text-sm leading-6 text-muted-foreground" aria-live="polite">
+                {status === "loading" && "Sending your message..."}
+                {status === "success" && "Message sent successfully."}
+                {status === "error" && "Something went wrong. Please try again."}
+                {status === "idle" && "I usually reply with the next best technical step."}
+              </p>
+
+              <Button
+                type="submit"
+                disabled={status === "loading" || status === "success"}
+                className="h-11 rounded-full px-6 text-sm font-semibold shadow-[0_18px_45px_-24px_rgba(39,83,214,0.56)]"
+              >
+                {status === "loading" ? "Sending..." : status === "success" ? "Message sent" : "Send message"}
+                <Send className="h-4 w-4" />
+              </Button>
+            </div>
           </form>
         </CardContent>
       </Card>
-
-      <div className="mt-8 flex justify-center gap-6 text-muted-foreground">
-        <a href="https://linkedin.com/in/ergi-septiandi-p-05b896275" target="_blank" className="hover:text-primary transition-colors">
-          LinkedIn
-        </a>
-        <a href="https://github.com/ergiseptiandi" target="_blank" className="hover:text-primary transition-colors">
-          GitHub
-        </a>
-      </div>
     </div>
   );
 };
