@@ -4,391 +4,312 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CV - Erghi Septiandi Putra</title>
+    <title>Resume - Erghi Septiandi Putra</title>
     <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
         body {
-            font-family: 'Arial', sans-serif;
-            line-height: 1.6;
-            color: #333;
-            max-width: 800px;
+            max-width: 820px;
             margin: 0 auto;
-            padding: 40px;
-            background: white;
+            padding: 36px 42px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 11pt;
+            line-height: 1.45;
+            color: #111;
+            background: #fff;
         }
 
-        h1 {
-            font-size: 24px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 5px;
-            color: #000;
-        }
-
-        .header {
+        .resume-header {
             text-align: center;
-            border-bottom: 1px solid #000;
-            padding-bottom: 20px;
-            margin-bottom: 20px;
+            margin-bottom: 22px;
         }
 
-        .contact-info {
-            font-size: 14px;
-            margin-bottom: 20px;
+        .resume-header h1 {
+            font-size: 30pt;
+            line-height: 1;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .resume-header .role {
+            font-size: 11pt;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .resume-header .contact {
+            font-size: 10pt;
+            color: #333;
+        }
+
+        .resume-header .contact a {
+            color: inherit;
+            text-decoration: none;
         }
 
         h2 {
-            font-size: 16px;
-            text-transform: uppercase;
-            border-bottom: 1px solid #ccc;
+            margin-top: 22px;
+            margin-bottom: 10px;
             padding-bottom: 5px;
-            margin-top: 25px;
-            margin-bottom: 15px;
+            border-bottom: 1px solid #777;
+            font-size: 15pt;
+            font-weight: 800;
+            text-transform: uppercase;
         }
 
-        .job {
-            margin-bottom: 15px;
+        p {
+            margin-bottom: 10px;
         }
 
-        .job-title {
-            font-weight: bold;
-            font-size: 15px;
+        .entry {
+            margin-bottom: 18px;
         }
 
-        .company {
-            font-style: italic;
+        .entry-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 16px;
+            margin-bottom: 2px;
         }
 
-        .date {
-            float: right;
-            font-weight: normal;
+        .entry-title {
+            font-size: 12pt;
+            font-weight: 700;
+        }
+
+        .entry-date {
+            font-size: 10pt;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .entry-company {
+            margin-bottom: 5px;
+            font-size: 10.5pt;
+            font-weight: 700;
+            color: #333;
         }
 
         ul {
-            margin: 5px 0 15px 20px;
-            padding: 0;
-            font-size: 14px;
+            margin: 0 0 0 18px;
         }
 
         li {
-            margin-bottom: 3px;
-        }
-
-        .skills-section {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .skill-group {
-            margin-bottom: 12px;
-        }
-
-        .skill-group-title {
-            font-weight: bold;
-            font-size: 14px;
-            color: #222;
-        }
-
-        .skill-group-desc {
-            font-size: 13px;
-            color: #666;
             margin-bottom: 4px;
         }
 
-        .skill-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
+        .no-print {
+            margin-bottom: 18px;
+            text-align: right;
         }
 
-        .skill-tag {
-            background: #f3f4f6;
-            border: 1px solid #d1d5db;
-            padding: 2px 10px;
+        .btn-print {
+            border: none;
             border-radius: 4px;
+            background: #1f1f1f;
+            color: #fff;
+            padding: 10px 18px;
             font-size: 13px;
-            color: #374151;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .btn-print:hover {
+            background: #333;
         }
 
         @media print {
             body {
                 padding: 0;
-                margin: 20mm;
+                margin: 12mm 14mm;
+                font-size: 10.5pt;
             }
 
             .no-print {
-                display: none;
+                display: none !important;
             }
-        }
 
-        .btn-print {
-            background: #333;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            cursor: pointer;
-            border-radius: 4px;
-            margin-bottom: 20px;
-            font-size: 14px;
+            .entry {
+                page-break-inside: avoid;
+            }
+
+            h2 {
+                page-break-after: avoid;
+            }
         }
     </style>
 </head>
 
 <body>
-    <div class="no-print" style="text-align: right;">
+    <div class="no-print">
         <button onclick="window.print()" class="btn-print">Save as PDF</button>
     </div>
 
-    <div class="header">
+    <script>
+        if (new URLSearchParams(window.location.search).has('download')) {
+            window.addEventListener('load', function () {
+                setTimeout(function () { window.print(); }, 400);
+            });
+        }
+    </script>
+
+    <header class="resume-header">
         <h1>Erghi Septiandi Putra</h1>
-        <div class="contact-info">
-            Fullstack Developer | Laravel, Next.js, NestJS, Flutter<br>
-            Batam, Indonesia | ergiputra321@gmail.com | github.com/ergiseptiandi
+        <div class="role">Full Stack Developer | Backend Systems | Mobile Apps | DevOps</div>
+        <div class="contact">
+            Batam, Indonesia |
+            <a href="mailto:ergiputra321@gmail.com">ergiputra321@gmail.com</a> |
+            +62 852 6391 2536 |
+            <a href="https://portfolio.paidev.my.id/">portfolio.paidev.my.id</a>
         </div>
-        <p style="font-size: 14px; max-width: 600px; margin: 0 auto; text-align: center;">
-            A full-stack developer with hands-on experience delivering internal systems, customer-facing interfaces,
-            backend services, mobile workflows, and deployment automation.
-        </p>
-    </div>
-
-    <h2>Experience</h2>
-
-    <div class="job">
-        <div class="job-title">
-            Full Stack Developer <span class="date">Project-based</span>
+        <div class="contact">
+            <a href="https://github.com/ergiseptiandi">github.com/ergiseptiandi</a> |
+            <a href="https://linkedin.com/in/ergi-septiandi-p-05b896275">linkedin.com/in/ergi-septiandi-p-05b896275</a>
         </div>
-        <div class="company">PT Jalaarmadarinjani (Aplikasi Absensi)</div>
-        <p style="font-size: 14px;">
-            Built a comprehensive attendance application with two user roles: admin and employee. The system handles
-            coordinate-based attendance with cross-day clock-in support, leave and sick request submissions, and
-            complete attendance history tracking.
-        </p>
+    </header>
+
+    <h2>Professional Summary</h2>
+    <p>
+        Full Stack Developer with 3+ years of experience delivering production web applications,
+        mobile apps, backend services, and deployment workflows. Strong hands-on experience
+        across Laravel, Next.js, NestJS, Flutter, Expo, PostgreSQL, Docker, and CI/CD, with a
+        focus on internal systems, operational tools, responsive user experience, and reliable
+        business process automation.
+    </p>
+
+    <h2>Work Experience</h2>
+
+    <section class="entry">
+        <div class="entry-head">
+            <div class="entry-title">Full Stack Developer (Freelance)</div>
+            <div class="entry-date">January 2026 - Present</div>
+        </div>
+        <div class="entry-company">Captura, Remote</div>
         <ul>
-            <li><strong>Employee:</strong> Coordinate-based GPS attendance, cross-day clock-in/out, leave/sick/permission
-                requests, personal attendance history.</li>
-            <li><strong>Admin Dashboard:</strong> Overview dashboard (total employees, coordinates, today's attendance,
-                pending requests), user management, coordinate location management, shift settings with reusable
-                templates per division or individual, employee leave/permission management, informative attendance
-                reports (overall and per-employee).</li>
-        </ul>
-    </div>
-
-    <div class="job">
-        <div class="job-title">
-            Full Stack Developer (Freelance) <span class="date">Jan 2026 - Present</span>
-        </div>
-        <div class="company">Captura</div>
-        <ul>
-            <li>Optimized the user interface to deliver a more engaging experience with strong responsiveness across
-                mobile and desktop.</li>
-            <li>Built new features, fixed application issues, and developed a real-time queue dashboard that
-                consolidated data from multiple branches and companies.</li>
-        </ul>
-    </div>
-
-    <div class="job">
-        <div class="job-title">
-            DevOps Engineer <span class="date">Project-based</span>
-        </div>
-        <div class="company">PT Persero Batam</div>
-        <ul>
-            <li>Automated deployment workflows with GitLab CI/CD using GitLab jobs.</li>
-            <li>Configured Docker services to restart automatically after server outages.</li>
-            <li>Successfully migrated an Odoo application from a cloud server to an on-premise server without data
-                loss.</li>
-        </ul>
-    </div>
-
-    <div class="job">
-        <div class="job-title">
-            Full Stack Developer <span class="date">2024 - Present</span>
-        </div>
-        <div class="company">PT Persero Batam (HRIS Project)</div>
-        <ul>
-            <li>Built mobile and web HRIS applications covering attendance, payroll, BPJS, income tax, overtime, and
-                automated payslip delivery.</li>
-            <li>Developed the mobile HRIS app with Expo, including coordinate-based attendance, fake GPS detection,
-                payslip and overtime slip access, KPI dashboards, and in-app auto updates.</li>
-        </ul>
-    </div>
-
-    <div class="job">
-        <div class="job-title">
-            Full Stack Developer <span class="date">Oct 2025</span>
-        </div>
-        <div class="company">PT Persero Batam (Meeting Room Application)</div>
-        <ul>
-            <li>Built a Laravel-based meeting room application with a real-time dashboard to monitor room status by date
-                and time.</li>
-            <li>Developed scheduling and meeting management features including participant count, meal requirements, and
-                automated WhatsApp API notifications.</li>
-        </ul>
-    </div>
-
-    <div class="job">
-        <div class="job-title">
-            Full Stack Developer <span class="date">Feb 2025</span>
-        </div>
-        <div class="company">Batam Toteles Application</div>
-        <ul>
-            <li>Built a Laravel-based operational management application with interconnected ERP-style modules:
-                purchase requests, purchase orders, delivery orders, production flows, and UMKM consignment management.
+            <li>Built a real-time queue dashboard that consolidated data from multiple branches and companies into a
+                single operational view.</li>
+            <li>Improved responsive user experience across mobile and desktop to support day-to-day operational usage.
             </li>
-            <li>Implemented user management with configurable roles and access control, WhatsApp Gateway notifications,
-                and informative operational reporting.</li>
+            <li>Delivered new features and resolved product issues to improve stability and release speed.</li>
         </ul>
-    </div>
+    </section>
 
-    <div class="job">
-        <div class="job-title">
-            Full Stack Developer <span class="date">2025</span>
+    <section class="entry">
+        <div class="entry-head">
+            <div class="entry-title">Full Stack Developer and DevOps Engineer</div>
+            <div class="entry-date">February 2025 - Present</div>
         </div>
-        <div class="company">Mudik Gratis BUMN Application</div>
+        <div class="entry-company">PT Persero Batam, Batam, Indonesia</div>
         <ul>
-            <li>Built a Laravel-based registration system to replace Google Form process with 24/7 status checking, live
-                chat support, and automatic email delivery.</li>
-            <li>Developed admin dashboard with participant totals, real-time notifications, statistical charts,
-                automated QRIS payment handling, NIK blacklist validation, and fully system-driven workflows.</li>
+            <li>Delivered 5+ internal production applications across HR, operations, logistics, and event workflows
+                using Laravel, Expo, Flutter, Docker, and GitLab CI/CD.</li>
+            <li>Built an HRIS platform covering payroll, PPh21 tax, BPJS, fingerprint attendance, overtime management,
+                email payslips, and a mobile app with GPS attendance, KPI dashboard, and in-app updates.</li>
+            <li>Developed a meeting room management system with real-time room status, scheduling, participant planning,
+                meal tracking, and WhatsApp notifications.</li>
+            <li>Automated deployment and recovery workflows using GitLab CI/CD, GitHub Actions, Docker restart policies,
+                and Nginx Proxy Manager.</li>
+            <li>Migrated Odoo from cloud infrastructure to on-premise server without data loss and delivered operational
+                mobile tools including airport cargo QR workflows.</li>
         </ul>
-    </div>
+    </section>
 
-    <div class="job">
-        <div class="job-title">
-            Full Stack Developer (Laravel & Flutter) <span class="date">Sep 2024 - Oct 2024</span>
+    <section class="entry">
+        <div class="entry-head">
+            <div class="entry-title">Full Stack Developer</div>
+            <div class="entry-date">February 2025</div>
         </div>
-        <div class="company">Candu Roti Bakar</div>
+        <div class="entry-company">Batam Toteles Application, Batam, Indonesia</div>
         <ul>
-            <li>Built a full-stack solution for product management, stock allocation, and financial reporting (Sales,
-                Profit, COGS).</li>
-            <li>Developed an Android POS system with automated QRIS (Midtrans) payments and real-time sales analytics.
+            <li>Built an ERP-style Laravel application covering purchase requests, purchase orders, delivery orders,
+                production flow, and UMKM consignment management.</li>
+            <li>Implemented role-based access control, WhatsApp Gateway notifications, and operational reporting
+                features.</li>
+        </ul>
+    </section>
+
+    <section class="entry">
+        <div class="entry-head">
+            <div class="entry-title">Full Stack Developer (Laravel and Flutter)</div>
+            <div class="entry-date">September 2024 - October 2024</div>
+        </div>
+        <div class="entry-company">Candu Roti Bakar, Batam, Indonesia</div>
+        <ul>
+            <li>Built a full-stack POS and operational system for stock management, sales reporting, profit and loss,
+                and COGS tracking.</li>
+            <li>Developed an Android POS application with Midtrans QRIS integration and real-time sales analytics.</li>
+        </ul>
+    </section>
+
+    <section class="entry">
+        <div class="entry-head">
+            <div class="entry-title">Full Stack Developer</div>
+            <div class="entry-date">Project-based</div>
+        </div>
+        <div class="entry-company">PT Jala Armada Rinjani, Remote</div>
+        <ul>
+            <li>Built an attendance application with GPS-based clock-in and clock-out, cross-day attendance support,
+                leave requests, and admin monitoring.</li>
+            <li>Delivered employee and admin workflows for attendance history, approvals, and operational reporting.
             </li>
         </ul>
-    </div>
+    </section>
 
-    <div class="job">
-        <div class="job-title">
-            Backend Developer (NestJS) <span class="date">2023 - 2024</span>
+    <section class="entry">
+        <div class="entry-head">
+            <div class="entry-title">Backend Developer (Internship)</div>
+            <div class="entry-date">2023 - 2024</div>
         </div>
-        <div class="company">Freelance Projects</div>
+        <div class="entry-company">Folxcode, Remote</div>
         <ul>
-            <li>Developed backend for 'HappyBeauty' (E-commerce automation).</li>
-            <li>Built 'Tritunas' & 'Grand Batam Mall' systems for branch, invoice management, and IG integration.</li>
-            <li>Created 'Liszthoven Music School' system with 50+ features including billing and radius-based
-                attendance.</li>
+            <li>Developed backend systems for multiple client products including HappyBeauty, Tritunas, and Grand Batam
+                Mall using NestJS and PostgreSQL.</li>
+            <li>Built the Liszthoven Music School platform with 50+ features including billing, student management, and
+                radius-based attendance.</li>
         </ul>
-    </div>
+    </section>
 
-    <div class="job">
-        <div class="job-title">
-            Mobile Developer <span class="date">2024</span>
+    <section class="entry">
+        <div class="entry-head">
+            <div class="entry-title">Full Stack Developer (Internship)</div>
+            <div class="entry-date">August 2022 - December 2022</div>
         </div>
-        <div class="company">PT Persero Batam Hang Nadim Airport Project</div>
+        <div class="entry-company">Tax Center - PBL Project, Batam State Polytechnic</div>
         <ul>
-            <li>Created a mobile acceptance application to automatically scan and integrate package QR codes into the
-                airport's central system.</li>
+            <li>Improved tax calculation accuracy, strengthened session security, and enhanced performance for the
+                e-filing tax system.</li>
+            <li>Implemented recurring payment support with Virtual Account integration.</li>
         </ul>
-    </div>
-
-    <div class="job">
-        <div class="job-title">
-            Full Stack Developer (Internship) <span class="date">Aug 2022 - Dec 2022</span>
-        </div>
-        <div class="company">Tax Center - PBL Project</div>
-        <ul>
-            <li>Optimized tax calculation formulas and enhanced session security.</li>
-            <li>Implemented automatic subscription features with Virtual Account payments and improved overall
-                application performance.</li>
-        </ul>
-    </div>
-
-    <h2>Technical Skills</h2>
-    <div style="font-size: 14px;">
-        <div class="skill-group">
-            <div class="skill-group-title">Core Web Stack</div>
-            <div class="skill-group-desc">Primary tools for product interfaces, admin systems, and full-stack dashboards.
-            </div>
-            <div class="skill-tags">
-                <span class="skill-tag">Laravel</span>
-                <span class="skill-tag">Next.js</span>
-                <span class="skill-tag">React</span>
-                <span class="skill-tag">Tailwind CSS</span>
-            </div>
-        </div>
-        <div class="skill-group">
-            <div class="skill-group-title">Backend & Data</div>
-            <div class="skill-group-desc">Service architecture, integrations, and persistence for production workflows.
-            </div>
-            <div class="skill-tags">
-                <span class="skill-tag">NestJS</span>
-                <span class="skill-tag">Node.js</span>
-                <span class="skill-tag">PostgreSQL</span>
-                <span class="skill-tag">MySQL</span>
-                <span class="skill-tag">Cloudflare</span>
-            </div>
-        </div>
-        <div class="skill-group">
-            <div class="skill-group-title">Mobile Delivery</div>
-            <div class="skill-group-desc">Cross-platform execution for internal tools and customer-facing mobile
-                products.</div>
-            <div class="skill-tags">
-                <span class="skill-tag">Flutter</span>
-                <span class="skill-tag">Expo</span>
-                <span class="skill-tag">Dart</span>
-            </div>
-        </div>
-        <div class="skill-group">
-            <div class="skill-group-title">Infrastructure</div>
-            <div class="skill-group-desc">Deployment, runtime reliability, and operational support around shipped systems.
-            </div>
-            <div class="skill-tags">
-                <span class="skill-tag">Docker</span>
-                <span class="skill-tag">Nginx</span>
-                <span class="skill-tag">GitLab CI/CD</span>
-                <span class="skill-tag">DevOps</span>
-            </div>
-        </div>
-        <div class="skill-group">
-            <div class="skill-group-title">Tools & Integrations</div>
-            <div class="skill-tags">
-                <span class="skill-tag">Git</span>
-                <span class="skill-tag">TypeScript</span>
-                <span class="skill-tag">PHP</span>
-                <span class="skill-tag">REST APIs</span>
-                <span class="skill-tag">WebSockets</span>
-                <span class="skill-tag">Midtrans Payment</span>
-                <span class="skill-tag">WhatsApp API</span>
-            </div>
-        </div>
-    </div>
+    </section>
 
     <h2>Education</h2>
-    <div class="job">
-        <div class="job-title">
-            Batam State Polytechnic <span class="date">2022 - 2025</span>
+    <section class="entry">
+        <div class="entry-head">
+            <div class="entry-title">D3 - Informatics Engineering</div>
+            <div class="entry-date">2022 - 2025</div>
         </div>
-        <div class="company">Informatics Engineering</div>
-    </div>
-
-    <h2>Projects</h2>
-    <div style="font-size: 14px;">
+        <div class="entry-company">Batam State Polytechnic (Politeknik Negeri Batam)</div>
         <ul>
-            <li><strong>Aplikasi Absensi (PT Jala Armada Rinjani):</strong> Attendance system with GPS coordinates,
-                cross-day support, shift templates, leave management, and admin dashboard.</li>
-            <li><strong>HRIS Integrated System:</strong> Corporate HR management with payroll, tax, BPJS, attendance,
-                and mobile app with Expo. (Laravel, MySQL, Expo)</li>
-            <li><strong>Captura Queue Dashboard:</strong> Real-time queue dashboard for multiple branches and companies.
-                (Next.js, React)</li>
-            <li><strong>Batam Toteles:</strong> ERP-style operational management with interconnected modules.
-                (Laravel, MySQL)</li>
-            <li><strong>Mudik Gratis BUMN:</strong> Registration system with QRIS payments, NIK validation, and admin
-                dashboard. (Laravel)</li>
-            <li><strong>Smart POS System:</strong> Retail POS with stock and financial reports. (Laravel, Flutter)</li>
-            <li><strong>Airport Cargo Mobile:</strong> Logistics scanning app. (Flutter)</li>
-            <li><strong>Backend Services:</strong> Scalable microservices for e-commerce and management systems.
-                (NestJS)</li>
+            <li>Focused on software engineering, web development, mobile development, and database systems.</li>
+            <li>Completed Project-Based Learning through the Tax Center e-filing system.</li>
         </ul>
-    </div>
+    </section>
 
+    <h2>Skills</h2>
+    <ul>
+        <li>Languages: PHP, JavaScript, TypeScript, Dart, SQL, HTML, CSS</li>
+        <li>Frameworks: Laravel, Next.js, React, NestJS, Node.js, Flutter, Expo, Tailwind CSS, Bootstrap</li>
+        <li>Databases and Infrastructure: PostgreSQL, MySQL, Docker, Nginx, Nginx Proxy Manager, GitLab CI/CD, GitHub
+            Actions, Cloudflare</li>
+        <li>Integrations and Tools: REST APIs, WebSockets, Midtrans, QRIS, Virtual Account, WhatsApp API, Git, GitLab,
+            GitHub, Postman, Figma</li>
+    </ul>
 </body>
 
 </html>

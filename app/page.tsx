@@ -6,11 +6,14 @@ import ProjectCard from "@/components/ProjectCard";
 import SectionHeading from "@/components/SectionHeading";
 import SkillBadge from "@/components/SkillBadge";
 import { Button } from "@/components/ui/button";
+import { Award, Building2, CheckCircle2, Zap } from "lucide-react";
 import {
   SiCloudflare,
   SiDocker,
   SiExpo,
   SiFlutter,
+  SiGithubactions,
+  SiGitlab,
   SiLaravel,
   SiNestjs,
   SiNextdotjs,
@@ -31,6 +34,7 @@ type SkillItem = {
 type SkillGroup = {
   title: string;
   description: string;
+  projectCount: string;
   items: SkillItem[];
 };
 
@@ -44,10 +48,18 @@ type ProjectItem = {
   isPrivate?: boolean;
 };
 
+const careerHighlights = [
+  "Built HRIS system serving full HR lifecycle at PT Persero Batam",
+  "Delivered 10+ production systems across web, mobile & DevOps",
+  "Payment integrations: Midtrans QRIS, Virtual Account",
+  "CI/CD automation & server migration without data loss",
+];
+
 const skillGroups: SkillGroup[] = [
   {
     title: "Core web stack",
     description: "Primary tools for product interfaces, admin systems, and full-stack dashboards.",
+    projectCount: "Used in 6+ projects",
     items: [
       { name: "Laravel", icon: SiLaravel, color: "#FF2D20" },
       { name: "Next.js", icon: SiNextdotjs, color: "#111827" },
@@ -58,6 +70,7 @@ const skillGroups: SkillGroup[] = [
   {
     title: "Backend and data",
     description: "Service architecture, integrations, and persistence for production workflows.",
+    projectCount: "Used in 5+ projects",
     items: [
       { name: "NestJS", icon: SiNestjs, color: "#E0234E" },
       { name: "Node.js", icon: SiNodedotjs, color: "#339933" },
@@ -68,6 +81,7 @@ const skillGroups: SkillGroup[] = [
   {
     title: "Mobile delivery",
     description: "Cross-platform execution for internal tools and customer-facing mobile products.",
+    projectCount: "Used in 3+ projects",
     items: [
       { name: "Flutter", icon: SiFlutter, color: "#02569B" },
       { name: "Expo", icon: SiExpo, color: "#1F2937" },
@@ -76,9 +90,12 @@ const skillGroups: SkillGroup[] = [
   {
     title: "Infrastructure",
     description: "Deployment, runtime reliability, and operational support around shipped systems.",
+    projectCount: "Production environments",
     items: [
       { name: "Docker", icon: SiDocker, color: "#2496ED" },
-      { name: "Nginx", icon: SiNginx, color: "#009639" },
+      { name: "Nginx / Proxy Manager", icon: SiNginx, color: "#009639" },
+      { name: "GitLab CI/CD", icon: SiGitlab, color: "#FC6D26" },
+      { name: "GitHub Actions", icon: SiGithubactions, color: "#2088FF" },
     ],
   },
 ];
@@ -174,18 +191,27 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
+            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
               <div className="surface-panel px-4 py-4">
                 <p className="font-mono text-xs uppercase tracking-[0.24em] text-muted-foreground">
                   Role
                 </p>
-                <p className="mt-2 text-lg font-semibold">Full-stack developer</p>
+                <p className="mt-2 text-lg font-semibold">Full-Stack Dev & DevOps</p>
               </div>
               <div className="surface-panel px-4 py-4">
                 <p className="font-mono text-xs uppercase tracking-[0.24em] text-muted-foreground">
-                  Focus
+                  Current Company
                 </p>
-                <p className="mt-2 text-lg font-semibold">Web, Mobile Apps, Backend</p>
+                <div className="mt-2 flex items-center gap-2">
+                  <Building2 className="h-4 w-4 text-primary" />
+                  <p className="text-lg font-semibold">PT Persero Batam</p>
+                </div>
+              </div>
+              <div className="surface-panel px-4 py-4">
+                <p className="font-mono text-xs uppercase tracking-[0.24em] text-muted-foreground">
+                  Since
+                </p>
+                <p className="mt-2 text-lg font-semibold">February 2025</p>
               </div>
               <div className="surface-panel px-4 py-4">
                 <p className="font-mono text-xs uppercase tracking-[0.24em] text-muted-foreground">
@@ -202,6 +228,22 @@ export default function Home() {
               title="Erghi Septiandi Putra"
               description="A full-stack developer with hands-on experience delivering internal systems, customer-facing interfaces, backend services, mobile workflows, and deployment automation."
             />
+
+            {/* Career Highlights — Quick scan for HRD */}
+            <div className="mt-6 surface-panel p-5">
+              <div className="flex items-center gap-2 mb-4">
+                <Award className="h-4 w-4 text-primary" />
+                <p className="section-label text-[0.68rem]">Career highlights</p>
+              </div>
+              <div className="grid gap-2 sm:grid-cols-2">
+                {careerHighlights.map((highlight) => (
+                  <div key={highlight} className="flex items-start gap-2.5 rounded-xl bg-background/60 px-3 py-2.5">
+                    <CheckCircle2 className="mt-0.5 h-3.5 w-3.5 shrink-0 text-emerald-500" />
+                    <p className="text-sm leading-6 text-foreground/85">{highlight}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
 
             <div className="mt-8 grid gap-8 lg:grid-cols-[minmax(0,1fr)_280px]">
               <div className="space-y-5 text-[0.98rem] leading-7 text-muted-foreground">
@@ -221,7 +263,7 @@ export default function Home() {
                     asChild
                     className="h-11 rounded-full px-6 text-sm font-semibold shadow-[0_18px_45px_-24px_rgba(39,83,214,0.56)]"
                   >
-                    <a href="/cv.html" target="_blank" rel="noreferrer">
+                    <a href="/cv-download">
                       Download CV (ATS)
                     </a>
                   </Button>
@@ -310,11 +352,30 @@ export default function Home() {
           description="Grouped by the areas where I use them most often, from interface work to backend operations and infrastructure."
         />
 
-        <div className="mt-10 grid gap-6 lg:grid-cols-2">
+        {/* Quick-scan tech summary bar for keyword matching */}
+        <div className="mt-6 surface-panel flex flex-wrap items-center gap-3 px-5 py-4">
+          <div className="flex items-center gap-2">
+            <Zap className="h-4 w-4 text-primary" />
+            <p className="font-mono text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-primary/80">
+              Primary tech
+            </p>
+          </div>
+          <div className="h-4 w-px bg-border/60" />
+          <p className="text-sm text-foreground/80">
+            Laravel · Next.js · NestJS · React · Flutter · Expo · PostgreSQL · Docker · Nginx · Tailwind CSS
+          </p>
+        </div>
+
+        <div className="mt-6 grid gap-6 lg:grid-cols-2">
           {skillGroups.map((group) => (
             <article key={group.title} className="surface-card p-6 sm:p-7">
               <div className="mb-6 space-y-3">
-                <p className="section-label text-[0.68rem]">{group.title}</p>
+                <div className="flex items-center justify-between">
+                  <p className="section-label text-[0.68rem]">{group.title}</p>
+                  <span className="rounded-full bg-primary/8 px-2.5 py-1 text-[0.68rem] font-medium text-primary/70">
+                    {group.projectCount}
+                  </span>
+                </div>
                 <p className="max-w-xl text-sm leading-6 text-muted-foreground sm:text-[0.95rem]">
                   {group.description}
                 </p>

@@ -2,10 +2,10 @@ import { Award, GraduationCap } from "lucide-react";
 
 const education = [
   {
-    degree: "Student",
-    school: "Batam State Polytechnic",
-    year: "2022 - 2025",
-    description: "Informatics Engineering",
+    degree: "D3 — Informatics Engineering",
+    school: "Batam State Polytechnic (Politeknik Negeri Batam)",
+    year: "2022 – 2025",
+    description: "Focused on software engineering, web & mobile development, and database systems. Completed PBL (Project-Based Learning) with Tax Center e-filing system.",
   },
 ];
 

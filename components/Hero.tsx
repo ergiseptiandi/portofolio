@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { ArrowRight, BriefcaseBusiness, Download, Layers3, Server, Smartphone } from "lucide-react";
+import { ArrowRight, Building2, BriefcaseBusiness, Download, Layers3, Server, Smartphone } from "lucide-react";
 import { motion } from "framer-motion";
 
 const capabilityCards = [
@@ -41,9 +41,15 @@ const Hero = () => {
               className="space-y-8"
             >
               <div className="space-y-5">
-                <div className="surface-panel inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-foreground/80">
-                  <BriefcaseBusiness className="h-4 w-4 text-primary" />
-                  Available for freelance and product work
+                <div className="flex flex-wrap items-center gap-2">
+                  <div className="surface-panel inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-foreground/80">
+                    <BriefcaseBusiness className="h-4 w-4 text-primary" />
+                    Available for freelance and product work
+                  </div>
+                  <div className="inline-flex items-center gap-2 rounded-full border border-emerald-500/25 bg-emerald-500/8 px-3 py-2 text-sm font-medium text-emerald-700 dark:text-emerald-400">
+                    <Building2 className="h-4 w-4" />
+                    Currently at PT Persero Batam
+                  </div>
                 </div>
 
                 <div className="space-y-4">
@@ -77,31 +83,35 @@ const Hero = () => {
                   variant="outline"
                   className="h-12 rounded-full border-border/70 bg-background/70 px-7 text-sm font-semibold hover:bg-background"
                 >
-                  <a href="/cv.html" target="_blank" rel="noreferrer">
+                  <a href="/cv-download">
                     Download CV
                     <Download className="h-4 w-4" />
                   </a>
                 </Button>
               </div>
 
+              {/* Quick stats for HRD scanning */}
               <div className="grid gap-3 sm:grid-cols-3">
                 <div className="surface-panel px-4 py-4">
                   <p className="font-mono text-xs uppercase tracking-[0.24em] text-muted-foreground">
-                    Focus
+                    Experience
                   </p>
-                  <p className="mt-2 text-lg font-semibold">Web products</p>
+                  <p className="mt-2 text-2xl font-semibold text-primary">1+ yr</p>
+                  <p className="mt-1 text-xs text-muted-foreground">at current company</p>
                 </div>
                 <div className="surface-panel px-4 py-4">
                   <p className="font-mono text-xs uppercase tracking-[0.24em] text-muted-foreground">
-                    Mobile
+                    Delivered
                   </p>
-                  <p className="mt-2 text-lg font-semibold">Mobile apps</p>
+                  <p className="mt-2 text-2xl font-semibold text-primary">10+</p>
+                  <p className="mt-1 text-xs text-muted-foreground">production systems</p>
                 </div>
                 <div className="surface-panel px-4 py-4">
                   <p className="font-mono text-xs uppercase tracking-[0.24em] text-muted-foreground">
-                    Ops
+                    Coding
                   </p>
-                  <p className="mt-2 text-lg font-semibold">CI/CD + infra</p>
+                  <p className="mt-2 text-2xl font-semibold text-primary">3+ yrs</p>
+                  <p className="mt-1 text-xs text-muted-foreground">development experience</p>
                 </div>
               </div>
             </motion.div>
