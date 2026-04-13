@@ -30,25 +30,24 @@ const Navbar = () => {
       return;
     }
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visibleEntries = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+    const updateActiveSection = () => {
+      const scrollPosition = window.scrollY + 140;
 
-        if (visibleEntries[0]) {
-          setActiveSection(visibleEntries[0].target.id as (typeof NAV_LINKS)[number]["id"]);
-        }
-      },
-      {
-        rootMargin: "-45% 0px -45% 0px",
-        threshold: [0.15, 0.35, 0.55],
-      }
-    );
+      const currentSection = sections.reduce<(typeof sections)[number]>((active, section) => {
+        return section.offsetTop <= scrollPosition ? section : active;
+      }, sections[0]);
 
-    sections.forEach((section) => observer.observe(section));
+      setActiveSection(currentSection.id as (typeof NAV_LINKS)[number]["id"]);
+    };
 
-    return () => observer.disconnect();
+    updateActiveSection();
+    window.addEventListener("scroll", updateActiveSection, { passive: true });
+    window.addEventListener("resize", updateActiveSection);
+
+    return () => {
+      window.removeEventListener("scroll", updateActiveSection);
+      window.removeEventListener("resize", updateActiveSection);
+    };
   }, []);
 
   useEffect(() => {
@@ -65,7 +64,8 @@ const Navbar = () => {
   return (
     <nav className="fixed inset-x-0 top-0 z-50">
       <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
-        <div className="surface-panel flex h-14 items-center justify-between rounded-full px-3 sm:px-4">
+        <div className="relative">
+          <div className="surface-panel flex h-14 items-center justify-between rounded-full px-3 sm:px-4">
           <Link
             href="#home"
             className="rounded-full px-3 py-2 font-semibold tracking-tight text-foreground transition-colors hover:text-primary"
@@ -136,48 +136,49 @@ const Navbar = () => {
               {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </Button>
           </div>
-        </div>
+          </div>
 
-        <div
-          className={cn(
-            "px-1 pt-3 transition-all duration-200 lg:hidden",
-            isOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
-          )}
-        >
           <div
             className={cn(
-              "surface-card overflow-hidden p-2 transition-all duration-200",
-              isOpen ? "translate-y-0" : "-translate-y-2"
+              "absolute inset-x-1 top-full pt-3 transition-all duration-200 lg:hidden",
+              isOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
             )}
           >
-            <div className="space-y-1">
-              {NAV_LINKS.map((link) => (
-                <Link
-                  key={link.id}
-                  href={link.href}
-                  onClick={() => {
-                    setActiveSection(link.id);
-                    setIsOpen(false);
-                  }}
-                  className={cn(
-                    "block rounded-2xl px-4 py-3 text-sm font-medium transition-colors",
-                    activeSection === link.id
-                      ? "bg-foreground/8 text-foreground"
-                      : "text-muted-foreground hover:bg-background hover:text-foreground"
-                  )}
-                >
-                  {link.name}
-                </Link>
-              ))}
-            </div>
+            <div
+              className={cn(
+                "surface-card overflow-hidden p-2 transition-all duration-200",
+                isOpen ? "translate-y-0" : "-translate-y-2"
+              )}
+            >
+              <div className="space-y-1">
+                {NAV_LINKS.map((link) => (
+                  <Link
+                    key={link.id}
+                    href={link.href}
+                    onClick={() => {
+                      setActiveSection(link.id);
+                      setIsOpen(false);
+                    }}
+                    className={cn(
+                      "block rounded-2xl px-4 py-3 text-sm font-medium transition-colors",
+                      activeSection === link.id
+                        ? "bg-foreground/8 text-foreground"
+                        : "text-muted-foreground hover:bg-background hover:text-foreground"
+                    )}
+                  >
+                    {link.name}
+                  </Link>
+                ))}
+              </div>
 
-            <div className="mt-2 border-t border-border/60 px-2 pt-4">
-              <Button asChild className="h-11 w-full rounded-full text-sm font-semibold">
-                <a href="mailto:ergiputra321@gmail.com">
-                  <Mail className="h-4 w-4" />
-                  Start a conversation
-                </a>
-              </Button>
+              <div className="mt-2 border-t border-border/60 px-2 pt-4">
+                <Button asChild className="h-11 w-full rounded-full text-sm font-semibold">
+                  <a href="mailto:ergiputra321@gmail.com">
+                    <Mail className="h-4 w-4" />
+                    Start a conversation
+                  </a>
+                </Button>
+              </div>
             </div>
           </div>
         </div>
