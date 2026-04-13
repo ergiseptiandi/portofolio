@@ -7,6 +7,7 @@ import SectionHeading from "@/components/SectionHeading";
 import SkillBadge from "@/components/SkillBadge";
 import { Button } from "@/components/ui/button";
 import { Award, Building2, CheckCircle2, Zap } from "lucide-react";
+import Image from "next/image";
 import {
   SiCloudflare,
   SiDocker,
@@ -181,12 +182,21 @@ export default function Home() {
                 </span>
               </div>
 
-              <div className="surface-panel flex w-full aspect-[4/3] items-center justify-center rounded-[2rem] border-dashed border-primary/25 bg-primary/6 lg:aspect-square">
-                <div className="text-center">
-                  <p className="font-mono text-xs uppercase tracking-[0.34em] text-muted-foreground">
-                    EP
+              <div className="surface-panel relative w-full aspect-[4/3] overflow-hidden rounded-[2rem] border-primary/25 bg-primary/6 lg:aspect-square">
+                <Image
+                  src="/ergi.jpg"
+                  alt="Portrait of Erghi Septiandi Putra"
+                  fill
+                  priority
+                  sizes="(min-width: 1024px) 280px, (min-width: 640px) 50vw, 100vw"
+                  className="object-cover object-center"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-background/35 via-transparent to-transparent" />
+                <div className="absolute inset-x-4 bottom-4 rounded-2xl border border-white/20 bg-black/30 px-4 py-3 backdrop-blur-sm">
+                  <p className="font-mono text-[0.68rem] uppercase tracking-[0.3em] text-white/70">
+                    Profile photo
                   </p>
-                  <p className="mt-3 text-5xl font-semibold text-primary">01</p>
+                  <p className="mt-1 text-lg font-semibold text-white">Erghi Septiandi Putra</p>
                 </div>
               </div>
             </div>
