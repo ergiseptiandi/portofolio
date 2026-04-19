@@ -34,17 +34,6 @@ const cvData = {
     "Full Stack Developer with 3+ years of experience delivering production web applications, mobile apps, backend services, and deployment workflows. Strong hands-on experience across Laravel, Next.js, NestJS, Flutter, Expo, PostgreSQL, Docker, and CI/CD, with a focus on internal systems, operational tools, responsive user experience, and reliable business process automation.",
   experiences: [
     {
-      role: "Full Stack Developer (Freelance)",
-      company: "Captura",
-      location: "Remote",
-      period: "January 2026 - Present",
-      bullets: [
-        "Built a real-time queue dashboard that consolidated data from multiple branches and companies into a single operational view.",
-        "Improved responsive user experience across mobile and desktop to support day-to-day operational usage.",
-        "Delivered new features and resolved product issues to improve stability and release speed.",
-      ],
-    },
-    {
       role: "Full Stack Developer and DevOps Engineer",
       company: "PT Persero Batam",
       location: "Batam, Indonesia",

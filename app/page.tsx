@@ -111,14 +111,6 @@ const projects: ProjectItem[] = [
     isPrivate: true,
   },
   {
-    title: "Captura Queue Dashboard",
-    description:
-      "Built and improved a realtime queue dashboard for multiple branches and companies, while optimizing the user interface for a more engaging and fully responsive experience across mobile and desktop.",
-    tags: ["Next.js", "Realtime Dashboard", "Responsive UI", "Full Stack"],
-    imageUrl: "",
-    isPrivate: true,
-  },
-  {
     title: "Smart POS System",
     description:
       "Full-stack Point of Sale for Candu Roti Bakar. Includes stock management, financial reports (Profit/Loss), and Midtrans QRIS payment integration.",

@@ -19,20 +19,6 @@ type ExperienceItem = {
 
 const experiences: ExperienceItem[] = [
   {
-    role: "Full Stack Developer (Freelance)",
-    company: "Captura",
-    location: "Remote",
-    period: "Jan 2026 – Present",
-    isCurrent: true,
-    description:
-      "Optimized the user interface to deliver a more engaging experience with strong responsiveness across mobile and desktop. Built new features, fixed application issues, and developed a real-time queue dashboard that consolidated data from multiple branches and companies.",
-    highlights: [
-      "Real-time queue dashboard across multiple branches",
-      "UI/UX improvements for mobile & desktop",
-      "Full-stack feature development & bug fixes",
-    ],
-  },
-  {
     role: "Full Stack Developer & DevOps",
     company: "PT Persero Batam",
     location: "Batam, Indonesia",
