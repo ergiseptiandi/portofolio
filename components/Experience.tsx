@@ -37,7 +37,7 @@ const experiences: ExperienceItem[] = [
         name: "HRIS System (Web + Mobile)",
         description:
           "Full HR management platform: automated payroll with tax & BPJS calculation, realtime fingerprint attendance, overtime management, and automated payslip delivery. Mobile app (Expo) with GPS-based attendance, fake GPS detection, KPI dashboards, payslip/overtime slip access, and in-app auto updates without Play Store releases.",
-        techStack: ["Laravel", "Expo", "MySQL", "REST API"],
+        techStack: ["Laravel", "Expo", "Oracle Database", "REST API"],
       },
       {
         name: "Meeting Room Application",

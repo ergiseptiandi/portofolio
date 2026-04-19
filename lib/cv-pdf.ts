@@ -100,7 +100,7 @@ const cvData = {
   skills: [
     "Languages: PHP, JavaScript, TypeScript, Dart, SQL, HTML, CSS",
     "Frameworks: Laravel, Next.js, React, NestJS, Node.js, Flutter, Expo, Tailwind CSS, Bootstrap",
-    "Databases and Infrastructure: PostgreSQL, MySQL, Docker, Nginx, Nginx Proxy Manager, GitLab CI/CD, GitHub Actions, Cloudflare",
+    "Databases and Infrastructure: PostgreSQL, MySQL, Oracle Database, Docker, Nginx, Nginx Proxy Manager, GitLab CI/CD, GitHub Actions, Cloudflare",
     "Integrations and Tools: REST APIs, WebSockets, Midtrans, QRIS, Virtual Account, WhatsApp API, Git, GitLab, GitHub, Postman, Figma",
   ],
   education: [

@@ -20,6 +20,7 @@ import {
   SiNextdotjs,
   SiNginx,
   SiNodedotjs,
+  SiOracle,
   SiPostgresql,
   SiReact,
   SiTailwindcss,
@@ -76,6 +77,7 @@ const skillGroups: SkillGroup[] = [
       { name: "NestJS", icon: SiNestjs, color: "#E0234E" },
       { name: "Node.js", icon: SiNodedotjs, color: "#339933" },
       { name: "PostgreSQL", icon: SiPostgresql, color: "#336791" },
+      { name: "Oracle Database", icon: SiOracle, color: "#F80000" },
       { name: "Cloudflare", icon: SiCloudflare, color: "#F38020" },
     ],
   },
@@ -106,7 +108,7 @@ const projects: ProjectItem[] = [
     title: "HRIS Integrated System",
     description:
       "Comprehensive HR management for Persero Batam. Features automated payroll with tax calculation, realtime fingerprint attendance integration, and overtime management.",
-    tags: ["Laravel", "MySQL", "Realtime Integration", "Bootstrap"],
+    tags: ["Laravel", "Oracle Database", "Realtime Integration", "Bootstrap"],
     imageUrl: "",
     isPrivate: true,
   },
@@ -364,7 +366,7 @@ export default function Home() {
           </div>
           <div className="h-4 w-px bg-border/60" />
           <p className="text-sm text-foreground/80">
-            Laravel · Next.js · NestJS · React · Flutter · Expo · PostgreSQL · Docker · Nginx · Tailwind CSS
+            Laravel · Next.js · NestJS · React · Flutter · Expo · PostgreSQL · Oracle Database · Docker · Nginx · Tailwind CSS
           </p>
         </div>
 
