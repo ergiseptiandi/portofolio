@@ -15,11 +15,13 @@ import {
   SiFlutter,
   SiGithubactions,
   SiGitlab,
+  SiGo,
   SiLaravel,
   SiNestjs,
   SiNextdotjs,
   SiNginx,
   SiNodedotjs,
+  SiMysql,
   SiOracle,
   SiPostgresql,
   SiReact,
@@ -31,6 +33,8 @@ type SkillItem = {
   name: string;
   icon: IconType;
   color: string;
+  badgeClassName?: string;
+  featured?: boolean;
 };
 
 type SkillGroup = {
@@ -75,7 +79,14 @@ const skillGroups: SkillGroup[] = [
     projectCount: "Used in 5+ projects",
     items: [
       { name: "NestJS", icon: SiNestjs, color: "#E0234E" },
+      { name: "Go", icon: SiGo, color: "#00ADD8" },
       { name: "Node.js", icon: SiNodedotjs, color: "#339933" },
+      {
+        name: "MySQL",
+        icon: SiMysql,
+        color: "#4479A1",
+        featured: true,
+      },
       { name: "PostgreSQL", icon: SiPostgresql, color: "#336791" },
       { name: "Oracle Database", icon: SiOracle, color: "#F80000" },
       { name: "Cloudflare", icon: SiCloudflare, color: "#F38020" },
@@ -104,6 +115,24 @@ const skillGroups: SkillGroup[] = [
 ];
 
 const projects: ProjectItem[] = [
+  {
+    title: "Finance App Mobile",
+    description:
+      "Independent personal finance mobile app built with Expo. Covers onboarding, authentication, biometric unlock, wallets, categories, budgets, notifications, and mobile-friendly finance workflows.",
+    tags: ["Expo", "React Native", "Biometric Unlock", "Push Notifications", "Personal Project"],
+    imageUrl: "",
+    githubUrl: "https://github.com/ergiseptiandi/finance-app-mobile",
+    isPrivate: false,
+  },
+  {
+    title: "Finance App Backend",
+    description:
+      "Go backend API for the same product, built with package-by-feature architecture. Handles auth, refresh tokens, transactions, notification settings, migrations, seeding, Docker, and MySQL.",
+    tags: ["Go", "MySQL", "JWT", "Docker", "Vertical Slice", "Personal Project"],
+    imageUrl: "",
+    githubUrl: "https://github.com/ergiseptiandi/finance-app",
+    isPrivate: false,
+  },
   {
     title: "HRIS Integrated System",
     description:
@@ -366,7 +395,7 @@ export default function Home() {
           </div>
           <div className="h-4 w-px bg-border/60" />
           <p className="text-sm text-foreground/80">
-            Laravel · Next.js · NestJS · React · Flutter · Expo · PostgreSQL · Oracle Database · Docker · Nginx · Tailwind CSS
+            Laravel · Next.js · NestJS · Go · MySQL · React · Flutter · Expo · PostgreSQL · Oracle Database · Docker · Nginx · Tailwind CSS
           </p>
         </div>
 
@@ -391,6 +420,8 @@ export default function Home() {
                     key={item.name}
                     name={item.name}
                     color={item.color}
+                    className={item.badgeClassName}
+                    featured={item.featured}
                     icon={<Icon className="h-4 w-4" />}
                   />
                 ))}
