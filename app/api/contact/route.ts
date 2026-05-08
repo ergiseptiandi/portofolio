@@ -1,12 +1,28 @@
-
 import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
+import {
+  generateCsrfToken,
+  setCsrfCookie,
+  getCsrfTokenFromCookie,
+  validateCsrfToken,
+} from '@/lib/csrf';
+
+export async function GET() {
+  const token = generateCsrfToken();
+  await setCsrfCookie(token);
+  return NextResponse.json({ csrfToken: token });
+}
 
 export async function POST(req: Request) {
   try {
-    const { name, email, message } = await req.json();
+    const body = await req.json();
+    const { name, email, message, csrfToken } = body;
 
-    // Create transporter
+    const cookieToken = await getCsrfTokenFromCookie();
+    if (!validateCsrfToken(cookieToken, csrfToken)) {
+      return NextResponse.json({ message: 'Invalid CSRF token' }, { status: 403 });
+    }
+
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {

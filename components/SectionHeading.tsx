@@ -18,15 +18,15 @@ const SectionHeading = ({
   return (
     <div
       className={cn(
-        "space-y-4",
+        "space-y-5",
         align === "center" && "mx-auto flex max-w-3xl flex-col items-center text-center",
         className
       )}
     >
       <p className="section-label">{label}</p>
-      <div className="space-y-3">
+      <div className="space-y-4">
         <h2 className="section-title">{title}</h2>
-        {description ? <p className="section-copy">{description}</p> : null}
+        {description && <p className="section-copy">{description}</p>}
       </div>
     </div>
   );

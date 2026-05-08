@@ -1,12 +1,21 @@
 const AnimatedBackground = () => {
   return (
     <div className="pointer-events-none fixed inset-0 -z-50 overflow-hidden">
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,color-mix(in_srgb,var(--border)_45%,transparent)_1px,transparent_1px),linear-gradient(to_bottom,color-mix(in_srgb,var(--border)_45%,transparent)_1px,transparent_1px)] bg-[size:120px_120px] opacity-[0.35] dark:opacity-[0.18]" />
-      <div className="absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-background via-background/85 to-transparent" />
-      <div className="absolute -left-24 top-12 h-72 w-72 rounded-full bg-primary/12 blur-3xl dark:bg-primary/18" />
-      <div className="absolute right-[-6rem] top-28 h-80 w-80 rounded-full bg-accent/14 blur-3xl dark:bg-accent/12" />
-      <div className="absolute bottom-[-10rem] left-1/3 h-96 w-96 rounded-full bg-primary/10 blur-3xl dark:bg-primary/14" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_transparent_0,_transparent_45%,_rgba(15,23,42,0.06)_100%)] dark:bg-[radial-gradient(circle_at_top,_transparent_0,_transparent_28%,_rgba(0,0,0,0.44)_100%)]" />
+      {/* Glow blob — top left */}
+      <div
+        className="absolute -left-40 -top-40 h-[700px] w-[700px] rounded-full blur-[200px]"
+        style={{ background: "radial-gradient(circle, rgba(0,245,255,0.08) 0%, transparent 70%)" }}
+      />
+      {/* Glow blob — bottom right */}
+      <div
+        className="absolute -bottom-60 -right-40 h-[600px] w-[600px] rounded-full blur-[180px]"
+        style={{ background: "radial-gradient(circle, rgba(170,255,0,0.04) 0%, transparent 70%)" }}
+      />
+      {/* Glow blob — center */}
+      <div
+        className="absolute left-1/2 top-1/2 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full blur-[200px]"
+        style={{ background: "radial-gradient(circle, rgba(0,245,255,0.03) 0%, transparent 70%)" }}
+      />
     </div>
   );
 };

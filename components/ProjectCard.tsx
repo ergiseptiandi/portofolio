@@ -1,6 +1,7 @@
-import { Badge } from "@/components/ui/badge";
+"use client";
+
 import { ExternalLink, Github, Lock } from "lucide-react";
-import Image from "next/image";
+import { useRef, useState } from "react";
 
 interface ProjectCardProps {
   title: string;
@@ -10,102 +11,192 @@ interface ProjectCardProps {
   githubUrl?: string;
   demoUrl?: string;
   isPrivate?: boolean;
+  index?: number;
+  featured?: boolean;
 }
 
 const ProjectCard = ({
   title,
   description,
   tags,
-  imageUrl,
   githubUrl,
   demoUrl,
   isPrivate = false,
+  index = 0,
+  featured = false,
 }: ProjectCardProps) => {
-  return (
-    <article className="surface-card group flex h-full flex-col overflow-hidden">
-      <div className="relative overflow-hidden border-b border-border/60">
-        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/35 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-        <div className="relative h-44 w-full bg-gradient-to-br from-primary/10 via-background to-accent/10">
-          {imageUrl ? (
-            <Image
-              src={imageUrl}
-              alt={title}
-              fill
-              className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-            />
-          ) : (
-            <div className="flex h-full items-end justify-between px-6 py-5">
-              <div>
-                <p className="font-mono text-xs uppercase tracking-[0.28em] text-muted-foreground">
-                  Project
-                </p>
-                <p className="mt-2 text-3xl font-semibold text-foreground/80">
-                  {isPrivate ? "Private" : "Public"}
-                </p>
-              </div>
-              <div className="rounded-full border border-border/60 bg-background/75 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
-                Case
-              </div>
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [transform, setTransform] = useState("perspective(1000px) rotateX(0deg) rotateY(0deg)");
+  const [glare, setGlare] = useState({ x: 50, y: 50, opacity: 0 });
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width;
+    const y = (e.clientY - rect.top) / rect.height;
+    const rotateX = (y - 0.5) * -12;
+    const rotateY = (x - 0.5) * 12;
+    setTransform(`perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02,1.02,1.02)`);
+    setGlare({ x: x * 100, y: y * 100, opacity: 0.15 });
+  };
+
+  const handleMouseLeave = () => {
+    setTransform("perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1,1,1)");
+    setGlare({ x: 50, y: 50, opacity: 0 });
+  };
+
+  if (featured) {
+    return (
+      <article
+        ref={cardRef}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+        className="group relative col-span-full rounded-2xl border border-[rgba(0,245,255,0.15)] bg-[rgba(255,255,255,0.03)] p-8 transition-shadow duration-300 hover:border-[rgba(0,245,255,0.3)] hover:shadow-[0_0_60px_-15px_rgba(0,245,255,0.15)] sm:p-10"
+        style={{ transform, transformStyle: "preserve-3d", transition: "transform 0.15s ease-out" }}
+      >
+        {/* Glare overlay */}
+        <div
+          className="pointer-events-none absolute inset-0 rounded-2xl transition-opacity duration-300"
+          style={{
+            background: `radial-gradient(circle at ${glare.x}% ${glare.y}%, rgba(0,245,255,${glare.opacity}), transparent 60%)`,
+          }}
+        />
+        <div className="relative z-10">
+          <div className="mb-6 flex items-start justify-between">
+            <div>
+              <p className="font-[family-name:var(--font-jetbrains)] text-[0.6rem] uppercase tracking-[0.3em] text-[#00f5ff]/60">
+                Featured · {String(index + 1).padStart(2, "0")}
+              </p>
+              <h3 className="mt-2 font-[family-name:var(--font-syne)] text-2xl font-extrabold text-white sm:text-3xl">
+                {title}
+              </h3>
+            </div>
+            {isPrivate && (
+              <span className="flex items-center gap-1 rounded-full border border-[rgba(255,255,255,0.1)] bg-[rgba(255,255,255,0.04)] px-2 py-0.5 font-[family-name:var(--font-jetbrains)] text-[0.6rem] uppercase tracking-[0.12em] text-[#888]">
+                <Lock className="h-2.5 w-2.5" />
+                Private
+              </span>
+            )}
+          </div>
+          <p className="mb-6 max-w-2xl text-sm leading-[1.8] text-[#b0b0b0] sm:text-base">
+            {description}
+          </p>
+          <div className="mb-6 flex flex-wrap gap-1.5">
+            {tags.map((tag) => (
+              <span
+                key={tag}
+                className="rounded-md border border-[rgba(0,245,255,0.12)] bg-[rgba(0,245,255,0.04)] px-2.5 py-0.5 font-[family-name:var(--font-jetbrains)] text-[0.6rem] uppercase tracking-[0.1em] text-[#00f5ff]/80"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+          {!isPrivate && (githubUrl || demoUrl) && (
+            <div className="flex items-center gap-4 border-t border-[rgba(255,255,255,0.06)] pt-4">
+              {githubUrl && (
+                <a
+                  href={githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-xs font-medium text-[#888] transition-colors hover:text-[#00f5ff]"
+                >
+                  <Github className="h-3.5 w-3.5" />
+                  Source
+                </a>
+              )}
+              {demoUrl && (
+                <a
+                  href={demoUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-xs font-medium text-[#888] transition-colors hover:text-[#00f5ff]"
+                >
+                  <ExternalLink className="h-3.5 w-3.5" />
+                  Live
+                </a>
+              )}
             </div>
           )}
-
-          {isPrivate ? (
-            <div className="absolute right-4 top-4">
-              <Badge className="gap-1.5 rounded-full bg-foreground text-background">
-                <Lock className="h-3.5 w-3.5" />
-                Private
-              </Badge>
-            </div>
-          ) : null}
         </div>
-      </div>
+      </article>
+    );
+  }
 
-      <div className="flex flex-1 flex-col px-6 py-6">
-        <div className="space-y-3">
-          <h3 className="text-xl font-semibold transition-colors duration-200 group-hover:text-primary">
-            {title}
-          </h3>
-          <p className="text-sm leading-6 text-muted-foreground">{description}</p>
+  return (
+    <article
+      ref={cardRef}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      className="group relative flex h-full flex-col rounded-xl border border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.03)] p-6 transition-all duration-300 hover:border-[rgba(0,245,255,0.2)] hover:shadow-[0_0_40px_-12px_rgba(0,245,255,0.12)]"
+      style={{ transform, transformStyle: "preserve-3d", transition: "transform 0.15s ease-out" }}
+    >
+      {/* Glare overlay */}
+      <div
+        className="pointer-events-none absolute inset-0 rounded-xl transition-opacity duration-300"
+        style={{
+          background: `radial-gradient(circle at ${glare.x}% ${glare.y}%, rgba(0,245,255,${glare.opacity}), transparent 60%)`,
+        }}
+      />
+
+      <div className="relative z-10 flex flex-1 flex-col">
+        <div className="mb-4 flex items-start justify-between">
+          <div>
+            <p className="font-[family-name:var(--font-jetbrains)] text-[0.58rem] uppercase tracking-[0.3em] text-[#00f5ff]/50">
+              {String(index + 1).padStart(2, "0")}
+            </p>
+            <h3 className="mt-1 font-[family-name:var(--font-syne)] text-lg font-bold text-white transition-colors duration-200 group-hover:text-[#00f5ff]">
+              {title}
+            </h3>
+          </div>
+          {isPrivate && (
+            <span className="flex items-center gap-1 rounded-full border border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.03)] px-2 py-0.5 font-[family-name:var(--font-jetbrains)] text-[0.55rem] uppercase tracking-[0.1em] text-[#888]">
+              <Lock className="h-2.5 w-2.5" />
+              Private
+            </span>
+          )}
         </div>
 
-        <div className="mt-6 flex flex-wrap gap-2">
+        <p className="mb-5 flex-1 text-sm leading-[1.7] text-[#b0b0b0]">
+          {description}
+        </p>
+
+        <div className="mb-4 flex flex-wrap gap-1.5">
           {tags.map((tag) => (
-            <Badge
+            <span
               key={tag}
-              variant="outline"
-              className="rounded-full border-border/70 bg-background/70 px-3 py-1 text-[0.7rem] uppercase tracking-[0.18em] text-muted-foreground"
+              className="rounded-md border border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.03)] px-2 py-0.5 font-[family-name:var(--font-jetbrains)] text-[0.58rem] uppercase tracking-[0.1em] text-[#888]"
             >
               {tag}
-            </Badge>
+            </span>
           ))}
         </div>
 
-        {!isPrivate && (githubUrl || demoUrl) ? (
-          <div className="mt-auto flex items-center gap-4 border-t border-border/60 pt-6 text-sm">
-            {githubUrl ? (
+        {!isPrivate && (githubUrl || demoUrl) && (
+          <div className="flex items-center gap-4 border-t border-[rgba(255,255,255,0.05)] pt-4">
+            {githubUrl && (
               <a
                 href={githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-muted-foreground transition-colors hover:text-foreground"
+                className="inline-flex items-center gap-1.5 text-xs font-medium text-[#888] transition-colors hover:text-[#00f5ff]"
               >
-                <Github className="h-4 w-4" />
+                <Github className="h-3.5 w-3.5" />
                 Source
               </a>
-            ) : null}
-            {demoUrl ? (
+            )}
+            {demoUrl && (
               <a
                 href={demoUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="ml-auto inline-flex items-center gap-2 text-muted-foreground transition-colors hover:text-foreground"
+                className="inline-flex items-center gap-1.5 text-xs font-medium text-[#888] transition-colors hover:text-[#00f5ff]"
               >
-                <ExternalLink className="h-4 w-4" />
-                Live demo
+                <ExternalLink className="h-3.5 w-3.5" />
+                Live
               </a>
-            ) : null}
+            )}
           </div>
-        ) : null}
+        )}
       </div>
     </article>
   );

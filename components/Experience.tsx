@@ -25,71 +25,70 @@ const experiences: ExperienceItem[] = [
     period: "Feb 2025 – Present",
     isCurrent: true,
     description:
-      "Core developer handling end-to-end product delivery for internal systems — from HRIS, meeting room management, to deployment automation and mobile operational tools. Working across Laravel, Expo, Flutter, Docker, and GitLab CI/CD.",
+      "Core developer handling end-to-end product delivery for internal systems — from HRIS, meeting room management, to deployment automation and mobile operational tools.",
     highlights: [
-      "Built HRIS covering full HR lifecycle (payroll, BPJS, tax, attendance)",
-      "Automated CI/CD with GitLab & Docker auto-recovery",
+      "Built HRIS covering full HR lifecycle",
+      "Automated CI/CD with GitLab & Docker",
       "Migrated Odoo server without data loss",
-      "Delivered 4+ production applications in-house",
+      "Delivered 4+ production applications",
     ],
     subProjects: [
       {
         name: "HRIS System (Web + Mobile)",
         description:
-          "Full HR management platform: automated payroll with tax & BPJS calculation, realtime fingerprint attendance, overtime management, and automated payslip delivery. Mobile app (Expo) with GPS-based attendance, fake GPS detection, KPI dashboards, payslip/overtime slip access, and in-app auto updates without Play Store releases.",
+          "Full HR platform: automated payroll with tax & BPJS, realtime fingerprint attendance, mobile app with GPS-based attendance and KPI dashboards.",
         techStack: ["Laravel", "Expo", "Oracle Database", "REST API"],
       },
       {
         name: "Meeting Room Application",
         description:
-          "Real-time dashboard to monitor room status by date and time. Scheduling and management features including participant count, meal requirements, and automated notifications through WhatsApp API.",
+          "Real-time dashboard for room scheduling with WhatsApp API notifications.",
         techStack: ["Laravel", "WhatsApp API", "Real-time Dashboard"],
       },
       {
         name: "DevOps & Server Migration",
         description:
-          "Automated deployment workflows with GitLab CI/CD jobs, configured Docker services for auto-restart after server outages, and migrated Odoo from cloud to on-premise server without data loss.",
+          "GitLab CI/CD workflows, Docker auto-recovery, Odoo cloud-to-on-premise migration.",
         techStack: ["GitLab CI/CD", "Docker", "Odoo", "Nginx"],
       },
       {
-        name: "Hang Nadim Airport — Cargo Mobile App",
+        name: "Airport Cargo Mobile App",
         description:
-          "Mobile acceptance application to scan and integrate package QR codes directly into the central airport system.",
+          "Mobile acceptance app for Hang Nadim Airport — QR code scanning into central system.",
         techStack: ["Flutter", "QR Scanning", "API Integration"],
       },
       {
-        name: "Mudik Gratis BUMN Application",
+        name: "Mudik Gratis BUMN App",
         description:
-          "Built a Laravel-based registration system to replace Google Forms, making participant handling more scalable. Included 24/7 status checking, live chat, automatic email delivery, admin dashboard with stats, participant filtering, QRIS payment handling, and NIK blacklist validation.",
+          "Laravel registration system with 24/7 status checking, live chat, QRIS payments, and admin dashboard.",
         techStack: ["Laravel", "Payment Gateway", "Dashboard"],
       },
     ],
   },
-
   {
     role: "Full Stack Developer",
     company: "Batam Toteles Application",
     location: "Batam, Indonesia",
     period: "Feb 2025",
     description:
-      "Built a Laravel-based ERP-like operational management app with interconnected modules: purchase requests, purchase orders, delivery orders, production flows, and UMKM consignment management. Integrated WhatsApp Gateway notifications and configurable user roles.",
+      "Built a Laravel ERP-like operational management app with interconnected modules, WhatsApp Gateway, and role-based access.",
     highlights: [
-      "ERP-style interconnected operational modules",
+      "ERP-style interconnected modules",
       "WhatsApp Gateway integration",
-      "Role-based access control system",
+      "Role-based access control",
     ],
   },
   {
-    role: "Full Stack Developer (Laravel & Flutter)",
+    role: "Full Stack Developer",
     company: "Candu Roti Bakar",
     location: "Batam, Indonesia",
     period: "Sep 2024 – Oct 2024",
     description:
-      "Built a full-stack solution for product management, stock allocation, and financial reporting (Sales, Profit, COGS). Developed an Android POS system with automated QRIS (Midtrans) payments and real-time sales analytics.",
+      "Full-stack POS system with stock management, financial reporting, and Midtrans QRIS payment integration.",
     highlights: [
-      "POS system with Midtrans QRIS payment",
-      "Automated financial reporting (P&L, COGS)",
-      "Real-time sales analytics dashboard",
+      "POS with Midtrans QRIS payment",
+      "Automated P&L financial reporting",
+      "Real-time sales analytics",
     ],
   },
   {
@@ -98,9 +97,9 @@ const experiences: ExperienceItem[] = [
     location: "Remote",
     period: "Project-based",
     description:
-      "Built a comprehensive attendance application with admin and employee roles. System handles coordinate-based attendance with cross-day clock-in support, leave and sick request submissions, and complete attendance history tracking.",
+      "GPS-based attendance application with cross-day support, leave/sick requests, and history tracking.",
     highlights: [
-      "GPS-based attendance with cross-day support",
+      "GPS attendance with cross-day support",
       "Leave & sick request workflow",
     ],
   },
@@ -110,10 +109,10 @@ const experiences: ExperienceItem[] = [
     location: "Remote",
     period: "2023 – 2024",
     description:
-      "Developed backend systems for multiple clients: HappyBeauty (E-commerce automation), Tritunas & Grand Batam Mall (branch management, invoicing, IG integration), and Liszthoven Music School (50+ features including billing and radius-based attendance).",
+      "Backend systems for multiple clients including e-commerce automation, branch management, and 50+ feature school management platform.",
     highlights: [
-      "50+ features for Liszthoven Music School",
-      "E-commerce automation for HappyBeauty",
+      "50+ features for music school",
+      "E-commerce automation",
       "Multi-client backend delivery",
     ],
   },
@@ -123,7 +122,7 @@ const experiences: ExperienceItem[] = [
     location: "Batam State Polytechnic",
     period: "Aug 2022 – Dec 2022",
     description:
-      "Optimized tax calculation formulas and enhanced session security. Implemented automatic subscription with Virtual Account payments and improved overall application performance.",
+      "Tax calculation optimization, session security, and Virtual Account payment integration.",
     highlights: [
       "Virtual Account payment integration",
       "Tax formula optimization",
@@ -133,110 +132,94 @@ const experiences: ExperienceItem[] = [
 
 const Experience = () => {
   return (
-    <div className="relative space-y-5 pl-6 before:absolute before:bottom-2 before:left-[0.45rem] before:top-2 before:w-px before:bg-border/80">
+    <div className="relative space-y-4 pl-8 before:absolute before:bottom-2 before:left-[0.55rem] before:top-2 before:w-px before:bg-[rgba(255,255,255,0.06)]">
       {experiences.map((exp, index) => (
-        <article key={`${exp.company}-${index}`} className="relative pl-6">
-          {/* Timeline dot — green pulse for current, static for past */}
+        <article key={`${exp.company}-${index}`} className="relative">
           <div
-            className={`absolute left-0 top-6 h-3 w-3 rounded-full border-4 border-background shadow-sm ${
+            className={`absolute -left-8 top-5 h-3 w-3 rounded-full border-[3px] border-[#0a0a0a] ${
               exp.isCurrent
-                ? "bg-emerald-500 shadow-[0_0_8px_2px_rgba(16,185,129,0.3)]"
-                : "bg-primary"
+                ? "bg-[#00f5ff] shadow-[0_0_12px_2px_rgba(0,245,255,0.4)]"
+                : "bg-[rgba(255,255,255,0.15)]"
             }`}
           />
-
-          <div className="surface-panel px-5 py-5 sm:px-6 sm:py-6">
-            {/* Header: Role + Company + Period */}
-            <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
-              <div className="space-y-2">
-                <div className="inline-flex items-center gap-2 text-primary">
-                  <Briefcase className="h-4 w-4" />
-                  <h4 className="text-lg font-semibold text-foreground">{exp.role}</h4>
+          <div className="rounded-xl border border-[rgba(255,255,255,0.05)] bg-[rgba(255,255,255,0.03)] p-5 transition-all duration-200 hover:border-[rgba(255,255,255,0.08)] hover:bg-[rgba(255,255,255,0.04)]">
+            <div className="flex flex-col gap-2 md:flex-row md:items-start md:justify-between">
+              <div className="space-y-1">
+                <div className="flex items-center gap-2">
+                  <Briefcase className="h-3.5 w-3.5 text-[#00f5ff]" />
+                  <h4 className="text-base font-semibold text-white">{exp.role}</h4>
                 </div>
-                <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
-                  <p className="text-sm font-medium text-foreground/80">{exp.company}</p>
-                  {exp.location ? (
-                    <span className="inline-flex items-center gap-1 text-xs text-muted-foreground">
-                      <MapPin className="h-3 w-3" />
+                <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5">
+                  <p className="text-sm text-[#ccc]">{exp.company}</p>
+                  {exp.location && (
+                    <span className="inline-flex items-center gap-0.5 text-xs text-[#888]">
+                      <MapPin className="h-2.5 w-2.5" />
                       {exp.location}
                     </span>
-                  ) : null}
+                  )}
                 </div>
               </div>
-
               <div className="flex items-center gap-2">
-                {exp.isCurrent ? (
-                  <span className="rounded-full bg-emerald-500/12 px-2.5 py-0.5 text-[0.68rem] font-semibold uppercase tracking-wider text-emerald-600 dark:text-emerald-400">
+                {exp.isCurrent && (
+                  <span className="rounded-full bg-[rgba(0,245,255,0.08)] px-2 py-0.5 font-[family-name:var(--font-jetbrains)] text-[0.58rem] font-semibold uppercase tracking-wider text-[#00f5ff]">
                     Current
                   </span>
-                ) : null}
-                <div className="inline-flex items-center gap-2 rounded-full border border-border/70 bg-background/70 px-3 py-1 text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground">
-                  <Calendar className="h-3.5 w-3.5" />
+                )}
+                <span className="inline-flex items-center gap-1.5 rounded-full border border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.03)] px-2.5 py-0.5 font-[family-name:var(--font-jetbrains)] text-[0.58rem] uppercase tracking-[0.12em] text-[#888]">
+                  <Calendar className="h-2.5 w-2.5" />
                   {exp.period}
-                </div>
+                </span>
               </div>
             </div>
-
-            {/* Description */}
-            <p className="mt-4 text-sm leading-7 text-muted-foreground sm:text-[0.95rem]">
-              {exp.description}
-            </p>
-
-            {/* Highlights — Quick scan for HRD */}
-            {exp.highlights && exp.highlights.length > 0 ? (
-              <div className="mt-4 flex flex-wrap gap-2">
-                {exp.highlights.map((highlight) => (
+            <p className="mt-3 text-sm leading-[1.7] text-[#b0b0b0]">{exp.description}</p>
+            {exp.highlights && exp.highlights.length > 0 && (
+              <div className="mt-3 flex flex-wrap gap-1.5">
+                {exp.highlights.map((h) => (
                   <span
-                    key={highlight}
-                    className="inline-flex items-center gap-1.5 rounded-full border border-primary/15 bg-primary/6 px-3 py-1 text-xs font-medium text-primary/90 dark:border-primary/20 dark:bg-primary/10"
+                    key={h}
+                    className="inline-flex items-center gap-1 rounded-md border border-[rgba(0,245,255,0.1)] bg-[rgba(0,245,255,0.04)] px-2 py-0.5 text-[0.65rem] font-medium text-[#00f5ff]/80"
                   >
-                    <CheckCircle2 className="h-3 w-3" />
-                    {highlight}
+                    <CheckCircle2 className="h-2.5 w-2.5" />
+                    {h}
                   </span>
                 ))}
               </div>
-            ) : null}
-
-            {/* Sub-projects for grouped entries (e.g. PT Persero Batam) */}
-            {exp.subProjects && exp.subProjects.length > 0 ? (
-              <div className="mt-5 space-y-3 border-t border-border/60 pt-5">
-                <p className="font-mono text-[0.68rem] font-semibold uppercase tracking-[0.28em] text-primary/70">
+            )}
+            {exp.subProjects && exp.subProjects.length > 0 && (
+              <div className="mt-4 space-y-2 border-t border-[rgba(255,255,255,0.05)] pt-4">
+                <p className="font-[family-name:var(--font-jetbrains)] text-[0.58rem] font-semibold uppercase tracking-[0.25em] text-[#00f5ff]/60">
                   Key projects delivered
                 </p>
-                <div className="grid gap-3 md:grid-cols-2">
+                <div className="grid gap-2 md:grid-cols-2">
                   {exp.subProjects.map((project) => (
                     <div
                       key={project.name}
-                      className="rounded-2xl border border-border/50 bg-background/60 px-4 py-4 transition-colors duration-200 hover:border-primary/25 hover:bg-primary/[0.03]"
+                      className="rounded-lg border border-[rgba(255,255,255,0.04)] bg-[rgba(255,255,255,0.02)] p-3 transition-colors duration-200 hover:border-[rgba(0,245,255,0.1)]"
                     >
-                      <div className="flex items-start gap-2">
-                        <ChevronRight className="mt-0.5 h-3.5 w-3.5 shrink-0 text-primary/60" />
-                        <div className="space-y-2">
-                          <p className="text-sm font-semibold text-foreground/90">
-                            {project.name}
-                          </p>
-                          <p className="text-[0.82rem] leading-6 text-muted-foreground">
-                            {project.description}
-                          </p>
-                          {project.techStack && project.techStack.length > 0 ? (
-                            <div className="flex flex-wrap gap-1.5 pt-1">
+                      <div className="flex items-start gap-1.5">
+                        <ChevronRight className="mt-0.5 h-3 w-3 shrink-0 text-[#00f5ff]/40" />
+                        <div className="space-y-1">
+                          <p className="text-xs font-semibold text-[#e0e0e0]">{project.name}</p>
+                          <p className="text-[0.72rem] leading-[1.6] text-[#999]">{project.description}</p>
+                          {project.techStack && (
+                            <div className="flex flex-wrap gap-1 pt-0.5">
                               {project.techStack.map((tech) => (
                                 <span
                                   key={tech}
-                                  className="rounded-md bg-muted/60 px-2 py-0.5 text-[0.68rem] font-medium text-muted-foreground"
+                                  className="rounded bg-[rgba(255,255,255,0.04)] px-1.5 py-0.5 font-[family-name:var(--font-jetbrains)] text-[0.55rem] text-[#888]"
                                 >
                                   {tech}
                                 </span>
                               ))}
                             </div>
-                          ) : null}
+                          )}
                         </div>
                       </div>
                     </div>
                   ))}
                 </div>
               </div>
-            ) : null}
+            )}
           </div>
         </article>
       ))}

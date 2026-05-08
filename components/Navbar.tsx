@@ -1,82 +1,75 @@
 "use client";
 
-import { ThemeToggle } from "@/components/ThemeToggle";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
-import { Github, Mail, Menu, X } from "lucide-react";
+import { Github, Mail } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const NAV_LINKS = [
   { name: "Home", href: "#home", id: "home" },
-  { name: "Profile", href: "#about", id: "about" },
+  { name: "About", href: "#about", id: "about" },
+  { name: "Projects", href: "#projects", id: "projects" },
   { name: "Experience", href: "#experience", id: "experience" },
   { name: "Skills", href: "#skills", id: "skills" },
-  { name: "Projects", href: "#projects", id: "projects" },
   { name: "Contact", href: "#contact", id: "contact" },
 ] as const;
 
 const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState<(typeof NAV_LINKS)[number]["id"]>("home");
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const sections = NAV_LINKS.map((link) => document.getElementById(link.id)).filter(
-      (element): element is HTMLElement => Boolean(element)
-    );
-
-    if (!sections.length) {
-      return;
-    }
-
-    const updateActiveSection = () => {
-      const scrollPosition = window.scrollY + 140;
-
-      const currentSection = sections.reduce<(typeof sections)[number]>((active, section) => {
-        return section.offsetTop <= scrollPosition ? section : active;
-      }, sections[0]);
-
-      setActiveSection(currentSection.id as (typeof NAV_LINKS)[number]["id"]);
-    };
-
-    updateActiveSection();
-    window.addEventListener("scroll", updateActiveSection, { passive: true });
-    window.addEventListener("resize", updateActiveSection);
-
-    return () => {
-      window.removeEventListener("scroll", updateActiveSection);
-      window.removeEventListener("resize", updateActiveSection);
-    };
+    const handleScroll = () => setScrolled(window.scrollY > 40);
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   useEffect(() => {
-    if (!isOpen) {
-      return;
-    }
+    const sections = NAV_LINKS.map((link) => document.getElementById(link.id)).filter(
+      (el): el is HTMLElement => Boolean(el)
+    );
+    if (!sections.length) return;
 
-    const closeMenu = () => setIsOpen(false);
+    const update = () => {
+      const pos = window.scrollY + 140;
+      const current = sections.reduce((active, section) =>
+        section.offsetTop <= pos ? section : active, sections[0]);
+      setActiveSection(current.id as (typeof NAV_LINKS)[number]["id"]);
+    };
 
-    window.addEventListener("hashchange", closeMenu);
-    return () => window.removeEventListener("hashchange", closeMenu);
-  }, [isOpen]);
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    return () => {
+      window.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
+    };
+  }, []);
 
   return (
-    <nav className="fixed inset-x-0 top-0 z-50">
-      <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
-        <div className="relative">
-          <div className="surface-panel flex h-14 items-center justify-between rounded-full px-3 sm:px-4">
+    <nav className="fixed inset-x-0 top-0 z-50 hidden md:block">
+      <div className="mx-auto max-w-7xl px-5 lg:px-8">
+        <div
+          className={cn(
+            "mt-4 flex h-14 items-center justify-between rounded-full border px-4 transition-all duration-300",
+            scrolled
+              ? "border-[rgba(255,255,255,0.06)] bg-[#0a0a0a]/80 shadow-[0_4px_30px_rgba(0,0,0,0.4)] backdrop-blur-xl"
+              : "border-transparent bg-transparent"
+          )}
+        >
           <Link
             href="#home"
-            className="rounded-full px-3 py-2 font-semibold tracking-tight text-foreground transition-colors hover:text-primary"
+            className="font-[family-name:var(--font-syne)] text-lg font-bold tracking-tight text-white"
           >
-            Erghi
+            Erghi<span className="text-[#00f5ff]">.</span>
           </Link>
 
           <div className="hidden items-center gap-1 lg:flex">
             {NAV_LINKS.map((link) => {
               const isActive = activeSection === link.id;
-
               return (
                 <Link
                   key={link.id}
@@ -84,16 +77,16 @@ const Navbar = () => {
                   onClick={() => setActiveSection(link.id)}
                   className={cn(
                     "relative rounded-full px-4 py-2 text-sm font-medium transition-colors",
-                    isActive ? "text-foreground" : "text-muted-foreground hover:text-foreground"
+                    isActive ? "text-white" : "text-[#888] hover:text-[#ccc]"
                   )}
                 >
-                  {isActive ? (
+                  {isActive && (
                     <motion.span
-                      layoutId="active-nav-pill"
-                      className="absolute inset-0 -z-10 rounded-full bg-foreground/8"
-                      transition={{ type: "spring", stiffness: 360, damping: 32 }}
+                      layoutId="nav-pill"
+                      className="absolute inset-0 -z-10 rounded-full bg-[rgba(255,255,255,0.06)]"
+                      transition={{ type: "spring", stiffness: 400, damping: 30 }}
                     />
-                  ) : null}
+                  )}
                   {link.name}
                 </Link>
               );
@@ -101,12 +94,11 @@ const Navbar = () => {
           </div>
 
           <div className="hidden items-center gap-2 lg:flex">
-            <ThemeToggle />
             <Button
               asChild
               variant="ghost"
               size="icon"
-              className="rounded-full text-muted-foreground hover:bg-background hover:text-foreground"
+              className="rounded-full text-[#888] hover:text-white"
             >
               <a href="https://github.com/ergiseptiandi" target="_blank" rel="noopener noreferrer">
                 <Github className="h-4 w-4" />
@@ -114,72 +106,14 @@ const Navbar = () => {
             </Button>
             <Button
               asChild
-              className="h-10 rounded-full px-5 text-sm font-semibold shadow-[0_16px_38px_-24px_rgba(39,83,214,0.56)]"
+              size="sm"
+              className="rounded-full bg-[#00f5ff] px-4 text-xs font-bold text-[#0a0a0a] shadow-[0_0_20px_rgba(0,245,255,0.2)] hover:shadow-[0_0_30px_rgba(0,245,255,0.3)]"
             >
               <a href="mailto:ergiputra321@gmail.com">
-                <Mail className="h-4 w-4" />
-                Hire me
+                <Mail className="h-3.5 w-3.5" />
+                Contact
               </a>
             </Button>
-          </div>
-
-          <div className="flex items-center gap-2 lg:hidden">
-            <ThemeToggle />
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setIsOpen((open) => !open)}
-              className="rounded-full text-muted-foreground hover:bg-background hover:text-foreground"
-              aria-expanded={isOpen}
-              aria-label="Toggle navigation"
-            >
-              {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-            </Button>
-          </div>
-          </div>
-
-          <div
-            className={cn(
-              "absolute inset-x-1 top-full pt-3 transition-all duration-200 lg:hidden",
-              isOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
-            )}
-          >
-            <div
-              className={cn(
-                "surface-card overflow-hidden p-2 transition-all duration-200",
-                isOpen ? "translate-y-0" : "-translate-y-2"
-              )}
-            >
-              <div className="space-y-1">
-                {NAV_LINKS.map((link) => (
-                  <Link
-                    key={link.id}
-                    href={link.href}
-                    onClick={() => {
-                      setActiveSection(link.id);
-                      setIsOpen(false);
-                    }}
-                    className={cn(
-                      "block rounded-2xl px-4 py-3 text-sm font-medium transition-colors",
-                      activeSection === link.id
-                        ? "bg-foreground/8 text-foreground"
-                        : "text-muted-foreground hover:bg-background hover:text-foreground"
-                    )}
-                  >
-                    {link.name}
-                  </Link>
-                ))}
-              </div>
-
-              <div className="mt-2 border-t border-border/60 px-2 pt-4">
-                <Button asChild className="h-11 w-full rounded-full text-sm font-semibold">
-                  <a href="mailto:ergiputra321@gmail.com">
-                    <Mail className="h-4 w-4" />
-                    Start a conversation
-                  </a>
-                </Button>
-              </div>
-            </div>
           </div>
         </div>
       </div>

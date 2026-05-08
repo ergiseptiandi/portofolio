@@ -1,8 +1,11 @@
 import AnimatedBackground from "@/components/AnimatedBackground";
+import BottomNav from "@/components/BottomNav";
+import CursorGlow from "@/components/CursorGlow";
 import Navbar from "@/components/Navbar";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { JetBrains_Mono, Syne } from "next/font/google";
+import { Geist } from "next/font/google";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -10,14 +13,22 @@ const geistSans = Geist({
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const jetbrainsMono = JetBrains_Mono({
+  variable: "--font-jetbrains",
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+});
+
+const syne = Syne({
+  variable: "--font-syne",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
 });
 
 export const metadata: Metadata = {
-  title: "Erghi Septiandi Putra | Fullstack Developer",
-  description: "Portfolio of Erghi Septiandi Putra, a Fullstack Developer specializing in Laravel, Next.js, NestJS, and Flutter.",
+  title: "Erghi Septiandi Putra — Full-Stack Developer & Builder",
+  description:
+    "I build web, mobile, and backend systems. Laravel, Next.js, NestJS, Flutter, Go.",
 };
 
 export default function RootLayout({
@@ -26,21 +37,21 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth" suppressHydrationWarning>
+    <html lang="en" className="dark scroll-smooth" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased selection:bg-primary/30 min-h-screen`}
+        className={`${geistSans.variable} ${jetbrainsMono.variable} ${syne.variable} antialiased min-h-screen`}
       >
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
-          enableSystem
+          defaultTheme="dark"
+          enableSystem={false}
           disableTransitionOnChange
         >
           <AnimatedBackground />
+          <CursorGlow />
           <Navbar />
-          <main className="min-h-screen pt-16 relative">
-            {children}
-          </main>
+          <main className="relative pb-24 md:pb-0">{children}</main>
+          <BottomNav />
         </ThemeProvider>
       </body>
     </html>
