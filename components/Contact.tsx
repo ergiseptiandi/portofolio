@@ -7,8 +7,15 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Github, Linkedin, Mail, MessageSquare, Send, User } from "lucide-react";
+import { SiWhatsapp } from "react-icons/si";
 
 const contactLinks = [
+  {
+    label: "WhatsApp",
+    value: "+62 852 6391 2536",
+    href: "https://wa.me/6285263912536",
+    icon: SiWhatsapp,
+  },
   {
     label: "Email",
     value: "ergiputra321@gmail.com",
