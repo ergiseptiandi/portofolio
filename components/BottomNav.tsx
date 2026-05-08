@@ -13,7 +13,8 @@ const NAV_ITEMS = [
 
 const BottomNav = () => {
   const [active, setActive] = useState("home");
-  const observerRef = useRef<IntersectionObserver | null>(null);
+  const lockedRef = useRef(false);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     const sections = NAV_ITEMS.map((item) =>
@@ -22,10 +23,10 @@ const BottomNav = () => {
 
     if (!sections.length) return;
 
-    observerRef.current?.disconnect();
-
-    observerRef.current = new IntersectionObserver(
+    const observer = new IntersectionObserver(
       (entries) => {
+        if (lockedRef.current) return;
+
         const visible = entries
           .filter((e) => e.isIntersecting)
           .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
@@ -34,16 +35,21 @@ const BottomNav = () => {
           setActive(visible[0].target.id);
         }
       },
-      {
-        rootMargin: "-20% 0px -60% 0px",
-        threshold: 0,
-      }
+      { rootMargin: "-10% 0px -70% 0px", threshold: 0 }
     );
 
-    sections.forEach((section) => observerRef.current!.observe(section));
-
-    return () => observerRef.current?.disconnect();
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
   }, []);
+
+  const handleClick = (id: string) => {
+    lockedRef.current = true;
+    setActive(id);
+    clearTimeout(timerRef.current ?? undefined);
+    timerRef.current = setTimeout(() => {
+      lockedRef.current = false;
+    }, 1200);
+  };
 
   return (
     <nav className="fixed inset-x-0 bottom-4 z-50 flex justify-center md:hidden">
@@ -55,6 +61,7 @@ const BottomNav = () => {
             <a
               key={item.id}
               href={item.href}
+              onClick={() => handleClick(item.id)}
               className={cn(
                 "relative flex flex-col items-center gap-0.5 rounded-full px-4 py-2 text-[0.6rem] font-medium transition-colors duration-200",
                 isActive ? "text-[#00f5ff]" : "text-[#888] hover:text-[#ccc]"

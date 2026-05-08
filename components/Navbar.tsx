@@ -19,7 +19,8 @@ const NAV_LINKS = [
 const Navbar = () => {
   const [activeSection, setActiveSection] = useState<(typeof NAV_LINKS)[number]["id"]>("home");
   const [scrolled, setScrolled] = useState(false);
-  const observerRef = useRef<IntersectionObserver | null>(null);
+  const lockedRef = useRef(false);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 40);
@@ -34,10 +35,10 @@ const Navbar = () => {
     );
     if (!sections.length) return;
 
-    observerRef.current?.disconnect();
-
-    observerRef.current = new IntersectionObserver(
+    const observer = new IntersectionObserver(
       (entries) => {
+        if (lockedRef.current) return;
+
         const visible = entries
           .filter((e) => e.isIntersecting)
           .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
@@ -46,16 +47,21 @@ const Navbar = () => {
           setActiveSection(visible[0].target.id as (typeof NAV_LINKS)[number]["id"]);
         }
       },
-      {
-        rootMargin: "-20% 0px -60% 0px",
-        threshold: 0,
-      }
+      { rootMargin: "-10% 0px -70% 0px", threshold: 0 }
     );
 
-    sections.forEach((section) => observerRef.current!.observe(section));
-
-    return () => observerRef.current?.disconnect();
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
   }, []);
+
+  const handleNavClick = (id: (typeof NAV_LINKS)[number]["id"]) => {
+    lockedRef.current = true;
+    setActiveSection(id);
+    clearTimeout(timerRef.current ?? undefined);
+    timerRef.current = setTimeout(() => {
+      lockedRef.current = false;
+    }, 1200);
+  };
 
   return (
     <nav className="fixed inset-x-0 top-0 z-50 hidden md:block">
@@ -82,7 +88,7 @@ const Navbar = () => {
                 <Link
                   key={link.id}
                   href={link.href}
-                  onClick={() => setActiveSection(link.id)}
+                  onClick={() => handleNavClick(link.id)}
                   className={cn(
                     "relative rounded-full px-4 py-2 text-sm font-medium transition-colors",
                     isActive ? "text-white" : "text-[#888] hover:text-[#ccc]"
