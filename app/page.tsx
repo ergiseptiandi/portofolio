@@ -117,6 +117,13 @@ const projects: ProjectItem[] = [
     demoUrl: "https://paijoki.paidev.my.id/",
   },
   {
+    title: "Personal CV Website",
+    description:
+      "This portfolio website itself. A modern, dark-themed personal site built with Next.js, Tailwind CSS, and Framer Motion. Features 3D tilt project cards, cursor glow, mobile bottom nav, and scroll-triggered animations.",
+    tags: ["Next.js", "Tailwind CSS", "Framer Motion", "TypeScript"],
+    demoUrl: "https://portfolio.paidev.my.id/",
+  },
+  {
     title: "Finance App Mobile",
     description:
       "Personal finance mobile app built with Expo. Covers onboarding, authentication, biometric unlock, wallets, categories, budgets, notifications, and mobile-friendly finance workflows.",
