@@ -2,7 +2,7 @@
 
 import { cn } from "@/lib/utils";
 import { Briefcase, Home, Mail, User } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const NAV_ITEMS = [
   { name: "Home", href: "#home", id: "home", icon: Home },
@@ -13,6 +13,7 @@ const NAV_ITEMS = [
 
 const BottomNav = () => {
   const [active, setActive] = useState("home");
+  const observerRef = useRef<IntersectionObserver | null>(null);
 
   useEffect(() => {
     const sections = NAV_ITEMS.map((item) =>
@@ -21,16 +22,27 @@ const BottomNav = () => {
 
     if (!sections.length) return;
 
-    const update = () => {
-      const pos = window.scrollY + 200;
-      const current = sections.reduce((a, s) =>
-        s.offsetTop <= pos ? s : a, sections[0]);
-      setActive(current.id);
-    };
+    observerRef.current?.disconnect();
 
-    update();
-    window.addEventListener("scroll", update, { passive: true });
-    return () => window.removeEventListener("scroll", update);
+    observerRef.current = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+
+        if (visible.length > 0) {
+          setActive(visible[0].target.id);
+        }
+      },
+      {
+        rootMargin: "-20% 0px -60% 0px",
+        threshold: 0,
+      }
+    );
+
+    sections.forEach((section) => observerRef.current!.observe(section));
+
+    return () => observerRef.current?.disconnect();
   }, []);
 
   return (

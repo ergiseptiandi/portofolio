@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import { Github, Mail } from "lucide-react";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const NAV_LINKS = [
   { name: "Home", href: "#home", id: "home" },
@@ -19,6 +19,7 @@ const NAV_LINKS = [
 const Navbar = () => {
   const [activeSection, setActiveSection] = useState<(typeof NAV_LINKS)[number]["id"]>("home");
   const [scrolled, setScrolled] = useState(false);
+  const observerRef = useRef<IntersectionObserver | null>(null);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 40);
@@ -33,20 +34,27 @@ const Navbar = () => {
     );
     if (!sections.length) return;
 
-    const update = () => {
-      const pos = window.scrollY + 140;
-      const current = sections.reduce((active, section) =>
-        section.offsetTop <= pos ? section : active, sections[0]);
-      setActiveSection(current.id as (typeof NAV_LINKS)[number]["id"]);
-    };
+    observerRef.current?.disconnect();
 
-    update();
-    window.addEventListener("scroll", update, { passive: true });
-    window.addEventListener("resize", update);
-    return () => {
-      window.removeEventListener("scroll", update);
-      window.removeEventListener("resize", update);
-    };
+    observerRef.current = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+
+        if (visible.length > 0) {
+          setActiveSection(visible[0].target.id as (typeof NAV_LINKS)[number]["id"]);
+        }
+      },
+      {
+        rootMargin: "-20% 0px -60% 0px",
+        threshold: 0,
+      }
+    );
+
+    sections.forEach((section) => observerRef.current!.observe(section));
+
+    return () => observerRef.current?.disconnect();
   }, []);
 
   return (

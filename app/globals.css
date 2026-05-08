@@ -89,7 +89,7 @@
   }
 
   html {
-    scroll-padding-top: 5rem;
+    scroll-padding-top: 4.5rem;
   }
 
   body {
@@ -142,7 +142,7 @@
 }
 
 @utility section-shell {
-  @apply mx-auto max-w-7xl px-5 py-20 md:px-8 md:py-28 scroll-mt-20;
+  @apply mx-auto max-w-7xl px-5 py-16 md:px-8 md:py-24;
 }
 
 @utility section-label {
