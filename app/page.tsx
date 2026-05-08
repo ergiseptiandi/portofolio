@@ -103,6 +103,20 @@ const skillGroups: SkillGroup[] = [
 
 const projects: ProjectItem[] = [
   {
+    title: "WhatsApp API Gateway",
+    description:
+      "Multi-Device WhatsApp API Gateway & Dashboard. A SaaS platform to connect, manage, and automate multiple WhatsApp numbers via a centralized dashboard. Features QR code authentication, dynamic API keys, webhooks, contact sync, and role-based access.",
+    tags: ["Next.js", "Baileys", "MySQL", "Prisma", "REST API", "Webhook"],
+    demoUrl: "https://whatsapp-gateway.paidev.my.id/",
+  },
+  {
+    title: "PAI JOKI",
+    description:
+      "Comprehensive freelance service management platform. Handles the entire end-to-end workflow from service catalog, ordering, real-time progress tracking, revision system, automated invoicing, WhatsApp notifications, to OTP & 2FA security.",
+    tags: ["Next.js", "Prisma", "Payment Gateway", "WhatsApp OTP", "2FA"],
+    demoUrl: "https://paijoki.paidev.my.id/",
+  },
+  {
     title: "Finance App Mobile",
     description:
       "Personal finance mobile app built with Expo. Covers onboarding, authentication, biometric unlock, wallets, categories, budgets, notifications, and mobile-friendly finance workflows.",
