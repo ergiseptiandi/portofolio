@@ -105,7 +105,7 @@ const Hero = () => {
           >
             <span className="inline-flex items-center gap-2 rounded-full border border-[#00f5ff]/20 bg-[#00f5ff]/[0.06] px-3 py-1.5 font-[family-name:var(--font-jetbrains)] text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-[#00f5ff]">
               <span className="h-1.5 w-1.5 rounded-full bg-[#00f5ff] animate-pulse" />
-              Available for work
+              Open for freelance
             </span>
           </motion.div>
 
@@ -117,7 +117,7 @@ const Hero = () => {
               transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
               className="space-y-6"
             >
-              <p className="section-label">Full-stack developer — Batam, ID</p>
+              <p className="section-label">Freelance full-stack developer &mdash; Batam, ID</p>
               <h1 className="font-[family-name:var(--font-syne)] text-5xl font-extrabold leading-[0.9] tracking-tight text-white sm:text-6xl lg:text-[6rem]">
                 I build things
                 <br />
@@ -137,9 +137,9 @@ const Hero = () => {
               transition={{ duration: 0.5, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
               className="mt-6 max-w-lg text-base leading-[1.8] text-[#b0b0b0] sm:text-lg"
             >
-              Web, mobile, and backend systems — from architecture to
-              deployment. I obsess over clean implementation and
-              production reliability.
+              Open for freelance projects — fullstack web, mobile, and backend
+              systems from architecture to deployment. Let&apos;s build something
+              that actually ships.
             </motion.p>
           </div>
 

@@ -56,7 +56,7 @@ const careerHighlights = [
 const skillGroups: SkillGroup[] = [
   {
     title: "Core web stack",
-    description: "Primary tools for product interfaces, admin systems, and full-stack dashboards.",
+    description: "Go-to tools for product interfaces, admin systems, and full-stack dashboards.",
     projectCount: "6+ projects",
     items: [
       { name: "Laravel", icon: SiLaravel, color: "#FF2D20" },
@@ -67,7 +67,7 @@ const skillGroups: SkillGroup[] = [
   },
   {
     title: "Backend and data",
-    description: "Service architecture, integrations, and persistence for production workflows.",
+    description: "Service architecture, integrations, and data storage for production-ready backends.",
     projectCount: "5+ projects",
     items: [
       { name: "NestJS", icon: SiNestjs, color: "#E0234E" },
@@ -237,7 +237,7 @@ export default function Home() {
 
               <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-1">
                 {[
-                  { label: "Role", value: "Full-Stack Dev & DevOps" },
+                  { label: "Role", value: "Freelance Full-Stack Dev & DevOps" },
                   { label: "Company", value: "PT Persero Batam" },
                   { label: "Since", value: "February 2025" },
                   { label: "Based in", value: "Batam, Indonesia" },
@@ -259,7 +259,7 @@ export default function Home() {
               <SectionHeading
                 label="Profile"
                 title="Erghi Septiandi Putra"
-                description="A full-stack developer with hands-on experience delivering internal systems, customer-facing interfaces, backend services, mobile workflows, and deployment automation."
+                description="A freelance full-stack developer open for projects — web, mobile, backend, and DevOps. Experienced in delivering internal systems, customer-facing interfaces, and deployment automation."
               />
 
               <div className="rounded-xl border border-[rgba(255,255,255,0.05)] bg-[rgba(255,255,255,0.03)] p-5">
@@ -284,14 +284,14 @@ export default function Home() {
 
               <div className="space-y-4 text-[0.9rem] leading-[1.8] text-[#b0b0b0]">
                 <p>
-                  I build complete solutions from planning to production. My work ranges
-                  from HRIS platforms and queue dashboards to mobile operational tools,
-                  payment-enabled POS systems, and backend automation for client products.
+                  I&apos;m open for freelance work — fullstack web, mobile, and backend projects.
+                  My experience ranges from HRIS platforms and queue dashboards to mobile
+                  operational tools, payment-enabled POS systems, and backend automation.
                 </p>
                 <p>
-                  The strongest part of my process is connecting product experience with
-                  implementation detail. I care about responsive interfaces, stable data
-                  flows, and shipping systems that still feel clear when they grow.
+                  Whether you need a new system built or an existing one improved, I bridge
+                  product thinking with solid technical execution — responsive interfaces,
+                  stable data flows, and systems that hold up under real traffic.
                 </p>
               </div>
 
@@ -334,7 +334,7 @@ export default function Home() {
           <SectionHeading
             label="Projects"
             title="Things I've built."
-            description="Each project represents a real problem solved. From finance apps to airport systems — I ship products that work."
+            description="Each project represents a real problem solved. From finance apps to airport systems — I ship products that work. Open for similar freelance projects."
           />
         </RevealSection>
 
@@ -353,7 +353,7 @@ export default function Home() {
           <SectionHeading
             label="Experience"
             title="Where I've shipped."
-            description="A selection of work across product engineering, operational systems, integrations, and deployment support."
+            description="A selection of work across product engineering, freelance projects, operational systems, integrations, and deployment support."
           />
         </RevealSection>
 
@@ -393,13 +393,14 @@ export default function Home() {
                 </p>
                 <div className="mt-4 space-y-3 text-sm leading-[1.7] text-[#b0b0b0]">
                   <p>
-                    Comfortable moving between user-facing polish and backend depth:
-                    refining interfaces, integrating external systems, automating deployments,
-                    and improving day-to-day operational reliability.
+                    I take freelance projects across the stack — building UIs,
+                    integrating APIs, automating deployments, and making systems
+                    more reliable.
                   </p>
                   <p>
-                    Most work is shaped by practical business problems, so solutions
-                    stay maintainable under real constraints.
+                    Most of my work comes from real business problems, so I
+                    prioritize practical solutions over over-engineering.
+                    Let&apos;s talk about your project.
                   </p>
                 </div>
               </div>
@@ -464,7 +465,7 @@ export default function Home() {
           <SectionHeading
             label="Contact"
             title="Get in touch."
-            description="Have a project in mind or need help shipping one? Let's talk."
+            description="Looking for a freelance developer? Have a project in mind or need help shipping one? Let's talk."
           />
         </RevealSection>
         <RevealSection className="mt-10">
