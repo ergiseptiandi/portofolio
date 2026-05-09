@@ -4,14 +4,17 @@ import Contact from "@/components/Contact";
 import Education from "@/components/Education";
 import Experience from "@/components/Experience";
 import Hero from "@/components/Hero";
+import HowIWork from "@/components/HowIWork";
 import ProjectCard from "@/components/ProjectCard";
+import ScrollToTop from "@/components/ScrollToTop";
 import SectionHeading from "@/components/SectionHeading";
+import Services from "@/components/Services";
 import SkillBadge from "@/components/SkillBadge";
 import { Button } from "@/components/ui/button";
-import { Award, CheckCircle2, Zap } from "lucide-react";
+import { Award, CheckCircle2, Search, Zap } from "lucide-react";
 import Image from "next/image";
 import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { useState, useRef, useMemo } from "react";
 import {
   SiCloudflare,
   SiDocker,
@@ -108,6 +111,7 @@ const projects: ProjectItem[] = [
       "Multi-Device WhatsApp API Gateway & Dashboard. A SaaS platform to connect, manage, and automate multiple WhatsApp numbers via a centralized dashboard. Features QR code authentication, dynamic API keys, webhooks, contact sync, and role-based access.",
     tags: ["Next.js", "Baileys", "MySQL", "Prisma", "REST API", "Webhook"],
     demoUrl: "https://whatsapp-gateway.paidev.my.id/",
+    imageUrl: "/projects/whatsapp-gateway.png",
   },
   {
     title: "PAI JOKI",
@@ -115,6 +119,7 @@ const projects: ProjectItem[] = [
       "Comprehensive freelance service management platform. Handles the entire end-to-end workflow from service catalog, ordering, real-time progress tracking, revision system, automated invoicing, WhatsApp notifications, to OTP & 2FA security.",
     tags: ["Next.js", "Prisma", "Payment Gateway", "WhatsApp OTP", "2FA"],
     demoUrl: "https://paijoki.paidev.my.id/",
+    imageUrl: "/projects/paijoki.png",
   },
   {
     title: "Personal CV Website",
@@ -122,6 +127,7 @@ const projects: ProjectItem[] = [
       "This portfolio website itself. A modern, dark-themed personal site built with Next.js, Tailwind CSS, and Framer Motion. Features 3D tilt project cards, cursor glow, mobile bottom nav, and scroll-triggered animations.",
     tags: ["Next.js", "Tailwind CSS", "Framer Motion", "TypeScript"],
     demoUrl: "https://portfolio.paidev.my.id/",
+    imageUrl: "/projects/portfolio.png",
   },
   {
     title: "Finance App Mobile",
@@ -204,6 +210,23 @@ function RevealSection({ children, className = "" }: { children: React.ReactNode
 }
 
 export default function Home() {
+  const [skillSearch, setSkillSearch] = useState("");
+
+  const filteredSkillGroups = useMemo(() => {
+    if (!skillSearch.trim()) return skillGroups;
+    const q = skillSearch.toLowerCase();
+    return skillGroups
+      .map((group) => ({
+        ...group,
+        items: group.items.filter(
+          (item) =>
+            item.name.toLowerCase().includes(q) ||
+            group.title.toLowerCase().includes(q)
+        ),
+      }))
+      .filter((group) => group.items.length > 0);
+  }, [skillSearch]);
+
   return (
     <div className="overflow-x-hidden">
       <Hero />
@@ -328,6 +351,9 @@ export default function Home() {
         </RevealSection>
       </section>
 
+      {/* Services — NEW */}
+      <Services />
+
       {/* Projects — THE HERO SECTION */}
       <section id="projects" className="section-shell">
         <RevealSection>
@@ -419,7 +445,21 @@ export default function Home() {
           />
         </RevealSection>
 
+        {/* Skill search input */}
         <RevealSection className="mt-6">
+          <div className="relative">
+            <Search className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-[#555]" />
+            <input
+              type="text"
+              value={skillSearch}
+              onChange={(e) => setSkillSearch(e.target.value)}
+              placeholder="Search skills..."
+              className="w-full rounded-xl border border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.03)] py-3 pl-11 pr-4 text-sm text-[#e0e0e0] placeholder:text-[#555] outline-none transition-colors focus:border-[rgba(0,245,255,0.3)] focus:bg-[rgba(255,255,255,0.04)]"
+            />
+          </div>
+        </RevealSection>
+
+        <RevealSection className="mt-4">
           <div className="flex flex-wrap items-center gap-2 rounded-xl border border-[rgba(255,255,255,0.05)] bg-[rgba(255,255,255,0.03)] px-5 py-3">
             <Zap className="h-3.5 w-3.5 text-[#00f5ff]" />
             <span className="font-[family-name:var(--font-jetbrains)] text-[0.58rem] font-semibold uppercase tracking-[0.2em] text-[#00f5ff]/70">
@@ -432,7 +472,7 @@ export default function Home() {
         </RevealSection>
 
         <div className="mt-6 grid gap-4 lg:grid-cols-2">
-          {skillGroups.map((group) => (
+          {filteredSkillGroups.map((group) => (
             <RevealSection key={group.title}>
               <article className="rounded-xl border border-[rgba(255,255,255,0.05)] bg-[rgba(255,255,255,0.03)] p-5 backdrop-blur-xl transition-all duration-200 hover:border-[rgba(255,255,255,0.08)] hover:bg-[rgba(255,255,255,0.04)]">
                 <div className="mb-5 flex items-center justify-between">
@@ -456,8 +496,18 @@ export default function Home() {
               </article>
             </RevealSection>
           ))}
+          {filteredSkillGroups.length === 0 && skillSearch && (
+            <RevealSection>
+              <p className="col-span-full text-center text-sm text-[#888] py-8">
+                No skills found for &quot;{skillSearch}&quot;
+              </p>
+            </RevealSection>
+          )}
         </div>
       </section>
+
+      {/* How I Work — NEW */}
+      <HowIWork />
 
       {/* Contact */}
       <section id="contact" className="section-shell">
@@ -484,6 +534,9 @@ export default function Home() {
           </div>
         </div>
       </footer>
+
+      {/* Scroll to top — NEW */}
+      <ScrollToTop />
     </div>
   );
 }

@@ -10,9 +10,11 @@ import { useEffect, useRef, useState } from "react";
 const NAV_LINKS = [
   { name: "Home", href: "#home", id: "home" },
   { name: "About", href: "#about", id: "about" },
+  { name: "Services", href: "#services", id: "services" },
   { name: "Projects", href: "#projects", id: "projects" },
   { name: "Experience", href: "#experience", id: "experience" },
   { name: "Skills", href: "#skills", id: "skills" },
+  { name: "Process", href: "#process", id: "process" },
   { name: "Contact", href: "#contact", id: "contact" },
 ] as const;
 

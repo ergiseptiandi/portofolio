@@ -26,9 +26,46 @@ const syne = Syne({
 });
 
 export const metadata: Metadata = {
-  title: "Erghi Septiandi Putra — Full-Stack Developer & Builder",
+  title: "Erghi Septiandi Putra — Freelance Full-Stack Developer",
   description:
-    "I build web, mobile, and backend systems. Laravel, Next.js, NestJS, Flutter, Go.",
+    "Freelance full-stack developer open for projects. Web, mobile, backend & DevOps. Next.js, Laravel, Go, Flutter, NestJS. Batam, Indonesia.",
+  keywords: [
+    "full-stack developer",
+    "freelance developer",
+    "web developer",
+    "mobile developer",
+    "backend developer",
+    "Next.js",
+    "Laravel",
+    "Go",
+    "Flutter",
+    "NestJS",
+    "React",
+    "TypeScript",
+    "DevOps",
+    "Batam",
+    "Indonesia",
+    "Erghi Septiandi Putra",
+  ],
+  openGraph: {
+    title: "Erghi Septiandi Putra — Freelance Full-Stack Developer",
+    description:
+      "Freelance full-stack developer open for projects. Web, mobile, backend & DevOps. Next.js, Laravel, Go, Flutter, NestJS. Batam, Indonesia.",
+    url: "https://portfolio.paidev.my.id/",
+    siteName: "Erghi Septiandi Putra",
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Erghi Septiandi Putra — Freelance Full-Stack Developer",
+    description:
+      "Freelance full-stack developer open for projects. Web, mobile, backend & DevOps. Next.js, Laravel, Go, Flutter, NestJS. Batam, Indonesia.",
+  },
+  icons: {
+    icon: "/window.svg",
+    shortcut: "/window.svg",
+  },
 };
 
 export default function RootLayout({

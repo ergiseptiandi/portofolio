@@ -1,4 +1,8 @@
-import { Briefcase, Calendar, CheckCircle2, ChevronRight, MapPin } from "lucide-react";
+"use client";
+
+import { Briefcase, Calendar, CheckCircle2, ChevronDown, ChevronRight, MapPin } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState } from "react";
 
 type SubProject = {
   name: string;
@@ -131,98 +135,160 @@ const experiences: ExperienceItem[] = [
 ];
 
 const Experience = () => {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  const toggleItem = (index: number) => {
+    setOpenIndex((prev) => (prev === index ? null : index));
+  };
+
   return (
     <div className="relative space-y-4 pl-8 before:absolute before:bottom-2 before:left-[0.55rem] before:top-2 before:w-px before:bg-[rgba(255,255,255,0.06)]">
-      {experiences.map((exp, index) => (
-        <article key={`${exp.company}-${index}`} className="relative">
-          <div
-            className={`absolute -left-8 top-5 h-3 w-3 rounded-full border-[3px] border-[#0a0a0a] ${
-              exp.isCurrent
-                ? "bg-[#00f5ff] shadow-[0_0_12px_2px_rgba(0,245,255,0.4)]"
-                : "bg-[rgba(255,255,255,0.15)]"
-            }`}
-          />
-          <div className="rounded-xl border border-[rgba(255,255,255,0.05)] bg-[rgba(255,255,255,0.03)] p-5 transition-all duration-200 hover:border-[rgba(255,255,255,0.08)] hover:bg-[rgba(255,255,255,0.04)]">
-            <div className="flex flex-col gap-2 md:flex-row md:items-start md:justify-between">
-              <div className="space-y-1">
-                <div className="flex items-center gap-2">
-                  <Briefcase className="h-3.5 w-3.5 text-[#00f5ff]" />
-                  <h4 className="text-base font-semibold text-white">{exp.role}</h4>
+      {experiences.map((exp, index) => {
+        const isOpen = openIndex === index;
+        const hasExpandableContent =
+          exp.description || (exp.highlights && exp.highlights.length > 0) || (exp.subProjects && exp.subProjects.length > 0);
+
+        return (
+          <article key={`${exp.company}-${index}`} className="relative">
+            {/* Timeline dot */}
+            <div
+              className={`absolute -left-8 top-5 h-3 w-3 rounded-full border-[3px] border-[#0a0a0a] ${
+                exp.isCurrent
+                  ? "bg-[#00f5ff] shadow-[0_0_12px_2px_rgba(0,245,255,0.4)]"
+                  : "bg-[rgba(255,255,255,0.15)]"
+              }`}
+            />
+
+            {/* Card */}
+            <div
+              className={`rounded-xl border border-[rgba(255,255,255,0.05)] bg-[rgba(255,255,255,0.03)] p-5 transition-all duration-200 ${
+                hasExpandableContent
+                  ? "cursor-pointer hover:border-[rgba(255,255,255,0.08)] hover:bg-[rgba(255,255,255,0.04)]"
+                  : ""
+              }`}
+              onClick={() => hasExpandableContent && toggleItem(index)}
+              role={hasExpandableContent ? "button" : undefined}
+              tabIndex={hasExpandableContent ? 0 : undefined}
+              onKeyDown={(e) => {
+                if (hasExpandableContent && (e.key === "Enter" || e.key === " ")) {
+                  e.preventDefault();
+                  toggleItem(index);
+                }
+              }}
+            >
+              {/* Header — always visible */}
+              <div className="flex flex-col gap-2 md:flex-row md:items-start md:justify-between">
+                <div className="space-y-1">
+                  <div className="flex items-center gap-2">
+                    <Briefcase className="h-3.5 w-3.5 text-[#00f5ff]" />
+                    <h4 className="text-base font-semibold text-white">{exp.role}</h4>
+                    {hasExpandableContent && (
+                      <motion.span
+                        animate={{ rotate: isOpen ? 0 : -90 }}
+                        transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+                        className="inline-flex"
+                      >
+                        {isOpen ? (
+                          <ChevronDown className="h-3.5 w-3.5 text-[#00f5ff]/60" />
+                        ) : (
+                          <ChevronRight className="h-3.5 w-3.5 text-[#00f5ff]/60" />
+                        )}
+                      </motion.span>
+                    )}
+                  </div>
+                  <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5">
+                    <p className="text-sm text-[#ccc]">{exp.company}</p>
+                    {exp.location && (
+                      <span className="inline-flex items-center gap-0.5 text-xs text-[#888]">
+                        <MapPin className="h-2.5 w-2.5" />
+                        {exp.location}
+                      </span>
+                    )}
+                  </div>
                 </div>
-                <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5">
-                  <p className="text-sm text-[#ccc]">{exp.company}</p>
-                  {exp.location && (
-                    <span className="inline-flex items-center gap-0.5 text-xs text-[#888]">
-                      <MapPin className="h-2.5 w-2.5" />
-                      {exp.location}
+                <div className="flex items-center gap-2">
+                  {exp.isCurrent && (
+                    <span className="rounded-full bg-[rgba(0,245,255,0.08)] px-2 py-0.5 font-[family-name:var(--font-jetbrains)] text-[0.58rem] font-semibold uppercase tracking-wider text-[#00f5ff]">
+                      Current
                     </span>
                   )}
+                  <span className="inline-flex items-center gap-1.5 rounded-full border border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.03)] px-2.5 py-0.5 font-[family-name:var(--font-jetbrains)] text-[0.58rem] uppercase tracking-[0.12em] text-[#888]">
+                    <Calendar className="h-2.5 w-2.5" />
+                    {exp.period}
+                  </span>
                 </div>
               </div>
-              <div className="flex items-center gap-2">
-                {exp.isCurrent && (
-                  <span className="rounded-full bg-[rgba(0,245,255,0.08)] px-2 py-0.5 font-[family-name:var(--font-jetbrains)] text-[0.58rem] font-semibold uppercase tracking-wider text-[#00f5ff]">
-                    Current
-                  </span>
-                )}
-                <span className="inline-flex items-center gap-1.5 rounded-full border border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.03)] px-2.5 py-0.5 font-[family-name:var(--font-jetbrains)] text-[0.58rem] uppercase tracking-[0.12em] text-[#888]">
-                  <Calendar className="h-2.5 w-2.5" />
-                  {exp.period}
-                </span>
-              </div>
-            </div>
-            <p className="mt-3 text-sm leading-[1.7] text-[#b0b0b0]">{exp.description}</p>
-            {exp.highlights && exp.highlights.length > 0 && (
-              <div className="mt-3 flex flex-wrap gap-1.5">
-                {exp.highlights.map((h) => (
-                  <span
-                    key={h}
-                    className="inline-flex items-center gap-1 rounded-md border border-[rgba(0,245,255,0.1)] bg-[rgba(0,245,255,0.04)] px-2 py-0.5 text-[0.65rem] font-medium text-[#00f5ff]/80"
+
+              {/* Expandable content */}
+              <AnimatePresence initial={false}>
+                {isOpen && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                    className="overflow-hidden"
                   >
-                    <CheckCircle2 className="h-2.5 w-2.5" />
-                    {h}
-                  </span>
-                ))}
-              </div>
-            )}
-            {exp.subProjects && exp.subProjects.length > 0 && (
-              <div className="mt-4 space-y-2 border-t border-[rgba(255,255,255,0.05)] pt-4">
-                <p className="font-[family-name:var(--font-jetbrains)] text-[0.58rem] font-semibold uppercase tracking-[0.25em] text-[#00f5ff]/60">
-                  Key projects delivered
-                </p>
-                <div className="grid gap-2 md:grid-cols-2">
-                  {exp.subProjects.map((project) => (
-                    <div
-                      key={project.name}
-                      className="rounded-lg border border-[rgba(255,255,255,0.04)] bg-[rgba(255,255,255,0.02)] p-3 transition-colors duration-200 hover:border-[rgba(0,245,255,0.1)]"
-                    >
-                      <div className="flex items-start gap-1.5">
-                        <ChevronRight className="mt-0.5 h-3 w-3 shrink-0 text-[#00f5ff]/40" />
-                        <div className="space-y-1">
-                          <p className="text-xs font-semibold text-[#e0e0e0]">{project.name}</p>
-                          <p className="text-[0.72rem] leading-[1.6] text-[#999]">{project.description}</p>
-                          {project.techStack && (
-                            <div className="flex flex-wrap gap-1 pt-0.5">
-                              {project.techStack.map((tech) => (
-                                <span
-                                  key={tech}
-                                  className="rounded bg-[rgba(255,255,255,0.04)] px-1.5 py-0.5 font-[family-name:var(--font-jetbrains)] text-[0.55rem] text-[#888]"
-                                >
-                                  {tech}
-                                </span>
-                              ))}
-                            </div>
-                          )}
+                    <div className="pt-3">
+                      <p className="text-sm leading-[1.7] text-[#b0b0b0]">{exp.description}</p>
+
+                      {exp.highlights && exp.highlights.length > 0 && (
+                        <div className="mt-3 flex flex-wrap gap-1.5">
+                          {exp.highlights.map((h) => (
+                            <span
+                              key={h}
+                              className="inline-flex items-center gap-1 rounded-md border border-[rgba(0,245,255,0.1)] bg-[rgba(0,245,255,0.04)] px-2 py-0.5 text-[0.65rem] font-medium text-[#00f5ff]/80"
+                            >
+                              <CheckCircle2 className="h-2.5 w-2.5" />
+                              {h}
+                            </span>
+                          ))}
                         </div>
-                      </div>
+                      )}
+
+                      {exp.subProjects && exp.subProjects.length > 0 && (
+                        <div className="mt-4 space-y-2 border-t border-[rgba(255,255,255,0.05)] pt-4">
+                          <p className="font-[family-name:var(--font-jetbrains)] text-[0.58rem] font-semibold uppercase tracking-[0.25em] text-[#00f5ff]/60">
+                            Key projects delivered
+                          </p>
+                          <div className="grid gap-2 md:grid-cols-2">
+                            {exp.subProjects.map((project) => (
+                              <div
+                                key={project.name}
+                                className="rounded-lg border border-[rgba(255,255,255,0.04)] bg-[rgba(255,255,255,0.02)] p-3 transition-colors duration-200 hover:border-[rgba(0,245,255,0.1)]"
+                              >
+                                <div className="flex items-start gap-1.5">
+                                  <ChevronRight className="mt-0.5 h-3 w-3 shrink-0 text-[#00f5ff]/40" />
+                                  <div className="space-y-1">
+                                    <p className="text-xs font-semibold text-[#e0e0e0]">{project.name}</p>
+                                    <p className="text-[0.72rem] leading-[1.6] text-[#999]">{project.description}</p>
+                                    {project.techStack && (
+                                      <div className="flex flex-wrap gap-1 pt-0.5">
+                                        {project.techStack.map((tech) => (
+                                          <span
+                                            key={tech}
+                                            className="rounded bg-[rgba(255,255,255,0.04)] px-1.5 py-0.5 font-[family-name:var(--font-jetbrains)] text-[0.55rem] text-[#888]"
+                                          >
+                                            {tech}
+                                          </span>
+                                        ))}
+                                      </div>
+                                    )}
+                                  </div>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
                     </div>
-                  ))}
-                </div>
-              </div>
-            )}
-          </div>
-        </article>
-      ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          </article>
+        );
+      })}
     </div>
   );
 };
