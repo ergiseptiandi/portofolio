@@ -66,7 +66,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="fixed inset-x-0 top-0 z-50 block">
+    <nav className="fixed inset-x-0 top-0 z-50 hidden md:block">
       <div className="mx-auto max-w-7xl px-5 lg:px-8">
         <div
           className={cn(
@@ -83,7 +83,7 @@ const Navbar = () => {
             Erghi<span className="text-[#00f5ff]">.</span>
           </Link>
 
-          <div className="flex items-center gap-0.5 overflow-x-auto [&::-webkit-scrollbar]:hidden sm:gap-1">
+          <div className="hidden items-center gap-1 lg:flex">
             {NAV_LINKS.map((link) => {
               const isActive = activeSection === link.id;
               return (
@@ -92,7 +92,7 @@ const Navbar = () => {
                   href={link.href}
                   onClick={() => handleNavClick(link.id)}
                   className={cn(
-                    "relative shrink-0 rounded-full px-2.5 py-1.5 text-xs font-medium transition-colors sm:px-4 sm:py-2 sm:text-sm",
+                    "relative rounded-full px-4 py-2 text-sm font-medium transition-colors",
                     isActive ? "text-white" : "text-[#888] hover:text-[#ccc]"
                   )}
                 >
@@ -109,7 +109,7 @@ const Navbar = () => {
             })}
           </div>
 
-          <div className="hidden items-center gap-2 sm:flex">
+          <div className="hidden items-center gap-2 lg:flex">
             <Button
               asChild
               variant="ghost"
