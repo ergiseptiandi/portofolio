@@ -1,4 +1,5 @@
 import AnimatedBackground from "@/components/AnimatedBackground";
+import BottomNav from "@/components/BottomNav";
 import CursorGlow from "@/components/CursorGlow";
 import Navbar from "@/components/Navbar";
 import { ThemeProvider } from "@/components/ThemeProvider";
@@ -95,7 +96,8 @@ export default function RootLayout({
           <AnimatedBackground />
           <CursorGlow />
           <Navbar />
-          <main className="relative">{children}</main>
+          <main className="relative pb-24 md:pb-0">{children}</main>
+          <BottomNav />
         </ThemeProvider>
       </body>
     </html>
