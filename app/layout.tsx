@@ -1,5 +1,4 @@
 import AnimatedBackground from "@/components/AnimatedBackground";
-import BottomNav from "@/components/BottomNav";
 import CursorGlow from "@/components/CursorGlow";
 import Navbar from "@/components/Navbar";
 import { ThemeProvider } from "@/components/ThemeProvider";
@@ -55,12 +54,21 @@ export const metadata: Metadata = {
     siteName: "Erghi Septiandi Putra",
     locale: "en_US",
     type: "website",
+    images: [
+      {
+        url: "https://portfolio.paidev.my.id/projects/portfolio.png",
+        width: 1200,
+        height: 630,
+        alt: "Erghi Septiandi Putra — Freelance Full-Stack Developer",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Erghi Septiandi Putra — Freelance Full-Stack Developer",
     description:
       "Freelance full-stack developer open for projects. Web, mobile, backend & DevOps. Next.js, Laravel, Go, Flutter, NestJS. Batam, Indonesia.",
+    images: ["https://portfolio.paidev.my.id/projects/portfolio.png"],
   },
   icons: {
     icon: "/window.svg",
@@ -87,8 +95,7 @@ export default function RootLayout({
           <AnimatedBackground />
           <CursorGlow />
           <Navbar />
-          <main className="relative pb-24 md:pb-0">{children}</main>
-          <BottomNav />
+          <main className="relative">{children}</main>
         </ThemeProvider>
       </body>
     </html>

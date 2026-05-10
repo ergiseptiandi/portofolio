@@ -6,8 +6,8 @@ import { useEffect, useRef, useState } from "react";
 
 const NAV_ITEMS = [
   { name: "Home", href: "#home", id: "home", icon: Home },
-  { name: "Projects", href: "#projects", id: "projects", icon: Briefcase },
   { name: "About", href: "#about", id: "about", icon: User },
+  { name: "Projects", href: "#projects", id: "projects", icon: Briefcase },
   { name: "Contact", href: "#contact", id: "contact", icon: Mail },
 ] as const;
 

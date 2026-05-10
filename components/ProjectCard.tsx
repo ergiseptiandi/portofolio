@@ -1,6 +1,7 @@
 "use client";
 
 import { ExternalLink, Github, Lock } from "lucide-react";
+import Image from "next/image";
 import { useRef, useState } from "react";
 
 interface ProjectCardProps {
@@ -19,6 +20,7 @@ const ProjectCard = ({
   title,
   description,
   tags,
+  imageUrl,
   githubUrl,
   demoUrl,
   isPrivate = false,
@@ -62,6 +64,18 @@ const ProjectCard = ({
           }}
         />
         <div className="relative z-10">
+          {imageUrl && (
+            <div className="relative mb-6 aspect-video w-full overflow-hidden rounded-xl border border-[rgba(255,255,255,0.06)] bg-[rgba(0,245,255,0.03)]">
+              <Image
+                src={imageUrl}
+                alt={title}
+                fill
+                className="object-cover object-top"
+                sizes="(min-width: 1024px) 560px, (min-width: 640px) 50vw, 100vw"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a]/40 via-transparent to-transparent" />
+            </div>
+          )}
           <div className="mb-6 flex items-start justify-between">
             <div>
               <p className="font-[family-name:var(--font-jetbrains)] text-[0.6rem] uppercase tracking-[0.3em] text-[#00f5ff]/60">
@@ -139,7 +153,19 @@ const ProjectCard = ({
       />
 
       <div className="relative z-10 flex flex-1 flex-col">
-        <div className="mb-4 flex items-start justify-between">
+          {imageUrl && (
+            <div className="relative mb-5 aspect-video w-full overflow-hidden rounded-lg border border-[rgba(255,255,255,0.06)] bg-[rgba(0,245,255,0.03)]">
+              <Image
+                src={imageUrl}
+                alt={title}
+                fill
+                className="object-cover object-top"
+                sizes="(min-width: 1280px) 33vw, (min-width: 768px) 50vw, 100vw"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a]/30 via-transparent to-transparent" />
+            </div>
+          )}
+          <div className="mb-4 flex items-start justify-between">
           <div>
             <p className="font-[family-name:var(--font-jetbrains)] text-[0.58rem] uppercase tracking-[0.3em] text-[#00f5ff]/50">
               {String(index + 1).padStart(2, "0")}
