@@ -6,8 +6,11 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { Turnstile } from "@marsidev/react-turnstile";
 import { Github, Linkedin, Mail, MessageSquare, Send, User } from "lucide-react";
 import { SiWhatsapp } from "react-icons/si";
+
+const SITE_KEY = "0x4AAAAAADJ2lQRon8nMeXXB";
 
 const contactLinks = [
   {
@@ -40,6 +43,7 @@ const Contact = () => {
   const [formData, setFormData] = React.useState({ name: "", email: "", message: "" });
   const [status, setStatus] = React.useState<"idle" | "loading" | "success" | "error">("idle");
   const [csrfToken, setCsrfToken] = React.useState("");
+  const [turnstileToken, setTurnstileToken] = React.useState<string | null>(null);
 
   React.useEffect(() => {
     fetch("/api/contact")
@@ -54,18 +58,22 @@ const Contact = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!turnstileToken) return setStatus("error");
+
     setStatus("loading");
     try {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...formData, csrfToken }),
+        body: JSON.stringify({ ...formData, csrfToken, turnstileToken }),
       });
       if (res.ok) {
         setStatus("success");
         setFormData({ name: "", email: "", message: "" });
+        setTurnstileToken(null);
       } else {
-        setStatus("error");
+        const data = await res.json();
+        setStatus(data.message === "Rate limited. Try again later." ? "error" : "error");
       }
     } catch {
       setStatus("error");
@@ -160,16 +168,26 @@ const Contact = () => {
               />
             </div>
           </div>
+
+          <Turnstile
+            siteKey={SITE_KEY}
+            onSuccess={setTurnstileToken}
+            options={{
+              theme: "dark",
+              size: "flexible",
+            }}
+          />
+
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <p className="text-xs text-muted-foreground" aria-live="polite">
               {status === "loading" && "Sending..."}
-              {status === "success" && "Message sent."}
+              {status === "success" && "Message sent. I'll get back to you soon."}
               {status === "error" && "Failed to send. Try again."}
               {status === "idle" && "I usually reply within 24h."}
             </p>
             <Button
               type="submit"
-              disabled={status === "loading" || status === "success"}
+              disabled={status === "loading" || status === "success" || !turnstileToken}
               className="h-11 rounded-full bg-primary px-6 text-sm font-bold text-background shadow-[0_0_20px_rgba(0,245,255,0.2)] hover:shadow-[0_0_30px_rgba(0,245,255,0.3)]"
             >
               {status === "loading" ? "Sending..." : status === "success" ? "Sent" : "Send message"}
