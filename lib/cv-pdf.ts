@@ -62,8 +62,6 @@ const cvData = {
       location: "Remote",
       period: "Sep 2024 - Present",
       bullets: [
-        "Pai Joki — Built a full freelance service management platform: catalog, ordering, real-time progress tracking, revision workflow, automated invoicing, WhatsApp notifications, OTP & 2FA. Built with Next.js, Prisma, Midtrans, and WhatsApp Gateway",
-        "WhatsApp API Gateway — Developed a multi-device SaaS platform for WhatsApp API management: QR auth, dynamic API keys, webhooks, contact sync, role-based access. Used by Pai Joki and external clients",
         "Smart POS System (Candu Roti Bakar) — Full-stack POS with stock management, P&L reports, COGS tracking, and Midtrans QRIS integration. Android app built with Flutter",
         "ERP-style system (Batam Toteles) — Purchase requests, POs, delivery orders, production flow, UMKM consignment with RBAC and WhatsApp notifications",
         "GPS Attendance App (PT Jala Armada Rinjani) — GPS clock-in/out, cross-day support, leave management, admin monitoring dashboard",
@@ -181,6 +179,14 @@ export async function generateCvPdf(): Promise<Buffer> {
 
   const addPage = () => {
     page = pdfDoc.addPage([PAGE_WIDTH, PAGE_HEIGHT]);
+    // Draw accent bar on every page
+    page.drawRectangle({
+      x: 0,
+      y: 0,
+      width: 6,
+      height: PAGE_HEIGHT,
+      color: COLOR_PRIMARY,
+    });
     y = PAGE_HEIGHT - MARGIN;
   };
 
