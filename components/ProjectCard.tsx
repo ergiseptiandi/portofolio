@@ -53,7 +53,7 @@ const ProjectCard = ({
         ref={cardRef}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
-        className="group relative col-span-full rounded-2xl border border-[rgba(0,245,255,0.15)] bg-[rgba(255,255,255,0.03)] p-8 transition-shadow duration-300 hover:border-[rgba(0,245,255,0.3)] hover:shadow-[0_0_60px_-15px_rgba(0,245,255,0.15)] sm:p-10"
+        className="group relative col-span-full rounded-2xl border border-primary/20 bg-card p-8 transition-shadow duration-300 hover:border-primary/30 hover:shadow-[0_0_60px_-15px_rgba(0,245,255,0.15)] sm:p-10"
         style={{ transform, transformStyle: "preserve-3d", transition: "transform 0.15s ease-out" }}
       >
         {/* Glare overlay */}
@@ -65,7 +65,7 @@ const ProjectCard = ({
         />
         <div className="relative z-10">
           {imageUrl && (
-            <div className="relative mb-6 aspect-video w-full overflow-hidden rounded-xl border border-[rgba(255,255,255,0.06)] bg-[rgba(0,245,255,0.03)]">
+            <div className="relative mb-6 aspect-video w-full overflow-hidden rounded-xl border border-border bg-primary/[0.03]">
               <Image
                 src={imageUrl}
                 alt={title}
@@ -73,46 +73,46 @@ const ProjectCard = ({
                 className="object-cover object-top"
                 sizes="(min-width: 1024px) 560px, (min-width: 640px) 50vw, 100vw"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a]/40 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-background/40 via-transparent to-transparent" />
             </div>
           )}
           <div className="mb-6 flex items-start justify-between">
             <div>
-              <p className="font-[family-name:var(--font-jetbrains)] text-[0.6rem] uppercase tracking-[0.3em] text-[#00f5ff]/60">
+              <p className="font-[family-name:var(--font-jetbrains)] text-[0.6rem] uppercase tracking-[0.3em] text-primary/60">
                 Featured · {String(index + 1).padStart(2, "0")}
               </p>
-              <h3 className="mt-2 font-[family-name:var(--font-syne)] text-2xl font-extrabold text-white sm:text-3xl">
+              <h3 className="mt-2 font-[family-name:var(--font-syne)] text-2xl font-extrabold text-foreground sm:text-3xl">
                 {title}
               </h3>
             </div>
             {isPrivate && (
-              <span className="flex items-center gap-1 rounded-full border border-[rgba(255,255,255,0.1)] bg-[rgba(255,255,255,0.04)] px-2 py-0.5 font-[family-name:var(--font-jetbrains)] text-[0.6rem] uppercase tracking-[0.12em] text-[#888]">
+              <span className="flex items-center gap-1 rounded-full border border-border bg-muted px-2 py-0.5 font-[family-name:var(--font-jetbrains)] text-[0.6rem] uppercase tracking-[0.12em] text-muted-foreground">
                 <Lock className="h-2.5 w-2.5" />
                 Private
               </span>
             )}
           </div>
-          <p className="mb-6 max-w-2xl text-sm leading-[1.8] text-[#b0b0b0] sm:text-base">
+          <p className="mb-6 max-w-2xl text-sm leading-[1.8] text-muted-foreground sm:text-base">
             {description}
           </p>
           <div className="mb-6 flex flex-wrap gap-1.5">
             {tags.map((tag) => (
               <span
                 key={tag}
-                className="rounded-md border border-[rgba(0,245,255,0.12)] bg-[rgba(0,245,255,0.04)] px-2.5 py-0.5 font-[family-name:var(--font-jetbrains)] text-[0.6rem] uppercase tracking-[0.1em] text-[#00f5ff]/80"
+                className="rounded-md border border-primary/15 bg-primary/[0.04] px-2.5 py-0.5 font-[family-name:var(--font-jetbrains)] text-[0.6rem] uppercase tracking-[0.1em] text-primary/80"
               >
                 {tag}
               </span>
             ))}
           </div>
           {!isPrivate && (githubUrl || demoUrl) && (
-            <div className="flex items-center gap-4 border-t border-[rgba(255,255,255,0.06)] pt-4">
+            <div className="flex items-center gap-4 border-t border-border pt-4">
               {githubUrl && (
                 <a
                   href={githubUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-xs font-medium text-[#888] transition-colors hover:text-[#00f5ff]"
+                  className="inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground transition-colors hover:text-primary"
                 >
                   <Github className="h-3.5 w-3.5" />
                   Source
@@ -123,7 +123,7 @@ const ProjectCard = ({
                   href={demoUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-xs font-medium text-[#888] transition-colors hover:text-[#00f5ff]"
+                  className="inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground transition-colors hover:text-primary"
                 >
                   <ExternalLink className="h-3.5 w-3.5" />
                   Live
@@ -141,7 +141,7 @@ const ProjectCard = ({
       ref={cardRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className="group relative flex h-full flex-col rounded-xl border border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.03)] p-6 transition-all duration-300 hover:border-[rgba(0,245,255,0.2)] hover:shadow-[0_0_40px_-12px_rgba(0,245,255,0.12)]"
+      className="group relative flex h-full flex-col rounded-xl border border-border bg-card p-6 transition-all duration-300 hover:border-primary/20 hover:shadow-[0_0_40px_-12px_rgba(0,245,255,0.12)]"
       style={{ transform, transformStyle: "preserve-3d", transition: "transform 0.15s ease-out" }}
     >
       {/* Glare overlay */}
@@ -154,7 +154,7 @@ const ProjectCard = ({
 
       <div className="relative z-10 flex flex-1 flex-col">
           {imageUrl && (
-            <div className="relative mb-5 aspect-video w-full overflow-hidden rounded-lg border border-[rgba(255,255,255,0.06)] bg-[rgba(0,245,255,0.03)]">
+            <div className="relative mb-5 aspect-video w-full overflow-hidden rounded-lg border border-border bg-primary/[0.03]">
               <Image
                 src={imageUrl}
                 alt={title}
@@ -162,27 +162,27 @@ const ProjectCard = ({
                 className="object-cover object-top"
                 sizes="(min-width: 1280px) 33vw, (min-width: 768px) 50vw, 100vw"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a]/30 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-background/30 via-transparent to-transparent" />
             </div>
           )}
           <div className="mb-4 flex items-start justify-between">
           <div>
-            <p className="font-[family-name:var(--font-jetbrains)] text-[0.58rem] uppercase tracking-[0.3em] text-[#00f5ff]/50">
+            <p className="font-[family-name:var(--font-jetbrains)] text-[0.58rem] uppercase tracking-[0.3em] text-primary/50">
               {String(index + 1).padStart(2, "0")}
             </p>
-            <h3 className="mt-1 font-[family-name:var(--font-syne)] text-lg font-bold text-white transition-colors duration-200 group-hover:text-[#00f5ff]">
+            <h3 className="mt-1 font-[family-name:var(--font-syne)] text-lg font-bold text-foreground transition-colors duration-200 group-hover:text-primary">
               {title}
             </h3>
           </div>
           {isPrivate && (
-            <span className="flex items-center gap-1 rounded-full border border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.03)] px-2 py-0.5 font-[family-name:var(--font-jetbrains)] text-[0.55rem] uppercase tracking-[0.1em] text-[#888]">
+            <span className="flex items-center gap-1 rounded-full border border-border bg-muted px-2 py-0.5 font-[family-name:var(--font-jetbrains)] text-[0.55rem] uppercase tracking-[0.1em] text-muted-foreground">
               <Lock className="h-2.5 w-2.5" />
               Private
             </span>
           )}
         </div>
 
-        <p className="mb-5 flex-1 text-sm leading-[1.7] text-[#b0b0b0]">
+        <p className="mb-5 flex-1 text-sm leading-[1.7] text-muted-foreground">
           {description}
         </p>
 
@@ -190,7 +190,7 @@ const ProjectCard = ({
           {tags.map((tag) => (
             <span
               key={tag}
-              className="rounded-md border border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.03)] px-2 py-0.5 font-[family-name:var(--font-jetbrains)] text-[0.58rem] uppercase tracking-[0.1em] text-[#888]"
+              className="rounded-md border border-border bg-card px-2 py-0.5 font-[family-name:var(--font-jetbrains)] text-[0.58rem] uppercase tracking-[0.1em] text-muted-foreground"
             >
               {tag}
             </span>
@@ -198,13 +198,13 @@ const ProjectCard = ({
         </div>
 
         {!isPrivate && (githubUrl || demoUrl) && (
-          <div className="flex items-center gap-4 border-t border-[rgba(255,255,255,0.05)] pt-4">
+          <div className="flex items-center gap-4 border-t border-border pt-4">
             {githubUrl && (
               <a
                 href={githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-xs font-medium text-[#888] transition-colors hover:text-[#00f5ff]"
+                className="inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground transition-colors hover:text-primary"
               >
                 <Github className="h-3.5 w-3.5" />
                 Source
@@ -215,7 +215,7 @@ const ProjectCard = ({
                 href={demoUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-xs font-medium text-[#888] transition-colors hover:text-[#00f5ff]"
+                className="inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground transition-colors hover:text-primary"
               >
                 <ExternalLink className="h-3.5 w-3.5" />
                 Live

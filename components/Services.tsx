@@ -71,20 +71,20 @@ function ServiceCard({
         delay: index * 0.08,
         ease: [0.22, 1, 0.36, 1],
       }}
-      className="group relative flex h-full flex-col rounded-xl border border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.03)] p-6 transition-all duration-300 hover:border-[rgba(0,245,255,0.2)] hover:shadow-[0_0_40px_-12px_rgba(0,245,255,0.12)]"
+      className="group relative flex h-full flex-col rounded-xl border border-border bg-card p-6 transition-all duration-300 hover:border-primary/20 hover:shadow-[0_0_40px_-12px_rgba(0,245,255,0.12)]"
     >
       {/* Icon */}
-      <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-lg border border-[rgba(0,245,255,0.15)] bg-[rgba(0,245,255,0.06)]">
-        <Icon className="h-5 w-5 text-[#00f5ff]" />
+      <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-lg border border-primary/20 bg-primary/10">
+        <Icon className="h-5 w-5 text-primary" />
       </div>
 
       {/* Title */}
-      <h3 className="mb-2 font-[family-name:var(--font-syne)] text-lg font-bold text-white transition-colors duration-200 group-hover:text-[#00f5ff]">
+      <h3 className="mb-2 font-[family-name:var(--font-syne)] text-lg font-bold text-foreground transition-colors duration-200 group-hover:text-primary">
         {service.title}
       </h3>
 
       {/* Description */}
-      <p className="mb-5 flex-1 text-sm leading-[1.7] text-[#b0b0b0]">
+      <p className="mb-5 flex-1 text-sm leading-[1.7] text-muted-foreground">
         {service.description}
       </p>
 
@@ -93,7 +93,7 @@ function ServiceCard({
         {service.tags.map((tag) => (
           <span
             key={tag}
-            className="rounded-md border border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.03)] px-2.5 py-0.5 font-[family-name:var(--font-jetbrains)] text-[0.58rem] uppercase tracking-[0.1em] text-[#888]"
+            className="rounded-md border border-border bg-card px-2.5 py-0.5 font-[family-name:var(--font-jetbrains)] text-[0.58rem] uppercase tracking-[0.1em] text-muted-foreground"
           >
             {tag}
           </span>
@@ -149,24 +149,24 @@ const Services = () => {
         <RevealSection>
           <motion.a
             href="#contact"
-            className="group relative flex items-center justify-between gap-4 rounded-2xl border border-[rgba(0,245,255,0.15)] bg-[rgba(0,245,255,0.04)] px-8 py-7 transition-all duration-300 hover:border-[rgba(0,245,255,0.35)] hover:shadow-[0_0_60px_-15px_rgba(0,245,255,0.15)] sm:px-10 sm:py-8"
+            className="group relative flex items-center justify-between gap-4 rounded-2xl border border-primary/20 bg-primary/[0.04] px-8 py-7 transition-all duration-300 hover:border-primary/35 hover:shadow-[0_0_60px_-15px_rgba(0,245,255,0.15)] sm:px-10 sm:py-8"
             whileHover={{ scale: 1.01 }}
             transition={{ type: "spring", stiffness: 300, damping: 20 }}
           >
             <div>
-              <p className="font-[family-name:var(--font-jetbrains)] text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-[#00f5ff]">
+              <p className="font-[family-name:var(--font-jetbrains)] text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-primary">
                 Start a project
               </p>
-              <h3 className="mt-1 font-[family-name:var(--font-syne)] text-xl font-extrabold text-white sm:text-2xl">
+              <h3 className="mt-1 font-[family-name:var(--font-syne)] text-xl font-extrabold text-foreground sm:text-2xl">
                 Have a project in mind?
               </h3>
-              <p className="mt-1 text-sm text-[#b0b0b0]">
+              <p className="mt-1 text-sm text-muted-foreground">
                 Let&apos;s talk about your next idea. I&apos;m available for
                 freelance work.
               </p>
             </div>
-            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-[rgba(0,245,255,0.2)] bg-[rgba(0,245,255,0.06)] transition-all duration-300 group-hover:bg-[#00f5ff] group-hover:shadow-[0_0_30px_rgba(0,245,255,0.3)]">
-              <ArrowRight className="h-5 w-5 text-[#00f5ff] transition-colors duration-300 group-hover:text-[#0a0a0a]" />
+            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-primary/20 bg-primary/10 transition-all duration-300 group-hover:bg-primary group-hover:shadow-[0_0_30px_rgba(0,245,255,0.3)]">
+              <ArrowRight className="h-5 w-5 text-primary transition-colors duration-300 group-hover:text-primary-foreground" />
             </div>
           </motion.a>
         </RevealSection>

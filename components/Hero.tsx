@@ -95,101 +95,101 @@ const Hero = () => {
       <motion.div
         style={{ y, opacity }}
         className="section-shell flex min-h-screen items-center"
-      >
-        <div className="w-full space-y-12">
-          {/* Status badge */}
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <span className="inline-flex items-center gap-2 rounded-full border border-[#00f5ff]/20 bg-[#00f5ff]/[0.06] px-3 py-1.5 font-[family-name:var(--font-jetbrains)] text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-[#00f5ff]">
-              <span className="h-1.5 w-1.5 rounded-full bg-[#00f5ff] animate-pulse" />
-              Open for freelance
-            </span>
-          </motion.div>
-
-          {/* Hero text */}
-          <div className="max-w-5xl">
+        >
+          <div className="w-full space-y-12">
+            {/* Status badge */}
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-              className="space-y-6"
+              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
             >
-              <p className="section-label">Freelance full-stack developer &mdash; Batam, ID</p>
-              <h1 className="font-[family-name:var(--font-syne)] text-5xl font-extrabold leading-[0.9] tracking-tight text-white sm:text-6xl lg:text-[6rem]">
-                I build things
-                <br />
-                that{" "}
-                <span className="text-[#00f5ff]">ship</span>.
-              </h1>
-              <div className="flex items-center gap-2 text-xl text-[#b0b0b0] sm:text-2xl">
-                <span className="font-[family-name:var(--font-jetbrains)] text-[#00f5ff]">&gt;</span>
-                <span>{typed}</span>
-                <span className="inline-block w-[2px] h-6 animate-pulse bg-[#00f5ff]" />
-              </div>
+              <span className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/[0.06] px-3 py-1.5 font-[family-name:var(--font-jetbrains)] text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-primary">
+                <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
+                Open for freelance
+              </span>
             </motion.div>
 
-            <motion.p
+            {/* Hero text */}
+            <div className="max-w-5xl">
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                className="space-y-6"
+              >
+                <p className="section-label">Freelance full-stack developer &mdash; Batam, ID</p>
+                <h1 className="font-[family-name:var(--font-syne)] text-5xl font-extrabold leading-[0.9] tracking-tight text-foreground sm:text-6xl lg:text-[6rem]">
+                  I build things
+                  <br />
+                  that{" "}
+                  <span className="text-primary">ship</span>.
+                </h1>
+                <div className="flex items-center gap-2 text-xl text-muted-foreground sm:text-2xl">
+                  <span className="font-[family-name:var(--font-jetbrains)] text-primary">&gt;</span>
+                  <span>{typed}</span>
+                  <span className="inline-block w-[2px] h-6 animate-pulse bg-primary" />
+                </div>
+              </motion.div>
+
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+                className="mt-6 max-w-lg text-base leading-[1.8] text-muted-foreground sm:text-lg"
+              >
+                Open for freelance projects — fullstack web, mobile, and backend
+                systems from architecture to deployment. Let&apos;s build something
+                that actually ships.
+              </motion.p>
+            </div>
+
+            {/* CTA */}
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-              className="mt-6 max-w-lg text-base leading-[1.8] text-[#b0b0b0] sm:text-lg"
+              transition={{ duration: 0.5, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
+              className="flex flex-wrap gap-3"
             >
-              Open for freelance projects — fullstack web, mobile, and backend
-              systems from architecture to deployment. Let&apos;s build something
-              that actually ships.
-            </motion.p>
-          </div>
+              <Button
+                asChild
+                size="lg"
+                className="h-12 rounded-full bg-primary px-7 text-sm font-bold text-primary-foreground shadow-[0_0_30px_rgba(0,245,255,0.3)] transition-shadow hover:shadow-[0_0_50px_rgba(0,245,255,0.4)]"
+              >
+                <a href="#projects">
+                  View projects
+                  <ArrowRight className="h-4 w-4" />
+                </a>
+              </Button>
+              <Button
+                asChild
+                size="lg"
+                variant="outline"
+                className="h-12 rounded-full border-border bg-transparent px-7 text-sm font-semibold text-foreground hover:border-primary/30 hover:bg-primary/[0.05]"
+              >
+                <a href="/cv-download">
+                  Download CV
+                  <Download className="h-4 w-4" />
+                </a>
+              </Button>
+            </motion.div>
 
-          {/* CTA */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
-            className="flex flex-wrap gap-3"
-          >
-            <Button
-              asChild
-              size="lg"
-              className="h-12 rounded-full bg-[#00f5ff] px-7 text-sm font-bold text-[#0a0a0a] shadow-[0_0_30px_rgba(0,245,255,0.3)] transition-shadow hover:shadow-[0_0_50px_rgba(0,245,255,0.4)]"
+            {/* Stats */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
+              className="grid grid-cols-3 gap-6 border-t border-border pt-8 sm:gap-10"
             >
-              <a href="#projects">
-                View projects
-                <ArrowRight className="h-4 w-4" />
-              </a>
-            </Button>
-            <Button
-              asChild
-              size="lg"
-              variant="outline"
-              className="h-12 rounded-full border-[rgba(255,255,255,0.1)] bg-transparent px-7 text-sm font-semibold text-[#e0e0e0] hover:border-[rgba(0,245,255,0.3)] hover:bg-[rgba(0,245,255,0.05)]"
-            >
-              <a href="/cv-download">
-                Download CV
-                <Download className="h-4 w-4" />
-              </a>
-            </Button>
-          </motion.div>
-
-          {/* Stats */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
-            className="grid grid-cols-3 gap-6 border-t border-[rgba(255,255,255,0.06)] pt-8 sm:gap-10"
-          >
-            {stats.map((stat, i) => (
-              <div key={stat.label} className="space-y-1">
-                <p className="font-[family-name:var(--font-syne)] text-3xl font-extrabold text-[#00f5ff] sm:text-4xl">
-                  {counters[i].count}{stat.suffix}
-                </p>
-                <p className="font-[family-name:var(--font-jetbrains)] text-[0.6rem] uppercase tracking-[0.2em] text-[#888]">
-                  {stat.label}
-                </p>
-              </div>
-            ))}
+              {stats.map((stat, i) => (
+                <div key={stat.label} className="space-y-1">
+                  <p className="font-[family-name:var(--font-syne)] text-3xl font-extrabold text-primary sm:text-4xl">
+                    {counters[i].count}{stat.suffix}
+                  </p>
+                  <p className="font-[family-name:var(--font-jetbrains)] text-[0.6rem] uppercase tracking-[0.2em] text-muted-foreground">
+                    {stat.label}
+                  </p>
+                </div>
+              ))}
           </motion.div>
         </div>
       </motion.div>

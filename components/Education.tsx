@@ -16,19 +16,19 @@ const Education = () => {
       {education.map((edu) => (
         <article
           key={edu.school}
-          className="relative rounded-xl border border-[rgba(255,255,255,0.05)] bg-[rgba(255,255,255,0.03)] p-5 transition-all duration-200 hover:border-[rgba(255,255,255,0.08)] hover:bg-[rgba(255,255,255,0.04)]"
+          className="relative rounded-xl border border-border bg-card p-5 transition-all duration-200 hover:border-border hover:bg-muted"
         >
-          <div className="absolute right-4 top-4 rounded-lg bg-[rgba(0,245,255,0.06)] p-2.5 text-[#00f5ff]/50">
+          <div className="absolute right-4 top-4 rounded-lg bg-primary/10 p-2.5 text-primary/50">
             <GraduationCap className="h-5 w-5" />
           </div>
           <div className="max-w-[calc(100%-3.5rem)]">
-            <span className="inline-flex items-center gap-1.5 rounded-md border border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.03)] px-2 py-0.5 font-[family-name:var(--font-jetbrains)] text-[0.58rem] uppercase tracking-[0.12em] text-[#888]">
+            <span className="inline-flex items-center gap-1.5 rounded-md border border-border bg-card px-2 py-0.5 font-[family-name:var(--font-jetbrains)] text-[0.58rem] uppercase tracking-[0.12em] text-muted-foreground">
               <Award className="h-2.5 w-2.5" />
               {edu.year}
             </span>
-            <h4 className="mt-3 text-base font-semibold text-white">{edu.degree}</h4>
-            <p className="mt-1 text-sm text-[#ccc]">{edu.school}</p>
-            <p className="mt-2 text-sm leading-[1.7] text-[#999]">{edu.description}</p>
+            <h4 className="mt-3 text-base font-semibold text-foreground">{edu.degree}</h4>
+            <p className="mt-1 text-sm text-muted-foreground">{edu.school}</p>
+            <p className="mt-2 text-sm leading-[1.7] text-muted-foreground">{edu.description}</p>
           </div>
         </article>
       ))}

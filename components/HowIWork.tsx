@@ -79,19 +79,19 @@ const HowIWork = () => {
         </RevealSection>
 
         {/* Timeline */}
-        <div className="relative space-y-8 pl-8 before:absolute before:bottom-2 before:left-[2.15rem] before:top-2 before:w-px before:bg-[rgba(255,255,255,0.06)]">
+        <div className="relative space-y-8 pl-8 before:absolute before:bottom-2 before:left-[2.15rem] before:top-2 before:w-px before:bg-border">
           {steps.map((step, index) => {
             const Icon = step.icon;
             return (
               <div key={step.number} className="relative">
                 {/* Timeline dot */}
                 <div className="absolute -left-8 top-6 z-10 flex h-4 w-4 items-center justify-center">
-                  <div className="h-3 w-3 rounded-full border-[3px] border-[#0a0a0a] bg-[#00f5ff] shadow-[0_0_12px_2px_rgba(0,245,255,0.3)]" />
+                  <div className="h-3 w-3 rounded-full border-[3px] border-background bg-primary shadow-[0_0_12px_2px_rgba(0,245,255,0.3)]" />
                 </div>
 
                 {/* Step number (visible on larger screens) */}
                 <div className="absolute -left-[4.5rem] top-5 hidden w-12 text-right md:block">
-                  <span className="font-[family-name:var(--font-jetbrains)] text-[0.65rem] font-bold tracking-wider text-[#00f5ff]">
+                  <span className="font-[family-name:var(--font-jetbrains)] text-[0.65rem] font-bold tracking-wider text-primary">
                     {step.number}
                   </span>
                 </div>
@@ -106,25 +106,25 @@ const HowIWork = () => {
                     delay: index * 0.1,
                     ease: [0.22, 1, 0.36, 1],
                   }}
-                  className="group relative flex flex-col gap-4 rounded-xl border border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.03)] p-5 transition-all duration-300 hover:border-[rgba(0,245,255,0.2)] hover:shadow-[0_0_40px_-12px_rgba(0,245,255,0.12)] sm:flex-row sm:items-start"
+                  className="group relative flex flex-col gap-4 rounded-xl border border-border bg-card p-5 transition-all duration-300 hover:border-primary/20 hover:shadow-[0_0_40px_-12px_rgba(0,245,255,0.12)] sm:flex-row sm:items-start"
                 >
                   {/* Icon */}
-                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-[rgba(0,245,255,0.15)] bg-[rgba(0,245,255,0.06)]">
-                    <Icon className="h-5 w-5 text-[#00f5ff]" />
+                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-primary/20 bg-primary/10">
+                    <Icon className="h-5 w-5 text-primary" />
                   </div>
 
                   {/* Content */}
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center gap-3">
                       {/* Mobile step number */}
-                      <span className="font-[family-name:var(--font-jetbrains)] text-[0.6rem] font-bold tracking-wider text-[#00f5ff] md:hidden">
+                      <span className="font-[family-name:var(--font-jetbrains)] text-[0.6rem] font-bold tracking-wider text-primary md:hidden">
                         {step.number}
                       </span>
-                      <h3 className="font-[family-name:var(--font-syne)] text-lg font-bold text-white transition-colors duration-200 group-hover:text-[#00f5ff]">
+                      <h3 className="font-[family-name:var(--font-syne)] text-lg font-bold text-foreground transition-colors duration-200 group-hover:text-primary">
                         {step.title}
                       </h3>
                     </div>
-                    <p className="mt-2 text-sm leading-[1.7] text-[#b0b0b0]">
+                    <p className="mt-2 text-sm leading-[1.7] text-muted-foreground">
                       {step.description}
                     </p>
                   </div>

@@ -10,6 +10,7 @@ import ScrollToTop from "@/components/ScrollToTop";
 import SectionHeading from "@/components/SectionHeading";
 import Services from "@/components/Services";
 import SkillBadge from "@/components/SkillBadge";
+import SkillGauge from "@/components/SkillGauge";
 import { Button } from "@/components/ui/button";
 import { Award, CheckCircle2, Search, Zap } from "lucide-react";
 import Image from "next/image";
@@ -36,7 +37,7 @@ import {
 } from "react-icons/si";
 import type { IconType } from "react-icons";
 
-type SkillItem = { name: string; icon: IconType; color: string };
+type SkillItem = { name: string; icon: IconType; color: string; level: number };
 type SkillGroup = { title: string; description: string; projectCount: string; items: SkillItem[] };
 type ProjectItem = {
   title: string;
@@ -62,10 +63,10 @@ const skillGroups: SkillGroup[] = [
     description: "Go-to tools for product interfaces, admin systems, and full-stack dashboards.",
     projectCount: "6+ projects",
     items: [
-      { name: "Laravel", icon: SiLaravel, color: "#FF2D20" },
-      { name: "Next.js", icon: SiNextdotjs, color: "#111827" },
-      { name: "React", icon: SiReact, color: "#61DAFB" },
-      { name: "Tailwind CSS", icon: SiTailwindcss, color: "#06B6D4" },
+      { name: "Laravel", icon: SiLaravel, color: "#FF2D20", level: 95 },
+      { name: "Next.js", icon: SiNextdotjs, color: "#111827", level: 92 },
+      { name: "React", icon: SiReact, color: "#61DAFB", level: 88 },
+      { name: "Tailwind CSS", icon: SiTailwindcss, color: "#06B6D4", level: 90 },
     ],
   },
   {
@@ -73,13 +74,13 @@ const skillGroups: SkillGroup[] = [
     description: "Service architecture, integrations, and data storage for production-ready backends.",
     projectCount: "5+ projects",
     items: [
-      { name: "NestJS", icon: SiNestjs, color: "#E0234E" },
-      { name: "Go", icon: SiGo, color: "#00ADD8" },
-      { name: "Node.js", icon: SiNodedotjs, color: "#339933" },
-      { name: "MySQL", icon: SiMysql, color: "#4479A1" },
-      { name: "PostgreSQL", icon: SiPostgresql, color: "#336791" },
-      { name: "Oracle Database", icon: SiOracle, color: "#F80000" },
-      { name: "Cloudflare", icon: SiCloudflare, color: "#F38020" },
+      { name: "NestJS", icon: SiNestjs, color: "#E0234E", level: 85 },
+      { name: "Go", icon: SiGo, color: "#00ADD8", level: 78 },
+      { name: "Node.js", icon: SiNodedotjs, color: "#339933", level: 88 },
+      { name: "MySQL", icon: SiMysql, color: "#4479A1", level: 85 },
+      { name: "PostgreSQL", icon: SiPostgresql, color: "#336791", level: 75 },
+      { name: "Oracle Database", icon: SiOracle, color: "#F80000", level: 65 },
+      { name: "Cloudflare", icon: SiCloudflare, color: "#F38020", level: 70 },
     ],
   },
   {
@@ -87,8 +88,8 @@ const skillGroups: SkillGroup[] = [
     description: "Cross-platform execution for internal tools and customer-facing mobile products.",
     projectCount: "3+ projects",
     items: [
-      { name: "Flutter", icon: SiFlutter, color: "#02569B" },
-      { name: "Expo", icon: SiExpo, color: "#1F2937" },
+      { name: "Flutter", icon: SiFlutter, color: "#02569B", level: 82 },
+      { name: "Expo", icon: SiExpo, color: "#1F2937", level: 75 },
     ],
   },
   {
@@ -96,10 +97,10 @@ const skillGroups: SkillGroup[] = [
     description: "Deployment, runtime reliability, and operational support around shipped systems.",
     projectCount: "Production",
     items: [
-      { name: "Docker", icon: SiDocker, color: "#2496ED" },
-      { name: "Nginx", icon: SiNginx, color: "#009639" },
-      { name: "GitLab CI/CD", icon: SiGitlab, color: "#FC6D26" },
-      { name: "GitHub Actions", icon: SiGithubactions, color: "#2088FF" },
+      { name: "Docker", icon: SiDocker, color: "#2496ED", level: 85 },
+      { name: "Nginx", icon: SiNginx, color: "#009639", level: 80 },
+      { name: "GitLab CI/CD", icon: SiGitlab, color: "#FC6D26", level: 78 },
+      { name: "GitHub Actions", icon: SiGithubactions, color: "#2088FF", level: 82 },
     ],
   },
 ];
@@ -236,8 +237,8 @@ export default function Home() {
         <RevealSection>
           <div className="grid gap-10 lg:grid-cols-[minmax(280px,0.7fr)_minmax(0,1.3fr)]">
             <div className="space-y-6">
-              <div className="relative overflow-hidden rounded-xl border border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.03)] p-5">
-                <div className="relative aspect-[4/3] overflow-hidden rounded-lg bg-[rgba(0,245,255,0.03)]">
+              <div className="relative overflow-hidden rounded-xl border border-border bg-card p-5">
+                <div className="relative aspect-[4/3] overflow-hidden rounded-lg bg-primary/[0.03]">
                   <Image
                     src="/ergi.jpg"
                     alt="Erghi Septiandi Putra"
@@ -246,12 +247,12 @@ export default function Home() {
                     sizes="(min-width: 1024px) 280px, (min-width: 640px) 50vw, 100vw"
                     className="object-cover object-center"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a]/60 via-transparent to-transparent" />
-                  <div className="absolute inset-x-3 bottom-3 rounded-lg border border-[rgba(255,255,255,0.1)] bg-[#0a0a0a]/60 px-3 py-2 backdrop-blur-sm">
-                    <p className="font-[family-name:var(--font-syne)] text-sm font-bold text-white">
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent" />
+                  <div className="absolute inset-x-3 bottom-3 rounded-lg border border-border bg-background/60 px-3 py-2 backdrop-blur-sm">
+                    <p className="font-[family-name:var(--font-syne)] text-sm font-bold text-foreground">
                       Erghi Septiandi Putra
                     </p>
-                    <p className="font-[family-name:var(--font-jetbrains)] text-[0.55rem] uppercase tracking-[0.2em] text-[#888]">
+                    <p className="font-[family-name:var(--font-jetbrains)] text-[0.55rem] uppercase tracking-[0.2em] text-muted-foreground">
                       Full-stack developer
                     </p>
                   </div>
@@ -267,12 +268,12 @@ export default function Home() {
                 ].map((item) => (
                   <div
                     key={item.label}
-                    className="rounded-lg border border-[rgba(255,255,255,0.05)] bg-[rgba(255,255,255,0.03)] px-4 py-3"
+                    className="rounded-lg border border-border bg-card px-4 py-3"
                   >
-                    <p className="font-[family-name:var(--font-jetbrains)] text-[0.55rem] uppercase tracking-[0.25em] text-[#888]">
+                    <p className="font-[family-name:var(--font-jetbrains)] text-[0.55rem] uppercase tracking-[0.25em] text-muted-foreground">
                       {item.label}
                     </p>
-                    <p className="mt-1 text-sm font-semibold text-white">{item.value}</p>
+                    <p className="mt-1 text-sm font-semibold text-foreground">{item.value}</p>
                   </div>
                 ))}
               </div>
@@ -285,10 +286,10 @@ export default function Home() {
                 description="A freelance full-stack developer open for projects — web, mobile, backend, and DevOps. Experienced in delivering internal systems, customer-facing interfaces, and deployment automation."
               />
 
-              <div className="rounded-xl border border-[rgba(255,255,255,0.05)] bg-[rgba(255,255,255,0.03)] p-5">
+              <div className="rounded-xl border border-border bg-card p-5">
                 <div className="flex items-center gap-2 mb-4">
-                  <Award className="h-4 w-4 text-[#00f5ff]" />
-                  <p className="font-[family-name:var(--font-jetbrains)] text-[0.58rem] font-semibold uppercase tracking-[0.25em] text-[#00f5ff]/70">
+                  <Award className="h-4 w-4 text-primary" />
+                  <p className="font-[family-name:var(--font-jetbrains)] text-[0.58rem] font-semibold uppercase tracking-[0.25em] text-primary/70">
                     Career highlights
                   </p>
                 </div>
@@ -296,16 +297,16 @@ export default function Home() {
                   {careerHighlights.map((h) => (
                     <div
                       key={h}
-                      className="flex items-start gap-2 rounded-lg bg-[rgba(255,255,255,0.02)] px-3 py-2"
+                      className="flex items-start gap-2 rounded-lg bg-muted px-3 py-2"
                     >
-                      <CheckCircle2 className="mt-0.5 h-3 w-3 shrink-0 text-[#00f5ff]" />
-                      <p className="text-xs leading-relaxed text-[#ccc]">{h}</p>
+                      <CheckCircle2 className="mt-0.5 h-3 w-3 shrink-0 text-primary" />
+                      <p className="text-xs leading-relaxed text-muted-foreground">{h}</p>
                     </div>
                   ))}
                 </div>
               </div>
 
-              <div className="space-y-4 text-[0.9rem] leading-[1.8] text-[#b0b0b0]">
+              <div className="space-y-4 text-[0.9rem] leading-[1.8] text-muted-foreground">
                 <p>
                   I&apos;m open for freelance work — fullstack web, mobile, and backend projects.
                   My experience ranges from HRIS platforms and queue dashboards to mobile
@@ -319,29 +320,29 @@ export default function Home() {
               </div>
 
               <div className="flex flex-col gap-3 sm:flex-row">
-                <Button asChild className="h-11 rounded-full bg-[#00f5ff] px-6 text-sm font-bold text-[#0a0a0a] shadow-[0_0_25px_rgba(0,245,255,0.25)] hover:shadow-[0_0_40px_rgba(0,245,255,0.35)]">
+                <Button asChild className="h-11 rounded-full bg-primary px-6 text-sm font-bold text-primary-foreground shadow-[0_0_25px_rgba(0,245,255,0.25)] hover:shadow-[0_0_40px_rgba(0,245,255,0.35)]">
                   <a href="/cv-download">Download CV</a>
                 </Button>
                 <Button
                   asChild
                   variant="outline"
-                  className="h-11 rounded-full border-[rgba(255,255,255,0.08)] bg-transparent px-6 text-sm font-semibold text-[#e0e0e0] hover:border-[rgba(0,245,255,0.2)] hover:bg-[rgba(0,245,255,0.03)]"
+                  className="h-11 rounded-full border-border bg-transparent px-6 text-sm font-semibold text-foreground hover:border-primary/20 hover:bg-primary/[0.03]"
                 >
                   <a href="#contact">Contact me</a>
                 </Button>
               </div>
 
-              <div className="rounded-xl border border-[rgba(255,255,255,0.05)] bg-[rgba(255,255,255,0.03)] p-5">
-                <p className="font-[family-name:var(--font-jetbrains)] text-[0.58rem] font-semibold uppercase tracking-[0.25em] text-[#00f5ff]/70">
+              <div className="rounded-xl border border-border bg-card p-5">
+                <p className="font-[family-name:var(--font-jetbrains)] text-[0.58rem] font-semibold uppercase tracking-[0.25em] text-primary/70">
                   Working principles
                 </p>
                 <div className="mt-4 space-y-2">
                   {principles.map((p, i) => (
-                    <div key={p} className="flex items-start gap-3 rounded-lg bg-[rgba(255,255,255,0.02)] px-3 py-2.5">
-                      <span className="font-[family-name:var(--font-jetbrains)] text-[0.58rem] font-semibold text-[#00f5ff]/50">
+                    <div key={p} className="flex items-start gap-3 rounded-lg bg-muted px-3 py-2.5">
+                      <span className="font-[family-name:var(--font-jetbrains)] text-[0.58rem] font-semibold text-primary/50">
                         {String(i + 1).padStart(2, "0")}
                       </span>
-                      <p className="text-xs leading-relaxed text-[#ccc]">{p}</p>
+                      <p className="text-xs leading-relaxed text-muted-foreground">{p}</p>
                     </div>
                   ))}
                 </div>
@@ -385,17 +386,17 @@ export default function Home() {
 
         <RevealSection className="mt-10">
           <div className="grid gap-8 xl:grid-cols-[minmax(0,1.2fr)_minmax(300px,0.8fr)]">
-            <div className="rounded-xl border border-[rgba(255,255,255,0.05)] bg-[rgba(255,255,255,0.03)] p-6 backdrop-blur-xl sm:p-8">
+            <div className="rounded-xl border border-border bg-card p-6 backdrop-blur-xl sm:p-8">
               <div className="mb-6 flex items-center justify-between">
                 <div>
-                  <p className="font-[family-name:var(--font-jetbrains)] text-[0.58rem] font-semibold uppercase tracking-[0.25em] text-[#00f5ff]/60">
+                  <p className="font-[family-name:var(--font-jetbrains)] text-[0.58rem] font-semibold uppercase tracking-[0.25em] text-primary/60">
                     01
                   </p>
-                  <h3 className="mt-1 font-[family-name:var(--font-syne)] text-xl font-bold text-white">
+                  <h3 className="mt-1 font-[family-name:var(--font-syne)] text-xl font-bold text-foreground">
                     Professional experience
                   </h3>
                 </div>
-                <span className="hidden rounded-full border border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.03)] px-2.5 py-0.5 font-[family-name:var(--font-jetbrains)] text-[0.58rem] uppercase tracking-[0.12em] text-[#888] sm:block">
+                <span className="hidden rounded-full border border-border bg-card px-2.5 py-0.5 font-[family-name:var(--font-jetbrains)] text-[0.58rem] uppercase tracking-[0.12em] text-muted-foreground sm:block">
                   Timeline
                 </span>
               </div>
@@ -403,21 +404,21 @@ export default function Home() {
             </div>
 
             <div className="space-y-6">
-              <div className="rounded-xl border border-[rgba(255,255,255,0.05)] bg-[rgba(255,255,255,0.03)] p-6 backdrop-blur-xl sm:p-8">
-                <p className="font-[family-name:var(--font-jetbrains)] text-[0.58rem] font-semibold uppercase tracking-[0.25em] text-[#00f5ff]/60">
+              <div className="rounded-xl border border-border bg-card p-6 backdrop-blur-xl sm:p-8">
+                <p className="font-[family-name:var(--font-jetbrains)] text-[0.58rem] font-semibold uppercase tracking-[0.25em] text-primary/60">
                   02
                 </p>
-                <h3 className="mt-1 font-[family-name:var(--font-syne)] text-xl font-bold text-white">
+                <h3 className="mt-1 font-[family-name:var(--font-syne)] text-xl font-bold text-foreground">
                   Education
                 </h3>
                 <div className="mt-5"><Education /></div>
               </div>
 
-              <div className="rounded-xl border border-[rgba(255,255,255,0.05)] bg-[rgba(255,255,255,0.03)] p-6 backdrop-blur-xl sm:p-8">
-                <p className="font-[family-name:var(--font-jetbrains)] text-[0.58rem] font-semibold uppercase tracking-[0.25em] text-[#00f5ff]/60">
+              <div className="rounded-xl border border-border bg-card p-6 backdrop-blur-xl sm:p-8">
+                <p className="font-[family-name:var(--font-jetbrains)] text-[0.58rem] font-semibold uppercase tracking-[0.25em] text-primary/60">
                   Approach
                 </p>
-                <div className="mt-4 space-y-3 text-sm leading-[1.7] text-[#b0b0b0]">
+                <div className="mt-4 space-y-3 text-sm leading-[1.7] text-muted-foreground">
                   <p>
                     I take freelance projects across the stack — building UIs,
                     integrating APIs, automating deployments, and making systems
@@ -448,24 +449,24 @@ export default function Home() {
         {/* Skill search input */}
         <RevealSection className="mt-6">
           <div className="relative">
-            <Search className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-[#555]" />
+            <Search className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground/60" />
             <input
               type="text"
               value={skillSearch}
               onChange={(e) => setSkillSearch(e.target.value)}
               placeholder="Search skills..."
-              className="w-full rounded-xl border border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.03)] py-3 pl-11 pr-4 text-sm text-[#e0e0e0] placeholder:text-[#555] outline-none transition-colors focus:border-[rgba(0,245,255,0.3)] focus:bg-[rgba(255,255,255,0.04)]"
+              className="w-full rounded-xl border border-border bg-card py-3 pl-11 pr-4 text-sm text-foreground placeholder:text-muted-foreground outline-none transition-colors focus:border-primary/30 focus:bg-card"
             />
           </div>
         </RevealSection>
 
         <RevealSection className="mt-4">
-          <div className="flex flex-wrap items-center gap-2 rounded-xl border border-[rgba(255,255,255,0.05)] bg-[rgba(255,255,255,0.03)] px-5 py-3">
-            <Zap className="h-3.5 w-3.5 text-[#00f5ff]" />
-            <span className="font-[family-name:var(--font-jetbrains)] text-[0.58rem] font-semibold uppercase tracking-[0.2em] text-[#00f5ff]/70">
+          <div className="flex flex-wrap items-center gap-2 rounded-xl border border-border bg-card px-5 py-3">
+            <Zap className="h-3.5 w-3.5 text-primary" />
+            <span className="font-[family-name:var(--font-jetbrains)] text-[0.58rem] font-semibold uppercase tracking-[0.2em] text-primary/70">
               Primary:
             </span>
-            <span className="text-xs text-[#ccc]">
+            <span className="text-xs text-muted-foreground">
               Laravel · Next.js · NestJS · Go · MySQL · React · Flutter · Expo · PostgreSQL · Docker · Nginx · Tailwind CSS
             </span>
           </div>
@@ -474,22 +475,37 @@ export default function Home() {
         <div className="mt-6 grid gap-4 lg:grid-cols-2">
           {filteredSkillGroups.map((group) => (
             <RevealSection key={group.title}>
-              <article className="rounded-xl border border-[rgba(255,255,255,0.05)] bg-[rgba(255,255,255,0.03)] p-5 backdrop-blur-xl transition-all duration-200 hover:border-[rgba(255,255,255,0.08)] hover:bg-[rgba(255,255,255,0.04)]">
+              <article className="rounded-xl border border-border bg-card p-5 backdrop-blur-xl transition-all duration-200 hover:border-border/80 hover:bg-card">
                 <div className="mb-5 flex items-center justify-between">
-                  <p className="font-[family-name:var(--font-jetbrains)] text-[0.58rem] font-semibold uppercase tracking-[0.25em] text-[#00f5ff]/70">
+                  <p className="font-[family-name:var(--font-jetbrains)] text-[0.58rem] font-semibold uppercase tracking-[0.25em] text-primary/70">
                     {group.title}
                   </p>
-                  <span className="rounded-md bg-[rgba(0,245,255,0.06)] px-2 py-0.5 font-[family-name:var(--font-jetbrains)] text-[0.55rem] text-[#00f5ff]/60">
+                  <span className="rounded-md bg-primary/10 px-2 py-0.5 font-[family-name:var(--font-jetbrains)] text-[0.55rem] text-primary/60">
                     {group.projectCount}
                   </span>
                 </div>
-                <p className="mb-4 text-xs leading-relaxed text-[#999]">{group.description}</p>
-                <div className="flex flex-wrap gap-2">
+                <p className="mb-4 text-xs leading-relaxed text-muted-foreground">{group.description}</p>
+                {/* Skill gauges */}
+                <div className="space-y-3">
+                  {group.items.map(({ icon: Icon, ...item }, i) => (
+                    <SkillGauge
+                      key={item.name}
+                      name={item.name}
+                      level={item.level}
+                      color={item.color}
+                      index={i}
+                      icon={<Icon className="h-3.5 w-3.5" />}
+                    />
+                  ))}
+                </div>
+                {/* Badges row */}
+                <div className="mt-3 flex flex-wrap gap-1.5">
                   {group.items.map(({ icon: Icon, ...item }) => (
                     <SkillBadge
                       key={item.name}
                       name={item.name}
-                      icon={<Icon className="h-3.5 w-3.5" />}
+                      icon={<Icon className="h-3 w-3" />}
+                      className="scale-75 origin-left opacity-60"
                     />
                   ))}
                 </div>
@@ -498,7 +514,7 @@ export default function Home() {
           ))}
           {filteredSkillGroups.length === 0 && skillSearch && (
             <RevealSection>
-              <p className="col-span-full text-center text-sm text-[#888] py-8">
+              <p className="col-span-full text-center text-sm text-muted-foreground py-8">
                 No skills found for &quot;{skillSearch}&quot;
               </p>
             </RevealSection>
@@ -524,9 +540,9 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-[rgba(255,255,255,0.05)] bg-[rgba(255,255,255,0.02)] py-8 backdrop-blur-sm">
+      <footer className="border-t border-border bg-muted py-8 backdrop-blur-sm">
         <div className="mx-auto max-w-7xl px-5 md:px-8">
-          <div className="flex flex-col gap-3 text-xs text-[#888] sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex flex-col gap-3 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
             <p>&copy; {new Date().getFullYear()} Erghi Septiandi Putra.</p>
             <p className="font-[family-name:var(--font-jetbrains)] text-[0.58rem] uppercase tracking-[0.2em]">
               Built with Next.js & Tailwind CSS

@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import { Github, Mail } from "lucide-react";
@@ -72,15 +73,15 @@ const Navbar = () => {
           className={cn(
             "mt-4 flex h-14 items-center justify-between rounded-full border px-4 transition-all duration-300",
             scrolled
-              ? "border-[rgba(255,255,255,0.06)] bg-[#0a0a0a]/80 shadow-[0_4px_30px_rgba(0,0,0,0.4)] backdrop-blur-xl"
+              ? "border-border bg-background/80 shadow-[0_4px_30px_rgba(0,0,0,0.4)] backdrop-blur-xl"
               : "border-transparent bg-transparent"
           )}
         >
           <Link
             href="#home"
-            className="font-[family-name:var(--font-syne)] text-lg font-bold tracking-tight text-white"
+            className="font-[family-name:var(--font-syne)] text-lg font-bold tracking-tight text-foreground"
           >
-            Erghi<span className="text-[#00f5ff]">.</span>
+            Erghi<span className="text-primary">.</span>
           </Link>
 
           <div className="hidden items-center gap-1 lg:flex">
@@ -93,13 +94,13 @@ const Navbar = () => {
                   onClick={() => handleNavClick(link.id)}
                   className={cn(
                     "relative rounded-full px-4 py-2 text-sm font-medium transition-colors",
-                    isActive ? "text-white" : "text-[#888] hover:text-[#ccc]"
+                    isActive ? "text-foreground" : "text-muted-foreground hover:text-foreground/70"
                   )}
                 >
                   {isActive && (
                     <motion.span
                       layoutId="nav-pill"
-                      className="absolute inset-0 -z-10 rounded-full bg-[rgba(255,255,255,0.06)]"
+                      className="absolute inset-0 -z-10 rounded-full bg-muted"
                       transition={{ type: "spring", stiffness: 400, damping: 30 }}
                     />
                   )}
@@ -110,11 +111,12 @@ const Navbar = () => {
           </div>
 
           <div className="hidden items-center gap-2 lg:flex">
+            <ThemeToggle />
             <Button
               asChild
               variant="ghost"
               size="icon"
-              className="rounded-full text-[#888] hover:text-white"
+              className="rounded-full text-muted-foreground hover:text-foreground"
             >
               <a href="https://github.com/ergiseptiandi" target="_blank" rel="noopener noreferrer">
                 <Github className="h-4 w-4" />
@@ -123,7 +125,7 @@ const Navbar = () => {
             <Button
               asChild
               size="sm"
-              className="rounded-full bg-[#00f5ff] px-4 text-xs font-bold text-[#0a0a0a] shadow-[0_0_20px_rgba(0,245,255,0.2)] hover:shadow-[0_0_30px_rgba(0,245,255,0.3)]"
+              className="rounded-full bg-primary px-4 text-xs font-bold text-primary-foreground shadow-[0_0_20px_rgba(0,245,255,0.2)] hover:shadow-[0_0_30px_rgba(0,245,255,0.3)]"
             >
               <a href="mailto:ergiputra321@gmail.com">
                 <Mail className="h-3.5 w-3.5" />

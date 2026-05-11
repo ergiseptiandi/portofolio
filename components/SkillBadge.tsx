@@ -10,12 +10,12 @@ const SkillBadge = ({ name, icon, className }: SkillBadgeProps) => {
   return (
     <div
       className={cn(
-        "inline-flex items-center gap-2 rounded-lg border border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.03)] px-3 py-2 text-sm font-medium text-[#e0e0e0] transition-all duration-200 hover:-translate-y-0.5 hover:border-[rgba(0,245,255,0.15)] hover:bg-[rgba(0,245,255,0.03)]",
+        "inline-flex items-center gap-2 rounded-lg border border-border bg-card px-3 py-2 text-sm font-medium text-foreground transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/20 hover:bg-primary/[0.03]",
         className
       )}
     >
       {icon && (
-        <span className="rounded-md border border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.04)] p-1 text-[#ccc]">
+        <span className="rounded-md border border-border bg-muted p-1 text-muted-foreground">
           {icon}
         </span>
       )}

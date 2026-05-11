@@ -142,7 +142,7 @@ const Experience = () => {
   };
 
   return (
-    <div className="relative space-y-4 pl-8 before:absolute before:bottom-2 before:left-[0.55rem] before:top-2 before:w-px before:bg-[rgba(255,255,255,0.06)]">
+    <div className="relative space-y-4 pl-8 before:absolute before:bottom-2 before:left-[0.55rem] before:top-2 before:w-px before:bg-border">
       {experiences.map((exp, index) => {
         const isOpen = openIndex === index;
         const hasExpandableContent =
@@ -152,18 +152,18 @@ const Experience = () => {
           <article key={`${exp.company}-${index}`} className="relative">
             {/* Timeline dot */}
             <div
-              className={`absolute -left-8 top-5 h-3 w-3 rounded-full border-[3px] border-[#0a0a0a] ${
+              className={`absolute -left-8 top-5 h-3 w-3 rounded-full border-[3px] border-background ${
                 exp.isCurrent
-                  ? "bg-[#00f5ff] shadow-[0_0_12px_2px_rgba(0,245,255,0.4)]"
-                  : "bg-[rgba(255,255,255,0.15)]"
+                  ? "bg-primary shadow-[0_0_12px_2px_rgba(0,245,255,0.4)]"
+                  : "bg-muted-foreground/20"
               }`}
             />
 
             {/* Card */}
             <div
-              className={`rounded-xl border border-[rgba(255,255,255,0.05)] bg-[rgba(255,255,255,0.03)] p-5 transition-all duration-200 ${
+              className={`rounded-xl border border-border bg-card p-5 transition-all duration-200 ${
                 hasExpandableContent
-                  ? "cursor-pointer hover:border-[rgba(255,255,255,0.08)] hover:bg-[rgba(255,255,255,0.04)]"
+                  ? "cursor-pointer hover:border-border hover:bg-muted"
                   : ""
               }`}
               onClick={() => hasExpandableContent && toggleItem(index)}
@@ -180,8 +180,8 @@ const Experience = () => {
               <div className="flex flex-col gap-2 md:flex-row md:items-start md:justify-between">
                 <div className="space-y-1">
                   <div className="flex items-center gap-2">
-                    <Briefcase className="h-3.5 w-3.5 text-[#00f5ff]" />
-                    <h4 className="text-base font-semibold text-white">{exp.role}</h4>
+                    <Briefcase className="h-3.5 w-3.5 text-primary" />
+                    <h4 className="text-base font-semibold text-foreground">{exp.role}</h4>
                     {hasExpandableContent && (
                       <motion.span
                         animate={{ rotate: isOpen ? 0 : -90 }}
@@ -189,17 +189,17 @@ const Experience = () => {
                         className="inline-flex"
                       >
                         {isOpen ? (
-                          <ChevronDown className="h-3.5 w-3.5 text-[#00f5ff]/60" />
+                          <ChevronDown className="h-3.5 w-3.5 text-primary/60" />
                         ) : (
-                          <ChevronRight className="h-3.5 w-3.5 text-[#00f5ff]/60" />
+                          <ChevronRight className="h-3.5 w-3.5 text-primary/60" />
                         )}
                       </motion.span>
                     )}
                   </div>
                   <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5">
-                    <p className="text-sm text-[#ccc]">{exp.company}</p>
+                    <p className="text-sm text-muted-foreground">{exp.company}</p>
                     {exp.location && (
-                      <span className="inline-flex items-center gap-0.5 text-xs text-[#888]">
+                      <span className="inline-flex items-center gap-0.5 text-xs text-muted-foreground">
                         <MapPin className="h-2.5 w-2.5" />
                         {exp.location}
                       </span>
@@ -208,11 +208,11 @@ const Experience = () => {
                 </div>
                 <div className="flex items-center gap-2">
                   {exp.isCurrent && (
-                    <span className="rounded-full bg-[rgba(0,245,255,0.08)] px-2 py-0.5 font-[family-name:var(--font-jetbrains)] text-[0.58rem] font-semibold uppercase tracking-wider text-[#00f5ff]">
+                    <span className="rounded-full bg-primary/10 px-2 py-0.5 font-[family-name:var(--font-jetbrains)] text-[0.58rem] font-semibold uppercase tracking-wider text-primary">
                       Current
                     </span>
                   )}
-                  <span className="inline-flex items-center gap-1.5 rounded-full border border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.03)] px-2.5 py-0.5 font-[family-name:var(--font-jetbrains)] text-[0.58rem] uppercase tracking-[0.12em] text-[#888]">
+                  <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-2.5 py-0.5 font-[family-name:var(--font-jetbrains)] text-[0.58rem] uppercase tracking-[0.12em] text-muted-foreground">
                     <Calendar className="h-2.5 w-2.5" />
                     {exp.period}
                   </span>
@@ -230,14 +230,14 @@ const Experience = () => {
                     className="overflow-hidden"
                   >
                     <div className="pt-3">
-                      <p className="text-sm leading-[1.7] text-[#b0b0b0]">{exp.description}</p>
+                      <p className="text-sm leading-[1.7] text-muted-foreground">{exp.description}</p>
 
                       {exp.highlights && exp.highlights.length > 0 && (
                         <div className="mt-3 flex flex-wrap gap-1.5">
                           {exp.highlights.map((h) => (
                             <span
                               key={h}
-                              className="inline-flex items-center gap-1 rounded-md border border-[rgba(0,245,255,0.1)] bg-[rgba(0,245,255,0.04)] px-2 py-0.5 text-[0.65rem] font-medium text-[#00f5ff]/80"
+                              className="inline-flex items-center gap-1 rounded-md border border-primary/15 bg-primary/[0.06] px-2 py-0.5 text-[0.65rem] font-medium text-primary/80"
                             >
                               <CheckCircle2 className="h-2.5 w-2.5" />
                               {h}
@@ -247,27 +247,27 @@ const Experience = () => {
                       )}
 
                       {exp.subProjects && exp.subProjects.length > 0 && (
-                        <div className="mt-4 space-y-2 border-t border-[rgba(255,255,255,0.05)] pt-4">
-                          <p className="font-[family-name:var(--font-jetbrains)] text-[0.58rem] font-semibold uppercase tracking-[0.25em] text-[#00f5ff]/60">
+                        <div className="mt-4 space-y-2 border-t border-border pt-4">
+                          <p className="font-[family-name:var(--font-jetbrains)] text-[0.58rem] font-semibold uppercase tracking-[0.25em] text-primary/60">
                             Key projects delivered
                           </p>
                           <div className="grid gap-2 md:grid-cols-2">
                             {exp.subProjects.map((project) => (
                               <div
                                 key={project.name}
-                                className="rounded-lg border border-[rgba(255,255,255,0.04)] bg-[rgba(255,255,255,0.02)] p-3 transition-colors duration-200 hover:border-[rgba(0,245,255,0.1)]"
+                                className="rounded-lg border border-border bg-muted p-3 transition-colors duration-200 hover:border-primary/15"
                               >
                                 <div className="flex items-start gap-1.5">
-                                  <ChevronRight className="mt-0.5 h-3 w-3 shrink-0 text-[#00f5ff]/40" />
+                                  <ChevronRight className="mt-0.5 h-3 w-3 shrink-0 text-primary/40" />
                                   <div className="space-y-1">
-                                    <p className="text-xs font-semibold text-[#e0e0e0]">{project.name}</p>
-                                    <p className="text-[0.72rem] leading-[1.6] text-[#999]">{project.description}</p>
+                                    <p className="text-xs font-semibold text-foreground">{project.name}</p>
+                                    <p className="text-[0.72rem] leading-[1.6] text-muted-foreground">{project.description}</p>
                                     {project.techStack && (
                                       <div className="flex flex-wrap gap-1 pt-0.5">
                                         {project.techStack.map((tech) => (
                                           <span
                                             key={tech}
-                                            className="rounded bg-[rgba(255,255,255,0.04)] px-1.5 py-0.5 font-[family-name:var(--font-jetbrains)] text-[0.55rem] text-[#888]"
+                                            className="rounded bg-muted px-1.5 py-0.5 font-[family-name:var(--font-jetbrains)] text-[0.55rem] text-muted-foreground"
                                           >
                                             {tech}
                                           </span>

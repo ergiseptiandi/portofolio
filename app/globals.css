@@ -83,6 +83,42 @@
   --sidebar-ring: #00f5ff;
 }
 
+.light {
+  --radius: 0.75rem;
+  --background: #f5f5f0;
+  --foreground: #1a1a1a;
+  --card: #ffffff;
+  --card-foreground: #1a1a1a;
+  --popover: #ffffff;
+  --popover-foreground: #1a1a1a;
+  --primary: #009ca6;
+  --primary-foreground: #ffffff;
+  --secondary: #f0eee8;
+  --secondary-foreground: #333333;
+  --muted: #f0eee8;
+  --muted-foreground: #6b7280;
+  --accent: #7acc00;
+  --accent-foreground: #ffffff;
+  --destructive: #dc2626;
+  --destructive-foreground: #ffffff;
+  --border: rgba(0, 0, 0, 0.1);
+  --input: rgba(0, 0, 0, 0.06);
+  --ring: #009ca6;
+  --chart-1: #009ca6;
+  --chart-2: #7acc00;
+  --chart-3: #e85d5d;
+  --chart-4: #a855f7;
+  --chart-5: #f97316;
+  --sidebar: #ffffff;
+  --sidebar-foreground: #1a1a1a;
+  --sidebar-primary: #009ca6;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #f0eee8;
+  --sidebar-accent-foreground: #333333;
+  --sidebar-border: rgba(0, 0, 0, 0.1);
+  --sidebar-ring: #009ca6;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -99,11 +135,11 @@
 
   h1, h2, h3, h4 {
     letter-spacing: -0.04em;
-    color: #ffffff;
+    @apply text-foreground;
   }
 
   p, span, li {
-    color: #e0e0e0;
+    @apply text-muted-foreground;
   }
 
   ::selection {
@@ -115,7 +151,7 @@
 @utility glass {
   background: rgba(255, 255, 255, 0.03);
   backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border);
 }
 
 @utility glass-card {
@@ -123,21 +159,16 @@
 }
 
 @utility surface-card {
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 1rem;
+  @apply bg-card border border-border rounded-xl;
 }
 
 @utility surface-panel {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: 0.75rem;
+  @apply bg-card/50 border border-border/80 rounded-xl;
 }
 
 @utility surface-muted {
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.04);
+  background: color-mix(in srgb, var(--foreground) 3%, transparent);
+  border: 1px solid color-mix(in srgb, var(--border) 60%, transparent);
   border-radius: 0.75rem;
 }
 
@@ -151,7 +182,7 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.3em;
-  color: #00f5ff;
+  @apply text-primary;
 }
 
 @utility section-title {
@@ -160,7 +191,7 @@
   font-weight: 800;
   line-height: 1.05;
   letter-spacing: -0.04em;
-  color: #ffffff;
+  @apply text-foreground;
 }
 
 @media (min-width: 640px) {
@@ -179,7 +210,7 @@
   max-width: 36rem;
   font-size: 0.95rem;
   line-height: 1.8;
-  color: #b0b0b0;
+  @apply text-muted-foreground;
 }
 
 /* Noise grain overlay via pseudo-element on body */
@@ -210,4 +241,15 @@ body::after {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
+}
+
+/* Skill gauge fill animation */
+@keyframes gauge-fill {
+  from { width: 0%; }
+}
+
+/* Light mode override for grain opacity */
+.light body::after,
+.light .noise-overlay {
+  opacity: 0.015;
 }

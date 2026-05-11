@@ -77,10 +77,10 @@ const Contact = () => {
       <div className="space-y-4">
         <div className="space-y-2">
           <p className="section-label">Direct contact</p>
-          <h3 className="font-[family-name:var(--font-syne)] text-2xl font-bold text-white">
+          <h3 className="font-[family-name:var(--font-syne)] text-2xl font-bold text-foreground">
             Let&apos;s work together.
           </h3>
-          <p className="text-sm leading-[1.7] text-[#b0b0b0]">
+          <p className="text-sm leading-[1.7] text-muted-foreground">
             Reach out directly or fill in the form. I usually respond within a day.
           </p>
         </div>
@@ -91,47 +91,47 @@ const Contact = () => {
               href={href}
               target={href.startsWith("http") ? "_blank" : undefined}
               rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
-              className="group flex items-center gap-4 rounded-xl border border-[rgba(255,255,255,0.05)] bg-[rgba(255,255,255,0.03)] px-4 py-4 transition-all duration-200 hover:border-[rgba(0,245,255,0.15)] hover:bg-[rgba(0,245,255,0.02)]"
+              className="group flex items-center gap-4 rounded-xl border border-border bg-card px-4 py-4 transition-all duration-200 hover:border-primary/20 hover:bg-primary/5"
             >
-              <div className="rounded-lg bg-[rgba(0,245,255,0.08)] p-2.5 text-[#00f5ff] transition-colors duration-200 group-hover:bg-[rgba(0,245,255,0.12)]">
+              <div className="rounded-lg bg-primary/10 p-2.5 text-primary transition-colors duration-200 group-hover:bg-primary/15">
                 <Icon className="h-4 w-4" />
               </div>
               <div>
-                <p className="font-[family-name:var(--font-jetbrains)] text-[0.58rem] uppercase tracking-[0.25em] text-[#888]">
+                <p className="font-[family-name:var(--font-jetbrains)] text-[0.58rem] uppercase tracking-[0.25em] text-muted-foreground">
                   {label}
                 </p>
-                <p className="mt-0.5 text-sm font-medium text-[#e0e0e0]">{value}</p>
+                <p className="mt-0.5 text-sm font-medium text-foreground">{value}</p>
               </div>
             </a>
           ))}
         </div>
       </div>
 
-      <div className="rounded-xl border border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.03)] p-6 backdrop-blur-xl sm:p-8">
+      <div className="rounded-xl border border-border bg-card p-6 backdrop-blur-xl sm:p-8">
         <form className="space-y-5" onSubmit={handleSubmit}>
           <div className="grid gap-5 sm:grid-cols-2">
             <div className="space-y-2">
-              <Label htmlFor="name" className="font-[family-name:var(--font-jetbrains)] text-[0.65rem] uppercase tracking-[0.15em] text-[#888]">
+              <Label htmlFor="name" className="font-[family-name:var(--font-jetbrains)] text-[0.65rem] uppercase tracking-[0.15em] text-muted-foreground">
                 Name
               </Label>
               <div className="relative">
-                <User className="absolute left-3 top-3 h-4 w-4 text-[#555]" />
+                <User className="absolute left-3 top-3 h-4 w-4 text-muted-foreground/60" />
                 <Input
                   id="name"
                   value={formData.name}
                   onChange={handleChange}
                   required
                   placeholder="Your name"
-                  className="h-11 rounded-lg border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.04)] pl-10 text-sm text-[#e0e0e0] placeholder:text-[#555] focus:border-[rgba(0,245,255,0.3)]"
+                  className="h-11 rounded-lg border-border bg-card pl-10 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary/30"
                 />
               </div>
             </div>
             <div className="space-y-2">
-              <Label htmlFor="email" className="font-[family-name:var(--font-jetbrains)] text-[0.65rem] uppercase tracking-[0.15em] text-[#888]">
+              <Label htmlFor="email" className="font-[family-name:var(--font-jetbrains)] text-[0.65rem] uppercase tracking-[0.15em] text-muted-foreground">
                 Email
               </Label>
               <div className="relative">
-                <Mail className="absolute left-3 top-3 h-4 w-4 text-[#555]" />
+                <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground/60" />
                 <Input
                   id="email"
                   type="email"
@@ -139,29 +139,29 @@ const Contact = () => {
                   onChange={handleChange}
                   required
                   placeholder="your@email.com"
-                  className="h-11 rounded-lg border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.04)] pl-10 text-sm text-[#e0e0e0] placeholder:text-[#555] focus:border-[rgba(0,245,255,0.3)]"
+                  className="h-11 rounded-lg border-border bg-card pl-10 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary/30"
                 />
               </div>
             </div>
           </div>
           <div className="space-y-2">
-            <Label htmlFor="message" className="font-[family-name:var(--font-jetbrains)] text-[0.65rem] uppercase tracking-[0.15em] text-[#888]">
+            <Label htmlFor="message" className="font-[family-name:var(--font-jetbrains)] text-[0.65rem] uppercase tracking-[0.15em] text-muted-foreground">
               Message
             </Label>
             <div className="relative">
-              <MessageSquare className="absolute left-3 top-3 h-4 w-4 text-[#555]" />
+              <MessageSquare className="absolute left-3 top-3 h-4 w-4 text-muted-foreground/60" />
               <Textarea
                 id="message"
                 value={formData.message}
                 onChange={handleChange}
                 required
                 placeholder="What are you building?"
-                className="min-h-[140px] rounded-lg border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.04)] pl-10 text-sm text-[#e0e0e0] placeholder:text-[#555] focus:border-[rgba(0,245,255,0.3)]"
+                className="min-h-[140px] rounded-lg border-border bg-card pl-10 text-sm text-foreground placeholder:text-muted-foreground focus:border-primary/30"
               />
             </div>
           </div>
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <p className="text-xs text-[#888]" aria-live="polite">
+            <p className="text-xs text-muted-foreground" aria-live="polite">
               {status === "loading" && "Sending..."}
               {status === "success" && "Message sent."}
               {status === "error" && "Failed to send. Try again."}
@@ -170,7 +170,7 @@ const Contact = () => {
             <Button
               type="submit"
               disabled={status === "loading" || status === "success"}
-              className="h-11 rounded-full bg-[#00f5ff] px-6 text-sm font-bold text-[#0a0a0a] shadow-[0_0_20px_rgba(0,245,255,0.2)] hover:shadow-[0_0_30px_rgba(0,245,255,0.3)]"
+              className="h-11 rounded-full bg-primary px-6 text-sm font-bold text-background shadow-[0_0_20px_rgba(0,245,255,0.2)] hover:shadow-[0_0_30px_rgba(0,245,255,0.3)]"
             >
               {status === "loading" ? "Sending..." : status === "success" ? "Sent" : "Send message"}
               <Send className="h-4 w-4" />

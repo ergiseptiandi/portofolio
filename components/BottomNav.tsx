@@ -1,5 +1,6 @@
 "use client";
 
+import { ThemeToggle } from "@/components/ThemeToggle";
 import { cn } from "@/lib/utils";
 import { Briefcase, Home, Mail, User } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
@@ -53,7 +54,7 @@ const BottomNav = () => {
 
   return (
     <nav className="fixed inset-x-0 bottom-4 z-50 flex justify-center md:hidden">
-      <div className="flex items-center gap-1 rounded-full border border-white/[0.08] bg-[#0a0a0a]/80 px-2 py-1.5 shadow-[0_8px_32px_rgba(0,0,0,0.6)] backdrop-blur-xl">
+      <div className="flex items-center gap-1 rounded-full border border-border bg-background/80 px-3 py-1.5 shadow-[0_8px_32px_rgba(0,0,0,0.6)] backdrop-blur-xl">
         {NAV_ITEMS.map((item) => {
           const isActive = active === item.id;
           const Icon = item.icon;
@@ -63,18 +64,21 @@ const BottomNav = () => {
               href={item.href}
               onClick={() => handleClick(item.id)}
               className={cn(
-                "relative flex flex-col items-center gap-0.5 rounded-full px-4 py-2 text-[0.6rem] font-medium transition-colors duration-200",
-                isActive ? "text-[#00f5ff]" : "text-[#888] hover:text-[#ccc]"
+                "relative flex flex-col items-center gap-0.5 rounded-full px-3 py-2 text-[0.55rem] font-medium transition-colors duration-200",
+                isActive ? "text-primary" : "text-muted-foreground hover:text-foreground/70"
               )}
             >
               {isActive && (
-                <span className="absolute inset-0 -z-10 rounded-full bg-[#00f5ff]/[0.08]" />
+                <span className="absolute inset-0 -z-10 rounded-full bg-primary/[0.08]" />
               )}
               <Icon className="h-4 w-4" />
               <span>{item.name}</span>
             </a>
           );
         })}
+        <div className="ml-1.5 border-l border-border pl-1.5">
+          <ThemeToggle compact />
+        </div>
       </div>
     </nav>
   );
