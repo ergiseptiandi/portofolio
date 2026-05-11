@@ -102,8 +102,8 @@ export const metadata: Metadata = {
     images: [`${siteUrl}/projects/portfolio.png`],
   },
   icons: {
-    icon: "/window.svg",
-    shortcut: "/window.svg",
+    icon: "/favicon.svg",
+    shortcut: "/favicon.svg",
   },
 };
 
