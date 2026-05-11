@@ -30,7 +30,6 @@ const COLOR_TEXT = rgb(0.07, 0.07, 0.1);
 const COLOR_MUTED = rgb(0.35, 0.35, 0.4);
 const COLOR_RULE = rgb(0.82, 0.82, 0.85);
 const COLOR_PRIMARY = rgb(0.15, 0.39, 0.92); // #2563eb
-const COLOR_BG_ACCENT = rgb(0.95, 0.97, 1.0);
 
 const cvData = {
   name: "Erghi Septiandi Putra",
@@ -179,14 +178,6 @@ export async function generateCvPdf(): Promise<Buffer> {
 
   const addPage = () => {
     page = pdfDoc.addPage([PAGE_WIDTH, PAGE_HEIGHT]);
-    // Draw accent bar on every page
-    page.drawRectangle({
-      x: 0,
-      y: 0,
-      width: 6,
-      height: PAGE_HEIGHT,
-      color: COLOR_PRIMARY,
-    });
     y = PAGE_HEIGHT - MARGIN;
   };
 
@@ -247,15 +238,6 @@ export async function generateCvPdf(): Promise<Buffer> {
     }
     y -= afterGap;
   };
-
-  // ---- Draw accent bar on left ----
-  page.drawRectangle({
-    x: 0,
-    y: 0,
-    width: 6,
-    height: PAGE_HEIGHT,
-    color: COLOR_PRIMARY,
-  });
 
   // ---- HEADER ----
   y -= 8;
